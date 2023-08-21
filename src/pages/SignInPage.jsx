@@ -25,7 +25,7 @@ export default function SignInPage() {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    const email = formJson.username;
+    const email = formJson.email;
     const password = formJson.password;
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
