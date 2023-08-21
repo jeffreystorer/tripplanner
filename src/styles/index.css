@@ -1,0 +1,914 @@
+body {
+
+  --x:  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
+  --logo:  url('../assets/android-chrome-512x512.png');
+  --background-blue: #00365f;
+  --background-black: #5a5a5a;
+  --background-button: #cccccc;
+  --background-button-primary: #0d63fd;
+  --background-button-secondary: #6c757d;
+  --background-secondary: #f9f9fb;
+  --background-white: #ffffff;
+  --border-hairline: 0.0625em solid #0004;
+  --borderRadius-outer: 0.5em;
+  --boxBorder: 0.05em solid var(--color-link-active);
+  --color-black: #212529;
+  --color-border-primary: #cdcdcd;
+  --color-link-active: #3378ac;
+  --color-link-hover: #c00;
+  --color-modal-fader: #b3b3b3cc;
+  --color-white: #ffffff;
+  --color-table-stripe: rgb(222, 226, 230);
+  --font-serif: 'Times New Roman', Times, serif;
+  /* --font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  --font-sans-serif: sans-serif;
+  --pad: clamp(0.5em, min(2vw, 4vh), 4em);
+  --shadow-chrome: 0 0.25em 1em 0.25em #0003;
+  --page-width: 95%;
+
+  /* @link https://utopia.fyi/type/calculator?c=416,16,1.067,1920,24,1.067,6,10,900-1200-1800-600&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+  --step--10: clamp(0.52rem, calc(0.45rem + 0.28vw), 0.78rem);
+  --step--9: clamp(0.56rem, calc(0.48rem + 0.30vw), 0.84rem);
+  --step--8: clamp(0.60rem, calc(0.51rem + 0.32vw), 0.89rem);
+  --step--7: clamp(0.64rem, calc(0.55rem + 0.34vw), 0.95rem);
+  --step--6: clamp(0.68rem, calc(0.58rem + 0.36vw), 1.02rem);
+  --step--5: clamp(0.72rem, calc(0.62rem + 0.38vw), 1.08rem);
+  --step--4: clamp(0.77rem, calc(0.66rem + 0.41vw), 1.16rem);
+  --step--3: clamp(0.82rem, calc(0.71rem + 0.44vw), 1.24rem);
+  --step--2: clamp(0.88rem, calc(0.76rem + 0.47vw), 1.32rem);
+  --step--1: clamp(0.94rem, calc(0.81rem + 0.50vw), 1.41rem);
+  --step-0: clamp(1.00rem, calc(0.86rem + 0.53vw), 1.50rem);
+  --step-1: clamp(1.07rem, calc(0.92rem + 0.57vw), 1.60rem);
+  --step-2: clamp(1.14rem, calc(0.98rem + 0.61vw), 1.71rem);
+  --step-3: clamp(1.22rem, calc(1.05rem + 0.65vw), 1.82rem);
+  --step-4: clamp(1.30rem, calc(1.12rem + 0.69vw), 1.94rem);
+  --step-5: clamp(1.38rem, calc(1.19rem + 0.74vw), 2.07rem);
+  --step-6: clamp(1.48rem, calc(1.27rem + 0.79vw), 2.21rem);
+}
+
+/*---------------------
+        RESETS
+---------------------*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+fieldset,
+object {
+  border: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul {
+  list-style-type: none;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+html,
+body {
+  font-family: sans-serif;
+  min-height: 100%;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+  line-height: 1.5;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*---------------------
+      AT RULES
+---------------------*/
+
+/* print */
+@media print {
+
+  #print {
+    display: none;
+  }
+
+  .itinerary-date {
+    margin-left: -.5em;
+  }
+  .itinerary-date  > summary {
+    list-style: none;
+  }
+  .itinerary-date > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  header,
+  #itinerary-page > ul {
+    display: none;
+    height: 0;
+    visibility: collapse;
+    width: 0;
+  }
+
+  #itinerary-page{
+    display: block;
+    margin-left: 1em;
+    overflow-y: hidden;
+  }
+    
+  #itinerary-page > div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1 1 0%;
+    margin: 0 .5em;
+    width: 100%;
+  }
+}
+
+/* phone only 599px */
+@media screen and (max-width: 37.4375em) {
+  
+  #trip-page  ul > li {
+    font-size: var(--step--1);
+  } 
+  
+  .titled-outer > h2,
+  .titled-inner > h3 {
+    font-size: var(--step--1);
+  }
+
+  #trip-page h2 {
+    top: -1.9em;
+  }
+
+  #detail-buttons > div > button.not-stacked {
+    font-size: var(--step--2);
+  }
+
+  #itinerary-page > ul {
+      height: 0;
+      visibility: collapse;
+      width: 0;
+    }
+
+  #itinerary-page{
+    display: block;
+    margin-left: 1em;
+    overflow-y: hidden;
+  }
+    
+  #itinerary-page > div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1 1 0%;
+    margin: 0 .5em;
+    width: 100%;
+  }
+}
+/* tablet portrait up 600px */
+@media screen and (min-width: 37.5em) {
+  #trip-page  ul > li {
+    font-size: var(--step-0);
+  } 
+   
+
+.titled-outer > h2,
+.titled-inner > h3 {
+  font-size: var(--step-0);
+}
+
+#trip-page h2 {
+  top: -1.6em;
+}
+
+  #detail-buttons > div > button.not-stacked {
+    font-size: var(--step-0);
+  }
+  #itinerary-page > ul {  
+      visibility: visible;
+    }  
+
+  #itinerary-page{
+    display: flex;
+    flex-direction: row;
+    margin-left: 1em;
+    overflow-y: hidden;
+  }
+  
+  #itinerary-page> div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1 1 0%;
+    width: 100%;
+  }
+}
+/* table landscape up 900px */
+@media screen and (min-width: 56.25em) {
+}
+/* desktop up 1200px */
+@media screen and (min-width: 75em) {
+}
+/* big desktop up 1800px */
+@media screen and (min-with: 112.5em) {
+}
+/*--------------------------------------
+        SELECTORS
+---------------------------------------*/
+
+a p {
+  text-align: center;
+}
+
+a,
+li,
+p,
+td {
+  font-family: var(--font-sans-serif);
+  font-size: var(--step-0);
+  margin-top: 0;
+}
+
+body {
+  background-color: var(--background-white);
+  display: block;
+  font-family: var(--font-sans-serif);
+  margin: auto;
+  overflow: none;
+  text-align: center;
+  z-index: 1;
+}
+
+.divider {
+  border-top: 0.0625em solid var(--color-link-active);
+  color: var(--background-black);
+  display: block;
+  height: 0;
+  margin: 0 auto;
+  opacity: 1;
+  overflow-x: hidden;
+  text-align: center;
+  width: 100%;
+}
+
+#sign-in {
+  font-size: var(--step-0);
+  margin-top: 2em;
+}
+
+#sign-in fieldset {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+#sign-in label{
+  justify-content: right;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+#sign-in input {
+  text-align: center;
+}
+
+button,
+a[type='button'] {
+  appearance: none;
+  background-color: var(--background-button);
+  border: 0.05em solid var(--background-button);
+  border-radius: 0.5em;
+  color: var(--color-black);
+  cursor: pointer;
+  display: inline-block;
+  font-family: var(--font-sans-serif);
+  font-size: var(--step-0);
+  font-weight: 600;
+  height: fit-content;
+  padding: 0 0.5em;
+  text-align: center;
+  text-decoration: none;
+  -webkit-appearance: none;
+}
+
+button { width: fit-content;}
+button:hover,
+a[type='button']:hover,
+#modal > section > footer > button:last-child:hover {
+  appearance: none;
+  background-color: var(--background-white);
+  border-radius: 0.5em;
+  color: var(--color-link-hover);
+  -webkit-appearance: none;
+}
+
+.buttons { 
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.buttons-stacked {
+  display: flex;
+  flex-direction: column;
+}
+
+.not-stacked {
+  margin: 0.5em auto;
+}
+
+.stacked {
+  margin: 0.25em auto 0.5em auto;
+
+}
+
+header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  margin: .5em auto 1em auto;
+  width: fit-content;
+}
+
+header > div {
+  align-items: top;
+  display: inline-flex;
+  height: fit-content;
+  width: fit-content;
+  background-color: var(--background-button);
+  color: var(--background-blue);
+  box-shadow: 0em .875em 1.75em rgba(0, 0, 0, 0.25), 0 .625em .625em rgba(0, 0, 0, 0.28);
+  font-size: var(--step--5);
+  padding-right: 0.5em;/* 0.5em .5em 0 .75em; */
+  overflow: hidden;
+}
+
+header > div > h1 {
+  margin-left: .25em;
+}
+
+header > div > h1::before {
+  content: ''; 
+  box-sizing: content-box;
+  display: inline;
+  padding: 0 .75em;
+  color: var(--color-black);
+  background: transparent
+    var(--logo)
+    left/1em auto no-repeat;
+  opacity: 1;
+  position: relative;
+}
+
+nav {
+  height: fit-content;
+}
+header > nav ul {
+  display: block;
+  background: var(--background-white);
+  height: fit-content;
+  list-style-type: none;
+  width: fit-content;
+}
+nav li {
+  display: inline-block;
+  margin: 0;
+}
+nav a {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-sans-serif);
+  font-size: var(--step-3);
+  font-weight: 500;
+  line-height: 1.5em;
+  margin-top: 0;
+  outline: 0;
+  overflow-wrap: break-word;
+  padding: 0 0.25em;
+  text-align: center;
+  text-decoration: none;
+  text-size-adjust: 100%;
+}
+nav a:link,
+nav a:visited {
+  color: var(--color-black);
+}
+nav a:hover,
+nav a.inactive:hover {
+  background-color: var(--color-link-hover);
+  color: var(--color-white);
+}
+nav a.active,
+.active {
+  background: var(--color-link-active);
+  color: var(--color-white);
+}
+nav a.inactive,
+.inactive {
+  background: var(--color-white);
+  color: var(--color-black);
+  text-decoration: underline;
+}
+
+/* START MODALS  */
+/* This is the modal overlay. */
+#modal {
+  align-items: center;
+  background: var(--color-modal-fader);
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: -100%;
+  opacity: 0;
+  overflow: auto;
+  padding: 0;
+  position: fixed;
+  transition: left 0s 0.5s, opacity 0.5s;
+  width: 100%;
+  z-index: 1;
+}
+
+#modal > section {
+  background: var(--background-white);
+  border: var(--border-hairline);
+  border-radius: var(--borderRadius-outer);
+  box-shadow: var(--shadow-chrome);
+  display: flex;
+  flex-direction: column;
+  left: 0%;
+  height: fit-content;
+  opacity: 1;
+  outline: 0;
+  overflow: auto;
+  padding: 0.5em 1em;
+  position: relative;
+  transition: left 0.5s;
+  width: fit-content;
+
+  /*One big thing to pay attention to is the  on the inner DIV. If you omit auto margin on the VERTICAL (a direction that normally ignores margin!) flex will chop off the top of your content and you won’t be able to scroll up to it. Grid often drops the ball on this worse which is why I favor flex here. If you’re going to use a container to center its children, I really suggest using flex with margin on an inner container. Failing to do so can really screw you over.*/
+}
+
+
+
+#add-edit > section {
+  background: var(--background-white);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+#modal > section > header {
+  border-bottom: 0.0625em solid rgb(222, 226, 230);
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 0;
+  width: 100%;
+}
+
+:is(#modal, #add-edit)  section > header > h2 {
+  font-size: var(--step-0);
+  font-weight: 700;
+  margin-left: 0.5em;
+
+}/* This link is the X to close the modal.*/
+
+#modal section > header > h2 + a.modalClose {
+  box-sizing: content-box;
+  display: inline;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 1em;
+  color: var(--color-black);
+  background: transparent
+    var(--x)
+    center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.25rem;
+  opacity: 0.5;
+  position: relative;
+}
+
+#add-edit  section > form {
+  display: flex;
+  max-width: 100%;
+}
+#add-edit  section > form > fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  text-align: left;
+  max-width: 100%;
+}
+
+ #add-edit  section > form > fieldset label {
+  font-size: var(--step-0);
+}
+
+#add-edit  section > form > fieldset > select {
+  font-size: var(--step-0);
+  margin: 0 auto;
+  width: 100%;
+}
+
+label > input[type='text'] {
+  margin-left: 0.5em;
+}
+
+:is( #modal, #add-edit )  section > form > fieldset > label > input[type='number'] {
+  margin-top: 0.5em;
+}
+
+#add-edit  section > form > fieldset > article {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+#add-edit > section > form {
+  margin: 0 auto;
+  width: fit-content;
+}
+
+:is( #modal, #add-edit ) footer{
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75em;
+}
+
+#modal footer {
+  border-top: 0.0625em solid rgb(222, 226, 230);
+}
+
+
+#add-edit section > form > fieldset > footer button,
+:is( #modal, #add-edit, #itinerary-details )  section > footer button {
+  align-items: flex-start;
+  display: inline-block;
+  margin: 0.25em;
+  position: relative;
+}
+
+:is( #add-edit, #itinerary-details)  section > footer a,
+:is( #modal, #add-edit, #itinerary-details )  section > footer > button:first-child {
+  color: var(--color-white);
+  background-color: var(--background-button-secondary);
+  border-color: var(--background-button-secondary);
+}
+
+:is( #modal, #add-edit, #itinerary-details )  section > footer > button:last-child {
+  color: var(--color-white);
+  background-color: var(--background-button-primary);
+  border-color: var(--background-button-primary);
+}
+
+
+#modal.open > section {
+  left: 0;
+}
+#modal.open {
+  left: 0;
+  opacity: 1;
+  transition: left 0s, opacity 0.5s;
+}
+
+/* END CONFIRMDLETEMODAL */
+
+#trip-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 2em auto 2em auto;
+}
+
+#trip-page ul > .buttons {
+  margin-top: .5em;
+  margin-bottom: -.5em;
+}
+
+#trip-page div > p,
+#trip-page .buttons:nth-of-type(1) {
+  margin-top: -1.5em;
+  margin-bottom: .5em;
+}
+
+#trip-page > button {
+  margin: 0 auto;
+}
+
+#trip-page > div {
+  padding: 1em 1em;
+  width: fit-content;
+
+}
+
+#trip-page  ul {
+  margin: 0 auto;
+  text-align: left;
+  width: fit-content;
+}
+
+#trip-page ul > li {
+  margin: .5em 0;
+}
+
+#trip-page ul > button {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.active-li {
+  font-weight: 700;
+}
+
+#detail-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+  width: fit-content;
+}
+
+#detail-buttons > div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
+a > svg {
+  background-color: var(--background-button);
+  min-height: 1.5em;
+  min-width: 1.5em;
+}
+
+
+select {
+  color: var(--color-black);
+  font-size: var(--step-0);
+  font-weight: normal;
+  margin: 0;
+}
+.select-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+  color: var(--color-black);
+  height: fit-content;
+  padding: 0.125em;
+  margin: 0 auto 0.5em auto;
+  width: fit-content;
+}
+
+.select-dropdown-container > label{
+  font-size: var(--step-0);
+}
+.select-dropdown-container label > select {
+  margin-left: 0.5em;
+}
+
+.titled-outer,
+.titled-inner {
+  border: var(--boxBorder);
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 0;
+  text-align: center;
+  max-width: 98%;
+}
+
+.titled-outer {
+  align-items: center;
+  margin: 0em auto;
+}
+
+.titled-inner {
+  font-size: var(--step-0);
+  margin: 0 auto .5em auto;
+  padding: 0 .5em .5em .5em;
+  text-align: left;
+  width: 95%;
+}
+
+.titled-outer > h2,
+.titled-inner > h3 {
+  background-color: var(--color-white);
+  border-radius: 0.5em;
+  font-weight: 700;
+  height: fit-content;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  width: fit-content;
+}
+
+#itinerary-page {
+  display: flex;
+  flex-direction: row;
+  margin: 1em .5em 3em .5em;
+}
+
+#itinerary-page h2 {
+  font-size: var(--step-0);
+  margin: 0 auto;
+  width: fit-content;
+}
+
+#itinerary-page > ul {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: flex-start;  
+  text-align: left;
+  position: fixed;
+}
+
+#itinerary-page > ul > li {
+  line-height: .6;
+}
+
+
+
+#itinerary-page > ul > li > button {
+  background-color: var(--background-white);
+  border: none;
+  color: var(--color-black);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: var(--step--6);
+  font-weight: 500;
+  padding: 0;
+  outline: none;
+}
+
+#itinerary-page > div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 7em;
+}
+
+.itinerary-date { 
+  width: fit-content;
+}
+
+#itinerary-page> div  h3,
+.itinerary-date > summary {
+  font-size: var(--step-0);
+  font-weight: 700;
+  width: fit-content;
+}
+
+.itinerary-date > ul {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+
+}
+
+
+.itinerary-date > ul > li > button {
+  background-color: var(--background-white);
+  color: var(--color-black);
+  border: none;
+  font-size: var(--step--1);
+  font-weight: 500;
+  margin: 0 0 0 2em;;
+  padding: 0;
+  outline: none;
+}
+
+#itinerary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#itinerary-items > p {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+#add-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+#add-edit > section > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-edit > section > footer > button:first-child {
+  color: var(--color-white);
+  background-color: var(--background-button-secondary);
+  border-color: var(--background-button-secondary);
+}
+
+#add-edit > section > footer > button:last-child {
+  color: var(--color-white);
+  background-color: var(--background-button-primary);
+  border-color: var(--background-button-primary);
+}
+
+.details,
+.details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#itinerary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#itinerary-details header {
+  display: block;
+}
+#itinerary-details p {
+  border-radius: .2em;
+  margin: 0 .5em .5em .5em;
+  text-align: left;
+}
+
+summary {
+  display: list-item;
+  font-size: var(--step-0);
+  font-weight: 700;
+  margin: 0 .5em;
+  text-align: left;
+  width: fit-content;
+}
+
+summary p {
+  font-size: var(--step-0);
+  font-weight: normal;
+  margin: 0 .5em;
+  text-align: left;
+  white-space: normal;
+
+}
+
+.item {
+  white-space: pre-wrap;
+}
+
+.note-item {
+  align-items: top;
+  display: flex;
+  flex-direction: row;
+}

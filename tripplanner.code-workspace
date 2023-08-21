@@ -1,0 +1,42 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../../../Desktop"
+    }
+  ],
+  "settings": {
+    "cSpell.words": [
+      "addactivity",
+      "addcar",
+      "additinerary",
+      "addnote",
+      "addroom",
+      "addtravel",
+      "addtrip",
+      "astart",
+      "bdetails",
+      "bstart",
+      "cend",
+      "datetime",
+      "defaut",
+      "editactivity",
+      "editcar",
+      "editnote",
+      "editroom",
+      "edittravel",
+      "edittrip",
+      "Hevetica",
+      "preval",
+      "renametrip",
+      "rentalcar",
+      "signin",
+      "Signout",
+      "tripplanner",
+      "uuidv",
+      "wwvxo"
+    ]
+  }
+}

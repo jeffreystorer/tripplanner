@@ -1,0 +1,1 @@
+export { default as AddEdit } from '@/components/screens/AddEdit';
