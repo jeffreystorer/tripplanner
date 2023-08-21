@@ -302,9 +302,12 @@ body {
 }
 
 #sign-in label{
-  justify-content: right;
-  margin: 0 auto;
+  padding-right: 5em;
   width: fit-content;
+}
+
+#sign-in label:first-of-type {
+  padding-left: 1.7em;
 }
 
 #sign-in input {
@@ -558,7 +561,9 @@ nav a.inactive,
   width: 100%;
 }
 
-label > input[type='text'] {
+label > input[type='text'],
+label > input[type='email'],
+label > input[type='password'] {
   margin-left: 0.5em;
 }
 
