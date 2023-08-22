@@ -375,7 +375,7 @@ header {
   width: fit-content;
 }
 
-header > div {
+header > h1 {
   align-items: top;
   display: inline-flex;
   height: fit-content;
@@ -383,16 +383,13 @@ header > div {
   background-color: var(--background-button);
   color: var(--background-blue);
   box-shadow: 0em .875em 1.75em rgba(0, 0, 0, 0.25), 0 .625em .625em rgba(0, 0, 0, 0.28);
-  font-size: var(--step--5);
+  font-size: var(--step-0);
+  margin-left: .25em;
   padding-right: 0.5em;/* 0.5em .5em 0 .75em; */
   overflow: hidden;
 }
 
-header > div > h1 {
-  margin-left: .25em;
-}
-
-header > div > h1::before {
+header >  h1::before {
   content: ''; 
   box-sizing: content-box;
   display: inline;
@@ -417,9 +414,10 @@ header > nav ul {
 }
 nav li {
   display: inline-block;
-  margin: 0;
+  margin: 0 .125em;
 }
-nav a {
+nav a,
+nav p {
   background-color: var(--color-white);
   color: var(--color-black);
   font-family: var(--font-sans-serif);
@@ -452,7 +450,6 @@ nav a.inactive,
 .inactive {
   background: var(--color-white);
   color: var(--color-black);
-  text-decoration: underline;
 }
 
 /* START MODALS  */
@@ -636,19 +633,9 @@ label > input[type='password'] {
   margin: 2em auto 2em auto;
 }
 
-#trip-page ul > .buttons {
-  margin-top: .5em;
-  margin-bottom: -.5em;
-}
-
-#trip-page div > p,
-#trip-page .buttons:nth-of-type(1) {
+#trip-page #detail-buttons {
   margin-top: -1.5em;
   margin-bottom: .5em;
-}
-
-#trip-page > button {
-  margin: 0 auto;
 }
 
 #trip-page > div {
@@ -658,7 +645,7 @@ label > input[type='password'] {
 }
 
 #trip-page  ul {
-  margin: 0 auto;
+  margin: -1.5em auto 0 auto;
   text-align: left;
   width: fit-content;
 }
@@ -670,6 +657,14 @@ label > input[type='password'] {
 #trip-page ul > button {
   margin-left: auto;
   margin-right: auto;
+}
+
+#trip-page > .titled-outer:nth-of-type(2) {
+  gap: .75em;
+}
+#trip-page > .titled-outer:nth-of-type(2) > button {
+  margin-top: -1.5em;
+
 }
 
 .active-li {
@@ -780,7 +775,7 @@ select {
 }
 
 #itinerary-page > ul > li {
-  line-height: .6;
+  line-height: .9;
 }
 
 
@@ -790,7 +785,7 @@ select {
   border: none;
   color: var(--color-black);
   font-family: 'Courier New', Courier, monospace;
-  font-size: var(--step--6);
+  font-size: var(--step--4);
   font-weight: 500;
   padding: 0;
   outline: none;
@@ -917,3 +912,42 @@ summary p {
   display: flex;
   flex-direction: row;
 }
+
+/*. dropdown = nav > ul > li:last-of-type*/
+
+nav > ul > li:last-of-type {
+  position: relative;
+  display: inline-block;
+}
+
+/*.content = nav > ul > li:last-of-type > ul*/
+
+nav > ul > li:last-of-type > ul {
+  display: none;
+  position: absolute;
+  background-color: var(--background-button); 
+  margin-left: -1.5em;
+  padding: .75em 1em;
+  width: 8em;
+  z-index: 1;
+}
+nav > ul > li:last-of-type:hover ul {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+nav > ul > li:last-of-type ul > li > button,
+nav > ul > li:last-of-type ul > li > a {
+  background-color: var(--background-button);
+  border: none;
+  font-size: inherit;
+  font-weight: normal;
+  text-align: left;
+}
+nav > ul > li:last-of-type ul div + li {
+  font-weight: 700;
+}
+
+
+

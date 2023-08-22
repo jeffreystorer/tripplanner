@@ -47,10 +47,7 @@ export default function SignInPage() {
       {loading ? (
         <>
       <header>
-        <div>
-          {/* <img alt='Logo' src={Logo} width='30' height='30'/> */}
           <h1>Storer TP</h1>
-        </div>
       </header>
       <main>
         <form id='sign-in' onSubmit={handleSubmit}>
