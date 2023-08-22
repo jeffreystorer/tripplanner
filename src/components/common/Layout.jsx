@@ -1,6 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import ScrollToTop from 'react-scroll-to-top';
-import Logo from '../../assets/android-chrome-512x512.svg';
 import '@/styles/index.css';
 
 export default function LayoutPage() {
