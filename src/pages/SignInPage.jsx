@@ -25,9 +25,9 @@ export default function SignInPage() {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    const username = formJson.username;
+    const email = formJson.email;
     const password = formJson.password;
-    signInWithEmailAndPassword(auth, username, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
         setUserId(user.uid);
@@ -47,26 +47,23 @@ export default function SignInPage() {
       {loading ? (
         <>
       <header>
-        <div>
-          {/* <img alt='Logo' src={Logo} width='30' height='30'/> */}
           <h1>Storer TP</h1>
-        </div>
       </header>
       <main>
         <form id='sign-in' onSubmit={handleSubmit}>
           <fieldset>
             <label>
-              Username:
+              Email:
               <input
-                type='text'
-                name='username'
+                type='email'
+                name='email'
                 required
               />
             </label>
             <label>
               Password:
               <input
-                type='text'
+                type='password'
                 name='password'
                 required
               />
