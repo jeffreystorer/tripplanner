@@ -31,7 +31,6 @@ export default function SignInPage() {
       .then(userCredential => {
         const user = userCredential.user;
         setUserId(user.uid);
-        sessionStorage.setItem('isLoggedIn',true);
         setLoading(false);
         resetCurrentTripIndex();
         refreshTripData();
