@@ -7,7 +7,6 @@ import {
 } from 'recoil';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-//import Logo from '../assets/android-chrome-512X512.svg';
 import { firebaseConfig } from '@/firebaseConfig';
 import * as state from '@/store';
 import '@/styles/index.css';

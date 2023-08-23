@@ -14,7 +14,7 @@ export default function createItineraryItems(
   const cars = data.cars;
   const notes = data.notes;
   const rooms = data.rooms;
-  const travels = data.travels;
+  const transports = data.transports;
 
   function noteItem(item, value) {
     
@@ -61,12 +61,12 @@ export default function createItineraryItems(
 
   function pushDateGroup(item) {
     pushDate(item);
-    pushTravelsOvernight(item);
+    pushTransportsOvernight(item);
     pushRoomsStay(item);
     pushRoomsCheckOut(item);
     pushPreActivities(item);
     pushCarsDropOff(item);
-    pushTravels(item);
+    pushTransports(item);
     pushCarsPickUp(item);
     pushActivities(item);
     pushRoomsCheckIn(item);
@@ -95,8 +95,8 @@ export default function createItineraryItems(
             </button>
           </li>
           <li>
-            <button className='stacked'  onClick={e => handleDateClick(item, 'travel', e)}>
-              Add Travel
+            <button className='stacked'  onClick={e => handleDateClick(item, 'transport', e)}>
+              Add Transport
             </button>
           </li>
         </ul>
@@ -177,14 +177,14 @@ export default function createItineraryItems(
     );
   }
 
-  function pushTravels(item) {
-    const todaysTravels = travels.filter(obj => {
+  function pushTransports(item) {
+    const todaysTransports = transports.filter(obj => {
       return obj.astart.substring(0, 10) === item;
     });
-    todaysTravels.forEach(pushTravel);
+    todaysTransports.forEach(pushTransport);
   }
 
-  function pushTravel(item) {
+  function pushTransport(item) {
     let arrDate = '';
     if (
       dowMonthDayFromStr(item.astart, 'short') !==
@@ -199,16 +199,16 @@ export default function createItineraryItems(
     );
   }
 
-  function pushTravelsOvernight(item) {
-    const todaysTravels = travels.filter(obj => {
+  function pushTransportsOvernight(item) {
+    const todaysTransports = transports.filter(obj => {
       return obj.dovernight_Arrival_Date === item;
     });
-    todaysTravels.forEach(pushTravelOvernight);
+    todaysTransports.forEach(pushTransportOvernight);
   }
 
-  function pushTravelOvernight(item) {
+  function pushTransportOvernight(item) {
     items.push(
-      itineraryItem(item, `Overnight Travel: ${dowMonthDayFromStr(
+      itineraryItem(item, `Overnight Transport: ${dowMonthDayFromStr(
           item.astart,
           'short'
         )}  ${item.astart.substring(11)}-${item.bend.substring(11)}  ${

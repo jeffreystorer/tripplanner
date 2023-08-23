@@ -1,9 +1,9 @@
-import { atom, selector, selectorFamily } from 'recoil';
-import { getDetails, getTrip, getTrips } from '@/services';
-import { stayDates, tripDates } from '@/utils';
+import { atom, selector, selectorFamily } from "recoil";
+import { getDetails, getTrip, getTrips } from "@/services";
+import { stayDates, tripDates } from "@/utils";
 
 const localStorageEffect =
-  key =>
+  (key) =>
   ({ setSelf, onSet }) => {
     const savedValue = localStorage.getItem(key);
     if (savedValue != null) {
@@ -18,7 +18,7 @@ const localStorageEffect =
   };
 
 export const tripData = selector({
-  key: 'tripData',
+  key: "tripData",
   get: async ({ get }) => {
     const response = await getTrips(get(userId));
     if (response.error) {
@@ -36,11 +36,11 @@ export const tripData = selector({
     }
     tripsArray.sort((a, b) => (a.atrip_Name > b.atrip_Name ? 1 : -1));
     return tripsArray;
-  }
+  },
 });
 
 export const currentTripData = selector({
-  key: 'currentTripData',
+  key: "currentTripData",
   get: async ({ get }) => {
     const response = await getTrip(get(userId), get(currentTripKey));
     if (response.error) {
@@ -51,9 +51,9 @@ export const currentTripData = selector({
 });
 
 export const detailData = selectorFamily({
-  key: 'detailData',
+  key: "detailData",
   get:
-    page =>
+    (page) =>
     async ({ get }) => {
       const response = await getDetails(get(userId), get(currentTripKey), page);
       if (response.error) {
@@ -67,7 +67,7 @@ export const detailData = selectorFamily({
       }
       if (detailArray.length > 0) {
         switch (page) {
-          case 'activity':
+          case "activity":
             detailArray.sort(function (a, b) {
               let x = a.astart_Date.toLowerCase();
               let y = b.astart_Date.toLowerCase();
@@ -80,15 +80,15 @@ export const detailData = selectorFamily({
               return 0;
             });
             break;
-          case 'car':
+          case "car":
             detailArray.sort((a, b) => {
               const result = a.astart.localeCompare(b.astart);
               return result !== 0 ? result : a.bend.localeCompare(b.bend);
             });
             break;
-          case 'note':
+          case "note":
             break;
-          case 'room':
+          case "room":
             detailArray.sort((a, b) => {
               const result = a.astart_Date.localeCompare(b.astart_Date);
               return result !== 0
@@ -96,7 +96,7 @@ export const detailData = selectorFamily({
                 : a.bend_Date.localeCompare(b.bend_Date);
             });
             break;
-          case 'travel':
+          case "transport":
             detailArray.sort((a, b) => {
               const result = a.astart.localeCompare(b.astart);
               return result !== 0 ? result : a.bend.localeCompare(b.bend);
@@ -111,12 +111,12 @@ export const detailData = selectorFamily({
 });
 
 export const itineraryDateTime = atom({
-  key: 'itineraryDateTime',
-  default: '',
+  key: "itineraryDateTime",
+  default: "",
 });
 
 export const itineraryData = selector({
-  key: 'itineraryData',
+  key: "itineraryData",
   get: async ({ get }) => {
     const response = await getTrip(get(userId), get(currentTripKey));
     if (response.error) {
@@ -130,7 +130,7 @@ export const itineraryData = selector({
       for (const [key, value] of Object.entries(response.details.activity)) {
         let detailObject = value;
         detailObject.key = key;
-        detailObject.type = 'activity';
+        detailObject.type = "activity";
         activityArray.push(detailObject);
       }
     }
@@ -140,7 +140,7 @@ export const itineraryData = selector({
       for (const [key, value] of Object.entries(response.details.car)) {
         let detailObject = value;
         detailObject.key = key;
-        detailObject.type = 'car';
+        detailObject.type = "car";
         carArray.push(detailObject);
       }
     }
@@ -150,7 +150,7 @@ export const itineraryData = selector({
       for (const [key, value] of Object.entries(response.details.note)) {
         let detailObject = value;
         detailObject.key = key;
-        detailObject.type = 'note';
+        detailObject.type = "note";
         noteArray.push(detailObject);
       }
     }
@@ -160,7 +160,7 @@ export const itineraryData = selector({
       for (const [key, value] of Object.entries(response.details.room)) {
         let detailObject = value;
         detailObject.key = key;
-        detailObject.type = 'room';
+        detailObject.type = "room";
         detailObject.fstay_Dates = stayDates(
           detailObject.astart_Date,
           detailObject.bend_Date
@@ -168,14 +168,14 @@ export const itineraryData = selector({
         roomArray.push(detailObject);
       }
     }
-    //travels
-    let travelArray = [];
-    if (response.details.travel) {
-      for (const [key, value] of Object.entries(response.details.travel)) {
+    //transports
+    let transportArray = [];
+    if (response.details.transport) {
+      for (const [key, value] of Object.entries(response.details.transport)) {
         let detailObject = value;
         detailObject.key = key;
-        detailObject.type = 'travel';
-        detailObject.dovernight_Arrival_Date = '';
+        detailObject.type = "transport";
+        detailObject.dovernight_Arrival_Date = "";
         if (
           detailObject.astart.substring(0, 10) !==
           detailObject.bend.substring(0, 10)
@@ -185,7 +185,7 @@ export const itineraryData = selector({
             10
           );
         }
-        travelArray.push(detailObject);
+        transportArray.push(detailObject);
       }
     }
     return {
@@ -194,43 +194,43 @@ export const itineraryData = selector({
       cars: carArray,
       notes: noteArray,
       rooms: roomArray,
-      travels: travelArray,
+      transports: transportArray,
     };
   },
 });
 
 export const itineraryDetail = atom({
-  key: 'itineraryDetail',
+  key: "itineraryDetail",
   default: {},
 });
 
 export const userId = atom({
-  key: 'userId',
+  key: "userId",
   default: null,
-  effects: [localStorageEffect('userId')],
+  effects: [localStorageEffect("userId")],
 });
 
 export const currentTrip = atom({
-  key: 'currentTrip',
-  default: '',
+  key: "currentTrip",
+  default: "",
 });
 
-export const currentKey = atom({ key: 'currentKey',default: '',});
+export const currentKey = atom({ key: "currentKey", default: "" });
 
 export const currentTripKey = atom({
-  key: 'currentTripKey',
-  default: '',
+  key: "currentTripKey",
+  default: "",
 });
 
 export const currentTripIndex = atom({
-  key: 'currentTripIndex',
+  key: "currentTripIndex",
   default: -1,
 });
 
-export const deleteAll = atom({ key: 'deleteAll',default: false,});
+export const deleteAll = atom({ key: "deleteAll", default: false });
 
-export const deleteTarget = atom({ key: 'deleteTarget',default: '',});
+export const deleteTarget = atom({ key: "deleteTarget", default: "" });
 
-export const page = atom({ key: 'page',default: '',});
+export const page = atom({ key: "page", default: "" });
 
-export const showModal = atom({ key: 'showModal',default: false,});
+export const showModal = atom({ key: "showModal", default: false });

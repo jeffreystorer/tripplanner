@@ -67,8 +67,8 @@ const router = createBrowserRouter (
         element={<AddPage page={'itineraryroom'} />}
       />
       <Route
-        path="additinerarytravel"
-        element={<AddPage page={'itinerarytravel'} />}
+        path="additinerarytransport"
+        element={<AddPage page={'itinerarytransport'} />}
       />
       <Route path="edititinerary" element={<EditDetailPage type={'itinerary'} />} />
       <Route path="note" element={<DetailsPage page={'note'} />} />
@@ -83,11 +83,11 @@ const router = createBrowserRouter (
         path="/pages/editroom/:rowIndex"
         element={<EditPage page={'room'} />}
       />
-      <Route path="travel" element={<DetailsPage page={'travel'} />} />
-      <Route path="addtravel" element={<AddPage page={'travel'} />} />
+      <Route path="transport" element={<DetailsPage page={'transport'} />} />
+      <Route path="addtransport" element={<AddPage page={'transport'} />} />
       <Route
-        path="/pages/edittravel/:rowIndex"
-        element={<EditPage page={'travel'} />}
+        path="/pages/edittransport/:rowIndex"
+        element={<EditPage page={'transport'} />}
       />
       <Route path="trip" element={<TripPage />} />
       <Route

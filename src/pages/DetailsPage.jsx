@@ -25,7 +25,7 @@ export default function DetailsPage({ page }) {
     car: 'Cars',
     note: 'Trip Notes',
     room: 'Rooms',
-    travel: 'Travels',
+    transport: 'Transports',
   };
 
   useEffect(() => {

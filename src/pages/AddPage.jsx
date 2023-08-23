@@ -44,7 +44,7 @@ export default function AddPage({ page }) {
         case 'room':
           setData({ ...data, astart_Date: itineraryDate });
           break;
-        case 'travel':
+        case 'transport':
           setData({ ...data, astart: itineraryDateTime });
           break;
         default:

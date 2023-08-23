@@ -44,12 +44,12 @@ export default function DetailButtons() {
         </button>
       </div>
       <div>        
-        <button onClick={() => navigate('/pages/addtravel')}
+        <button onClick={() => navigate('/pages/addtransport')}
           >
             <Plus />
         </button>
-        <button  onClick={() => navigate('/pages/travel')}>
-            Travels
+        <button  onClick={() => navigate('/pages/transport')}>
+            Transports
         </button>
       </div>
     </div>
