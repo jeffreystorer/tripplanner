@@ -215,7 +215,11 @@ export const currentTrip = atom({
   default: "",
 });
 
-export const currentKey = atom({ key: "currentKey", default: "" });
+export const currentKey = atom({
+  key: "currentKey",
+  default: "",
+  effects: [localStorageEffect("currentTripKey")],
+});
 
 export const currentTripKey = atom({
   key: "currentTripKey",
