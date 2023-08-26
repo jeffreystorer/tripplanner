@@ -8,7 +8,7 @@ import {
 } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import * as state from '@/store';
-import { createItineraryItems, dowMonthDayFromStr } from '@/utils';
+import { createItineraryItems, dateStrShort } from '@/utils';
 
 export default function ItineraryPage() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function ItineraryPage() {
       page: item.type,
       key: item.key,
       value: e.target.innerText,
-      date: Object.values(item)[0].substring(0, 10),
+      date: dateStrShort(Object.values(item)[0]),
     };
     setItineraryDetail(detail);
     navigate('/pages/itinerarydetail');
@@ -59,7 +59,7 @@ export default function ItineraryPage() {
       key: date,
     };
     setItineraryDetail(detail);
-    setItineraryDateTime(date + 'T00:00');
+    setItineraryDateTime(date);
     navigate('/pages/additinerary' + page);
   }
 
@@ -92,7 +92,7 @@ export default function ItineraryPage() {
                     });
                   }}
                 >
-                  {dowMonthDayFromStr(item, 'short')}
+                  {dateStrShort(item)}
                 </button>
               </li>
             );

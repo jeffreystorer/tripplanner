@@ -30,19 +30,18 @@ export default function AddPage({ page }) {
   const refreshItineraryData = useRecoilRefresher_UNSTABLE(state.itineraryData);
   const [data, setData] = useState(fields[addedPage]);
   const itineraryDateTime = useRecoilValue(state.itineraryDateTime);
-  const itineraryDate = itineraryDateTime.substring(0, 10);
 
   useEffect(() => {
     if (isItinerary) {
       switch (addedPage) {
         case 'activity':
-          setData({ ...data, astart_Date: itineraryDate });
+          setData({ ...data, astart_Date: itineraryDateTime });
           break;
         case 'car':
           setData({ ...data, astart: itineraryDateTime });
           break;
         case 'room':
-          setData({ ...data, astart_Date: itineraryDate });
+          setData({ ...data, astart_Date: itineraryDateTime });
           break;
         case 'transport':
           setData({ ...data, astart: itineraryDateTime });
@@ -52,7 +51,7 @@ export default function AddPage({ page }) {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addedPage, isItinerary, itineraryDate, itineraryDateTime]);
+  }, [addedPage, isItinerary, itineraryDateTime]);
 
   
   const handleChange = e => {

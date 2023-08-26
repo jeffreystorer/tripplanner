@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Star } from 'react-feather';
 import { v4 as uuidv4 } from 'uuid';
-import { dowMonthDayFromStr } from '@/utils';
+import { dateStrShort, timeStr } from '@/utils';
 
 export default function createItineraryItems(
   data,
@@ -37,20 +37,25 @@ export default function createItineraryItems(
     );
   }
 
+  //items are <p></p>
   let items = [];
-    items.push(
-      <details key={uuidv4()} className='itinerary-date'>
-        <summary>Notes</summary>
-        <ul>
-          <li>
-            <button className='not-stacked'  onClick={e => handleNoteClick(e)}>
-              Add Note
-            </button>
-          </li>          
-        </ul>
-      </details>  
-    );
-    notes.forEach(pushNotes);
+  
+  //dateItems are objects with item and value
+  let dateItems = [];
+
+  items.push(
+    <details key={uuidv4()} className='itinerary-date'>
+      <summary>Notes</summary>
+      <ul>
+        <li>
+          <button className='not-stacked'  onClick={e => handleNoteClick(e)}>
+            Add Note
+          </button>
+        </li>          
+      </ul>
+    </details>  
+  );
+  notes.forEach(pushNotes);
 
   function pushNotes(item) {
 
@@ -59,25 +64,18 @@ export default function createItineraryItems(
 
   dates.forEach(pushDateGroup);
 
+  //item is YYYY-MM-DDT00:00
   function pushDateGroup(item) {
     pushDate(item);
-    pushTransportsOvernight(item);
+    pushDateItems(item);
     pushRoomsStay(item);
-    pushRoomsCheckOut(item);
-    pushPreActivities(item);
-    pushCarsDropOff(item);
-    pushTransports(item);
-    pushCarsPickUp(item);
-    pushActivities(item);
-    pushRoomsCheckIn(item);
-    pushRoomsStay(item);
-    pushPostActivities(item);
+    dateItems = [];
   }
 
   function pushDate(item) {
     items.push(
       <details key={uuidv4()} id={item} className='itinerary-date'>
-        <summary>{dowMonthDayFromStr(item, 'long')}</summary>
+        <summary>{dateStrShort(item)}</summary>
         <ul>
           <li>
             <button className='stacked'  onClick={e => handleDateClick(item, 'activity', e)}>
@@ -104,82 +102,75 @@ export default function createItineraryItems(
     );
   }
 
-  function pushPreActivities(item) {
-    const todaysActivities = activities.filter(obj => {
-      return obj.astart_Date === item && obj.bdetails.charAt(0) === '<';
-    });
-    todaysActivities.forEach(pushPreActivity);
-  }
+    
 
-  function pushPreActivity(item) {
-    items.push(
-      itineraryItem(item, item.bdetails.substring(1))
-    );
+  function pushDateItems(item){
+    pushTransportsOvernight(item);
+    pushRoomsCheckOut(item);
+    pushCarsDropOff(item);
+    pushTransports(item);
+    pushCarsPickUp(item);
+    pushActivities(item);
+    pushRoomsCheckIn(item);
+    dateItems.sort((a, b) => a.value.localeCompare(b.value))
+    let sortedItems = [];
+    dateItems.forEach(pushItineraryItems);
+    function pushItineraryItems(item){
+      sortedItems.push(itineraryItem(item.item, item.value))
+    }
+    items.push(sortedItems);
   }
 
   function pushActivities(item) {
     const todaysActivities = activities.filter(obj => {
       return (
-        obj.astart_Date === item &&
-        obj.bdetails.charAt(0) !== '<' &&
-        obj.bdetails.charAt(0) !== '>'
+        dateStrShort(obj.astart_Date) === dateStrShort(item)
       );
     });
     todaysActivities.forEach(pushActivity);
   }
 
   function pushActivity(item) {
-    items.push(
-      itineraryItem(item, item.bdetails)
+    dateItems.push(
+      {item: item, value: `${timeStr(Object.values(item)[0])} ${item.bdetails}`}
     );
   }
 
-  function pushPostActivities(item) {
-    const todaysActivities = activities.filter(obj => {
-      return obj.astart_Date === item && obj.bdetails.charAt(0) === '>';
-    });
-    todaysActivities.forEach(pushPostActivity);
-  }
 
-  function pushPostActivity(item) {
-    items.push(
-      itineraryItem(item, item.bdetails.substring(1))
-    );
-  }
 
   function pushCarsDropOff(item) {
     const todaysCars = cars.filter(obj => {
-      return obj.bend.substring(0, 10) === item;
+      return dateStrShort(obj.bend) === dateStrShort(item);
     });
     todaysCars.forEach(pushCarDropOff);
   }
 
   function pushCarDropOff(item) {
-    items.push(
-      itineraryItem(item, `Drop Off Car: ${item.bend.substring(11)} ${item.cagency}, ${
+    dateItems.push(
+      {item: item, value: `${timeStr(Object.values(item)[1])} Drop Off Car: ${item.cagency}, ${
           item.fdrop_Off_Location
-        }`)
+        }`}
     );
   }
 
   function pushCarsPickUp(item) {
     const todaysCars = cars.filter(obj => {
-      return obj.astart.substring(0, 10) === item;
+      return dateStrShort(obj.astart) === dateStrShort(item);
     });
     todaysCars.forEach(pushCarPickUp);
   }
 
   function pushCarPickUp(item) {
-    items.push(
-      itineraryItem(item, `Pick Up Car: ${item.astart.substring(11)} ${item.cagency}, ${
+    dateItems.push(
+      {item: item, value: `${timeStr(Object.values(item)[0])} Pick Up Car: ${item.cagency}, ${
           item.dpick_Up_Location
-        }, ${item.edetails}`)
+        }, ${item.edetails}`}
     );
   }
 
   function pushTransports(item) {
     const todaysTransports = transports.filter(obj => {
-      return obj.astart.substring(0, 10) === item;
+      return dateStrShort(obj.astart) === dateStrShort(item);
     });
     todaysTransports.forEach(pushTransport);
   }
@@ -187,59 +178,58 @@ export default function createItineraryItems(
   function pushTransport(item) {
     let arrDate = '';
     if (
-      dowMonthDayFromStr(item.astart, 'short') !==
-      dowMonthDayFromStr(item.bend, 'short')
+      dateStrShort(item.astart) !==
+      dateStrShort(item.bend)
     ) {
-      arrDate = dowMonthDayFromStr(item.bend, 'short') + ' ';
+      arrDate = dateStrShort(item.bend) + ' ';
     }
-    items.push(
-      itineraryItem(item,`${item.astart.substring(11)}-${arrDate}${item.bend.substring(
-          11
-        )}  ${item.cdetails}`)
+    dateItems.push(
+      {item: item, value:`${timeStr(Object.values(item)[0])} - ${arrDate}${timeStr(Object.values(item)[1])}  ${item.cdetails}`}
     );
   }
 
   function pushTransportsOvernight(item) {
     const todaysTransports = transports.filter(obj => {
-      return obj.dovernight_Arrival_Date === item;
+      return dateStrShort(obj.dovernight_Arrival_Date) === dateStrShort(item);
     });
     todaysTransports.forEach(pushTransportOvernight);
   }
 
   function pushTransportOvernight(item) {
-    items.push(
-      itineraryItem(item, `Overnight Transport: ${dowMonthDayFromStr(
-          item.astart,
-          'short'
-        )}  ${item.astart.substring(11)}-${item.bend.substring(11)}  ${
+    dateItems.push(
+      {item: item, value: `${timeStr(Object.values(item)[1])} Arrival: ${
+        item.cdetails
+      }`}
+      /* {item: item, value: `Overnight Transport: ${dateStrShort(
+          Object.values(item)[0])}  ${timeStr(Object.values(item)[0])}-${timeStr(Object.values(item)[1])}  ${
           item.cdetails
-        }`)
+        }`} */
     );
   }
 
   function pushRoomsCheckOut(item) {
     const todaysRooms = rooms.filter(obj => {
-      return obj.bend_Date === item;
+      return dateStrShort(obj.bend_Date) === dateStrShort(item);
     });
     todaysRooms.forEach(pushRoomCheckOut);
   }
 
   function pushRoomCheckOut(item) {
-    items.push(
-      itineraryItem(item, `Check Out: ${item.croom}`)
+    dateItems.push(
+      {item: item, value: `${timeStr(Object.values(item)[1])} Check Out: ${item.croom}`}
     );
   }
 
   function pushRoomsCheckIn(item) {
     const todaysRooms = rooms.filter(obj => {
-      return obj.astart_Date === item;
+      return dateStrShort(obj.astart_Date) === dateStrShort(item);
     });
     todaysRooms.forEach(pushRoomCheckIn);
   }
 
   function pushRoomCheckIn(item) {
-    items.push(
-      itineraryItem(item, `Check In: ${item.croom}, ${item.ddetails}`)
+    dateItems.push(
+      {item: item, value: `${timeStr(Object.values(item)[0])} Check In: ${item.croom}, ${item.ddetails}`}
     );
   }
 
@@ -253,9 +243,8 @@ export default function createItineraryItems(
 
   function pushRoomStay(item) {
     // item == room object
-    items.push(
-      itineraryItem(item, `Continue Stay: ${item.croom}`)
-    );
+    items.push(itineraryItem(item, `Continue Stay: ${item.croom}`));
   }
+  
   return <div key={uuidv4()}  id='itinerary-items'>{items}</div>;
 }

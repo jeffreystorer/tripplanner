@@ -123,7 +123,7 @@ export const itineraryData = selector({
       throw response.error;
     }
     //dates
-    let dateArray = tripDates(response.bstart_Date, response.cend_Date);
+    let dateArray = tripDates(response.bstart_Date, response.cend_Date, true);
     //activities
     let activityArray = [];
     if (response.details.activity) {
@@ -163,7 +163,8 @@ export const itineraryData = selector({
         detailObject.type = "room";
         detailObject.fstay_Dates = stayDates(
           detailObject.astart_Date,
-          detailObject.bend_Date
+          detailObject.bend_Date,
+          true
         );
         roomArray.push(detailObject);
       }

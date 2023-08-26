@@ -836,8 +836,10 @@ select {
 
 #itinerary-items > p {
   text-align: left;
-  white-space: pre-wrap;
+  padding-left: 2.8em;
+  text-indent: -2.8em;
 }
+
 
 #add-edit {
   display: flex;

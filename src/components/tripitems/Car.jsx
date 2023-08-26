@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { dowMonthDayFromStr } from '@/utils';
+import { dateStrShort, timeStr } from '@/utils';
 
 export default function Car({ data, onClick }) {
 
@@ -13,15 +13,15 @@ export default function Car({ data, onClick }) {
   return (
       <p key={uuidv4()} className='item' onClick={e => onClick(item, e)}>
         <strong>
-          {dowMonthDayFromStr(Object.values(item)[0], 'short')} {' - '}   
-          {dowMonthDayFromStr(Object.values(item)[1], 'short')} 
+          {dateStrShort(Object.values(item)[0])} {' - '}   
+          {dateStrShort(Object.values(item)[1])}
              
         </strong> {'  '}
               {Object.values(item)[2]}<br />
-              Pick up: {Object.values(item)[0].substring(11)}
+              Pick up: {timeStr(Object.values(item)[0])}
               {'  '}
               {pickUpLocation}<br />
-              Drop off: {Object.values(item)[1].substring(11)}
+              Drop off: {timeStr(Object.values(item)[1])}
               {'  '}
               {dropOffLocation}
       </p>   

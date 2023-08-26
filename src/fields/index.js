@@ -39,12 +39,12 @@ export const inputType = {
   details: "textarea",
   drop_Off_Location: "textarea",
   end: "datetime-local",
-  end_Date: "date",
+  end_Date: "datetime-local",
   note: "textarea",
   pick_Up_Location: "textarea",
   room: "text",
   start: "datetime-local",
-  start_Date: "date",
+  start_Date: "datetime-local",
   trip_Name: "text",
 };
 

@@ -1,6 +1,6 @@
 
 import { v4 as uuidv4 } from 'uuid';
-import { dowMonthDayFromStr } from '@/utils';
+import { dateStrShort, timeStr } from '@/utils';
 
 export default function Activity({ data, onClick }) {
 
@@ -9,7 +9,7 @@ export default function Activity({ data, onClick }) {
   return (
         <p key={uuidv4()} className='item' onClick={e => onClick(item, e)}>
           <strong>
-            {dowMonthDayFromStr(Object.values(item)[0], 'short')}        
+            {dateStrShort(Object.values(item)[0])}{' '}{timeStr(Object.values(item)[0]) } 
           </strong><br />
         {Object.values(item)[1]}
         </p>

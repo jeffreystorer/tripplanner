@@ -5,7 +5,7 @@ import {
 } from 'recoil';
 import { ConfirmDeleteModal, DetailButtons } from '@/components/common';
 import * as state from '@/store';
-import { dowMonthDayFromStr } from '@/utils';
+import { dateStrLong, dateStrShort } from '@/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function TripPage() {
@@ -28,22 +28,22 @@ export default function TripPage() {
       atrip_LongName:
         item.atrip_Name +
         ':  ' +
-        dowMonthDayFromStr(item.bstart_Date, 'long') +
+        dateStrLong(item.bstart_Date) +
         ' to ' +
-        dowMonthDayFromStr(item.cend_Date, 'long'),
+        dateStrLong(item.cend_Date),
       atrip_Name:
         item.atrip_Name +
         ':  ' +
-        dowMonthDayFromStr(item.bstart_Date, 'short') +
+        dateStrShort(item.bstart_Date) +
         ' to ' +
-        dowMonthDayFromStr(item.cend_Date, 'short'),
+        dateStrShort(item.cend_Date),
       atrip_Title: item.atrip_Name,
-      atrip_Dates: dowMonthDayFromStr(item.bstart_Date, 'short') +
+      atrip_Dates: dateStrShort(item.bstart_Date) +
         ' to ' +
-        dowMonthDayFromStr(item.cend_Date, 'short'),
-      atrip_LongDates: dowMonthDayFromStr(item.bstart_Date, 'long') +
+        dateStrShort(item.cend_Date),
+      atrip_LongDates: dateStrLong(item.bstart_Date) +
         ' to ' +
-        dowMonthDayFromStr(item.cend_Date, 'long')
+        dateStrLong(item.cend_Date)
     }
     setCurrentTrip((prev) => newCurrentTrip);
     navigate('/pages/itinerary');
@@ -67,9 +67,9 @@ export default function TripPage() {
                 >
                   {item.atrip_Name}
                   {':  '}
-                  {dowMonthDayFromStr(item.bstart_Date, 'short')}
+                  {dateStrShort(item.bstart_Date)}
                   {' to '}
-                  {dowMonthDayFromStr(item.cend_Date, 'short')}
+                  {dateStrShort(item.cend_Date)}
                 </li>
               ))}
             </ul>

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilRefresher_UNSTABLE, useSetRecoilState, useRecoilValue } from 'recoil';
 import { ConfirmDeleteModal } from '@/components/common';
-import { dowMonthDayFromStr } from '@/utils';
+import { dateStrShort } from '@/utils';
 import * as state from '@/store';
 
 export default function DetailPage({type}) {
@@ -54,7 +54,7 @@ export default function DetailPage({type}) {
             ):(
               <h3>
                   {detailType}{' '}for{' '}
-                  {dowMonthDayFromStr(itineraryDetail.date, 'short')}
+                  {dateStrShort(itineraryDetail.date, 'short')}
               </h3>
             )
             }

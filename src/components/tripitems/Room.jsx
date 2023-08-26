@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { dowMonthDayFromStr, stayDates } from '@/utils';
+import { dateStrShort} from '@/utils';
 
 export default function Room({ data, onClick }) {
   
@@ -8,9 +8,10 @@ export default function Room({ data, onClick }) {
   return (
       <p key={uuidv4()} className='item' onClick={e => onClick(item, e)}>
           <strong>
-            {dowMonthDayFromStr(Object.values(detail)[0], 'short')}{' - '}{dowMonthDayFromStr(Object.values(detail)[1], 'short')}&nbsp;
+            {dateStrShort(Object.values(item)[0])}{' - '}{dateStrShort(Object.values(item)[1])}
+            &nbsp;
             </strong>
-                {Object.values(detail)[2]}
+                {Object.values(item)[2]}
       </p>
   )});
   
