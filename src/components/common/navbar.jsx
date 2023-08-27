@@ -108,7 +108,7 @@ export default function NavBar(){
                 </li>
                 {currentTripIndex > -1 && (
                   <>
-                <div className='divider'></div>
+                <li className='divider'></li>
                 <li>Current Trip</li>
                 <li>
                   <button onClick={handleEdit}>Edit</button>
@@ -123,7 +123,7 @@ export default function NavBar(){
                 )}
                 {tripData[0].length > 0 && (
                   <>
-                <div className='divider'></div>
+                <li className='divider'></li>
                 <li>All Trips</li>
                 <li>
                   <button onClick={e => handleDelete(e, true)}>Delete</button>
@@ -133,7 +133,7 @@ export default function NavBar(){
                 </li>
                 </>
                 )}
-                <div className='divider'></div>
+                <li className='divider'></li>
                 <li>                  
                   <NavLink
                   to="/"

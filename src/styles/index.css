@@ -271,7 +271,7 @@ body {
   display: block;
   font-family: var(--font-sans-serif);
   margin: auto;
-  overflow: none;
+  overflow:hidden;
   text-align: center;
   z-index: 1;
 }
@@ -376,7 +376,6 @@ header {
 }
 
 header > h1 {
-  align-items: top;
   display: inline-flex;
   height: fit-content;
   width: fit-content;
@@ -910,7 +909,6 @@ summary p {
 }
 
 .note-item {
-  align-items: top;
   display: flex;
   flex-direction: row;
 }
