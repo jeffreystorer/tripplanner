@@ -271,7 +271,6 @@ body {
   display: block;
   font-family: var(--font-sans-serif);
   margin: auto;
-  overflow:hidden;
   text-align: center;
   z-index: 1;
 }
