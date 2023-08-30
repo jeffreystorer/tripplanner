@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
-import { ConfirmDeleteModal, Layout, Loading } from './components/common';
+import { ConfirmDeleteModal, Layout, Loading } from '@/components/common';
 import {
   SignInPage,
   DetailsPage,

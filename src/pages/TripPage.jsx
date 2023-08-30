@@ -3,7 +3,7 @@ import {
   useRecoilState,
   useSetRecoilState,
 } from 'recoil';
-import { ConfirmDeleteModal, DetailButtons } from '@/components/common';
+import { DetailButtons } from '@/components/common';
 import * as state from '@/store';
 import { dateStrLong, dateStrShort } from '@/utils';
 import { v4 as uuidv4 } from 'uuid';
@@ -53,7 +53,6 @@ export default function TripPage() {
 
 
   return (
-    <>
       <div id='trip-page'>
         {tripData[0].length > 0 && (
           <div className='titled-outer'>
@@ -83,7 +82,5 @@ export default function TripPage() {
         )
         }
       </div>
-      <ConfirmDeleteModal />
-    </>
   );
 }

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilRefresher_UNSTABLE, useSetRecoilState, useRecoilValue } from 'recoil';
-import { ConfirmDeleteModal } from '@/components/common';
 import { dateStrShort } from '@/utils';
 import * as state from '@/store';
 
@@ -40,7 +39,6 @@ export default function DetailPage({type}) {
   const detailType = itineraryDetail.page.charAt(0).toUpperCase() + itineraryDetail.page.slice(1)
 
   return (
-    <>
       <div id='itinerary-details'>
         <section>
           <header>
@@ -76,7 +74,5 @@ export default function DetailPage({type}) {
           </footer>
         </section>
       </div>
-      <ConfirmDeleteModal />
-      </>
   );
 }
