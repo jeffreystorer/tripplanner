@@ -7,6 +7,7 @@ import {
 } from 'recoil';
 import * as _ from 'lodash';
 import { updateDetail, updateTrip } from '@/services';
+import { returnNewCurrentTrip } from '@/utils';
 import { AddEdit } from '@/components/screens';
 import * as state from '@/store';
 import '@/styles/index.css';
@@ -53,8 +54,8 @@ export default function EditPage({ page }) {
       switch (page) {
         case 'trip':
           updateTrip(userId, currentTripKey, data);
-          const { atrip_Name } = data;
-          setCurrentTrip({ key: currentTripKey, atrip_Name });
+          const newCurrentTrip = returnNewCurrentTrip(data);
+          setCurrentTrip((prev) => newCurrentTrip);
           refreshTripData();
           refreshDetailData();
           refreshItineraryData();

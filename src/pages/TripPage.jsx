@@ -2,15 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import {
   useRecoilState,
   useSetRecoilState,
+  useRecoilValue
 } from 'recoil';
 import { DetailButtons } from '@/components/common';
 import * as state from '@/store';
-import { dateStrLong, dateStrShort } from '@/utils';
+import { dateStrShort, returnNewCurrentTrip } from '@/utils';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function TripPage() {
   const navigate = useNavigate();
-  const tripData = useRecoilState(state.tripData);
+  const tripData = useRecoilValue(state.tripData);
   const [currentTrip, setCurrentTrip] = useRecoilState(state.currentTrip);
   const setCurrentTripKey = useSetRecoilState(
     state.currentTripKey
@@ -23,42 +24,19 @@ export default function TripPage() {
   function handleSetTrip(item, index) {
     setCurrentTripKey(item.key);
     setCurrentTripIndex(index);
-    const newCurrentTrip = {
-      key: item.key,
-      atrip_LongName:
-        item.atrip_Name +
-        ':  ' +
-        dateStrLong(item.bstart_Date) +
-        ' to ' +
-        dateStrLong(item.cend_Date),
-      atrip_Name:
-        item.atrip_Name +
-        ':  ' +
-        dateStrShort(item.bstart_Date) +
-        ' to ' +
-        dateStrShort(item.cend_Date),
-      atrip_Title: item.atrip_Name,
-      atrip_Dates: dateStrShort(item.bstart_Date) +
-        ' to ' +
-        dateStrShort(item.cend_Date),
-      atrip_LongDates: dateStrLong(item.bstart_Date) +
-        ' to ' +
-        dateStrLong(item.cend_Date)
-    }
+    const newCurrentTrip = returnNewCurrentTrip(item);
     setCurrentTrip((prev) => newCurrentTrip);
     navigate('/pages/itinerary');
   }
 
 
-
-
   return (
       <div id='trip-page'>
-        {tripData[0].length > 0 && (
+        {tripData.length > 0 && (
           <div className='titled-outer'>
             <h2>Saved Trips</h2>
             <ul>
-              {tripData[0].map((item, index) => (
+              {tripData.map((item, index) => (
                 <li
                   className={index === currentTripIndex ? 'active-li' : ''}
                   onClick={() => handleSetTrip(item, index)}
