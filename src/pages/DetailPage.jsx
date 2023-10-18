@@ -52,7 +52,7 @@ export default function DetailPage({type}) {
             ):(
               <h3>
                   {detailType}{' '}for{' '}
-                  {dateStrShort(itineraryDetail.date, 'short')}
+                  {itineraryDetail.date}
               </h3>
             )
             }

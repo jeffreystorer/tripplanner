@@ -54,6 +54,7 @@ export default function SignInPage() {
             <label>
               Email:
               <input
+                autoComplete='email'
                 type='email'
                 name='email'
                 required
@@ -62,6 +63,7 @@ export default function SignInPage() {
             <label>
               Password:
               <input
+                autoComplete='current-password'
                 type='password'
                 name='password'
                 required

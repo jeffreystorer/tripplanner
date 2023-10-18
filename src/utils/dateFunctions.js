@@ -6,7 +6,7 @@ function dateFromStr(str) {
   const y = parseInt(yStr);
   const m = parseInt(mStr) - 1;
   const d = parseInt(dStr);
-  return new Date(y, m, d);
+  return new Date(Date.UTC(y, m, d, 0, 0, 0) + MILLISECONDS_IN_DAY);
 }
 
 //convert a string '2022-06-11' or 2022-06-11THH:MM
@@ -51,7 +51,7 @@ function dateStrFromDate(date) {
 }
 
 //From two DateTime strings '2022-06-02T11:00'
-//get an array of date strings '2202-06-03' from a start date to an end date
+//get an array of date strings '2022-06-03' from a start date to an end date
 export function tripDates(startStr, endStr, withTime) {
   const startDate = dateFromStr(startStr);
   const startTime = startDate.getTime();
@@ -67,8 +67,21 @@ export function tripDates(startStr, endStr, withTime) {
   return dates;
 }
 
+/* let nonLeap = tripDates("2023-02-23T00:00", "2023-03-21T23:59", true);
+let leap = tripDates("2024-02-23T00:00", "2024-03-21T23:59", true);
+let cal = tripDates("2023-09-19T00:00", "2023-10-03T23:59", true);
+
+console.group("Trip Dates");
+console.log("😊😊 nonLeap.length", nonLeap.length);
+console.log("😊😊 nonLeap", nonLeap);
+console.log("😊😊 leap.length", leap.length);
+console.log("😊😊 leap", leap);
+console.log("😊😊 cal.length", cal.length);
+console.log("😊😊 cal", cal);
+console.groupEnd(); */
+
 //From two DateTime strings '2022-06-02T11:00'
-//get an array of date strings '2202-06-03' between two dates
+//get an array of date strings '2022-06-03' between two dates
 //used by Room to make trip detail items for stayDates
 export function stayDates(startStr, endStr, withTime) {
   const startDate = dateFromStr(startStr);
@@ -88,6 +101,19 @@ export function stayDates(startStr, endStr, withTime) {
   }
   return dates;
 }
+
+/* nonLeap = stayDates("2023-02-23T00:00", "2023-03-21T23:59", true);
+leap = stayDates("2024-02-23T00:00", "2024-03-21T23:59", true);
+cal = stayDates("2023-09-19T00:00", "2023-10-03T23:59", true);
+
+console.group("Stay Dates");
+console.log("😊😊 nonLeap.length", nonLeap.length);
+console.log("😊😊 nonLeap", nonLeap);
+console.log("😊😊 leap.length", leap.length);
+console.log("😊😊 leap", leap);
+console.log("😊😊 cal.length", cal.length);
+console.log("😊😊 cal", cal);
+console.groupEnd(); */
 
 /********************************************/
 /* //convert a date, time string '2022-06-02T11:00'
