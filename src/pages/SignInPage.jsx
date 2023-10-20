@@ -21,13 +21,12 @@ export default function SignInPage() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    /* const form = e.target;
+    const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
     const email = formJson.email;
-    const password = formJson.password; */
-    const email = 'tptesting@storer.net';
-    const password = 'testing';
+    const password = formJson.password;
+   
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
@@ -53,7 +52,7 @@ export default function SignInPage() {
       <main>
         <form id='sign-in' onSubmit={handleSubmit}>
           <fieldset>
-            {/* <label>
+            <label>
               Email:
               <input
                 autoComplete='email'
@@ -70,7 +69,7 @@ export default function SignInPage() {
                 name='password'
                 required
               />
-            </label> */}
+            </label>
             <button className={'not-stacked'} type='submit'>
               Sign In
             </button>
