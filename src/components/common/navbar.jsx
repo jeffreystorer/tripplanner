@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
-  useRecoilState,
   useSetRecoilState,
   useRecoilValue
 } from 'recoil';
@@ -9,7 +8,7 @@ import * as state from '@/store';
 
 export default function NavBar(){
   const navigate = useNavigate();
-  const tripData = useRecoilState(state.tripData);
+  const tripData = useRecoilValue(state.tripData);
   const currentTripData = useRecoilValue(state.currentTripData);
   const setCurrentKey = useSetRecoilState(state.currentKey);
   const currentTrip = useRecoilValue(state.currentTrip);
@@ -34,6 +33,14 @@ export default function NavBar(){
     const targetPage = `/pages/edittrip/${currentTripIndex}`
     navigate(targetPage);
   }
+  
+
+  function handleMove(e){
+    e.preventDefault();
+    const targetPage = `/pages/movetrip/${currentTripIndex}`
+    navigate(targetPage);
+  }
+
 
 
   function handleDelete(e, param) {
@@ -52,7 +59,7 @@ export default function NavBar(){
   }
 
   function handleDownloadTrips(e) {
-    e.preventDefault(); const tripsArray = tripData[0];
+    e.preventDefault(); const tripsArray = tripData;
 
     let backup = { [userId]: {} };
 
@@ -79,7 +86,6 @@ export default function NavBar(){
 
     link.click();
   };
-
 
   return (
     <nav>
@@ -112,6 +118,9 @@ export default function NavBar(){
                 <li>Current Trip</li>
                 <li>
                   <button onClick={handleEdit}>Edit</button>
+                </li>
+                <li>
+                  <button onClick={handleMove}>Move</button>
                 </li>
                 <li>
                   <button onClick={e => handleDelete(e, false)}>Delete</button>

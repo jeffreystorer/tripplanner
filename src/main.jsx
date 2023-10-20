@@ -19,6 +19,7 @@ import {
   DetailPage,
   EditDetailPage,
   TripPage,
+  MovePage,
 } from '@/pages';
 
 
@@ -99,6 +100,10 @@ const router = createBrowserRouter (
       <Route
         path="/pages/edittrip/:rowIndex"
         element={<EditPage page={'trip'} />}
+      />
+      <Route
+        path="/pages/movetrip/:rowIndex"
+        element={<MovePage />}
       />
       </Route>
     </>   

@@ -536,6 +536,7 @@ nav a.inactive,
 
 #add-edit  section > form {
   display: flex;
+  flex-direction: column;
   max-width: 100%;
 }
 #add-edit  section > form > fieldset {
@@ -600,13 +601,13 @@ label > input[type='password'] {
 }
 
 :is( #add-edit, #itinerary-details)  section > footer a,
-:is( #modal, #add-edit, #itinerary-details )  section > footer > button:first-child {
+:is( #modal, #add-edit, #itinerary-details )  footer > button:first-child {
   color: var(--color-white);
   background-color: var(--background-button-secondary);
   border-color: var(--background-button-secondary);
 }
 
-:is( #modal, #add-edit, #itinerary-details )  section > footer > button:last-child {
+:is( #modal, #add-edit, #itinerary-details )  footer > button:last-child {
   color: var(--color-white);
   background-color: var(--background-button-primary);
   border-color: var(--background-button-primary);
@@ -832,7 +833,8 @@ select {
   gap: 1em;
 }
 
-#itinerary-items > p {
+:is(#itinerary-items > p, .activityItem)
+ {
   text-align: left;
   padding-left: 2.8em;
   text-indent: -2.8em;

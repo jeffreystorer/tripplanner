@@ -123,7 +123,7 @@ export const itineraryData = selector({
       throw response.error;
     }
     //dates
-    let dateArray = tripDates(response.bstart_Date, response.cend_Date, true);
+    let dateArray = tripDates(response.bstart_Date, response.cend_Date);
     //activities
     let activityArray = [];
     if (response.details.activity) {

@@ -7,3 +7,4 @@ export { default as ItineraryPage } from '@/pages/ItineraryPage';
 export { default as ItineraryPageErrorBoundary } from '@/pages/ItineraryPageErrorBoundary';
 export { default as SignInPage } from '@/pages/SignInPage';
 export { default as TripPage } from '@/pages/TripPage';
+export { default as MovePage } from '@/pages/MovePage';

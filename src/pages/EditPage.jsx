@@ -78,9 +78,13 @@ export default function EditPage({ page }) {
 
 
   const handleChange = e => {
-    let newValue = e.target.value;
-    if (!newValue) newValue = '';
-    setData({ ...data, [e.target.name]: newValue });
+    e.preventDefault();
+    let name  = e.target.name;
+    console.log("😊😊 name", name)
+    let value = e.target.value ? e.target.value : '';
+    if (page === 'trip' && name !=='atrip_Name') value = value + 'T00:00'; 
+    console.log("😊😊 value", value)
+    setData({ ...data, [name]: value });
   };
 
   function handleCancel(){

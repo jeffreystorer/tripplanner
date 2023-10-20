@@ -55,7 +55,13 @@ export default function AddPage({ page }) {
 
   
   const handleChange = e => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    e.preventDefault();
+    let name  = e.target.name;
+    console.log("😊😊 name", name)
+    let value = e.target.value ? e.target.value : '';
+    if (page === 'trip' && name !=='atrip_Name') value = value + 'T00:00';
+    console.log("😊😊 value", value)
+    setData({ ...data, [name]: value });
   };
 
   const handleSubmit = async e => {

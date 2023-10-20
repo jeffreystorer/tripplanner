@@ -29,7 +29,6 @@ export default function TripPage() {
     navigate('/pages/itinerary');
   }
 
-
   return (
       <div id='trip-page'>
         {tripData.length > 0 && (

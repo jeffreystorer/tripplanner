@@ -71,8 +71,8 @@ export default function AddEdit({
             key={uuidv4()}
             autoComplete={keyItem}
             name={keyItem}
-            type={inputType[keyItem.slice(1)]}
-            defaultValue={data[keyItem]}
+            type={page === 'trip' && keyItem !=='atrip_Name' ? 'date': inputType[keyItem.slice(1)]}
+            defaultValue={page === 'trip' && keyItem !=='atrip_Name' ? data[keyItem].substring(0,10) : data[keyItem]}
             onBlur={handleChange}
           />
         </Fragment>

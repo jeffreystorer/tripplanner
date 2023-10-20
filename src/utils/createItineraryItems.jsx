@@ -200,10 +200,6 @@ export default function createItineraryItems(
       {item: item, value: `${timeStr(Object.values(item)[1])} Arrival: ${
         item.cdetails
       }`}
-      /* {item: item, value: `Overnight Transport: ${dateStrShort(
-          Object.values(item)[0])}  ${timeStr(Object.values(item)[0])}-${timeStr(Object.values(item)[1])}  ${
-          item.cdetails
-        }`} */
     );
   }
 

@@ -1,14 +1,8 @@
-import { dateStrLong, dateStrShort } from '@/utils';
+import { dateStrShort } from '@/utils';
 
 export default function returnNewCurrentTrip (item){
     const newCurrentTrip = {
       key: item.key,
-      atrip_LongName:
-        item.atrip_Name +
-        ':  ' +
-        dateStrLong(item.bstart_Date) +
-        ' to ' +
-        dateStrLong(item.cend_Date),
       atrip_Name:
         item.atrip_Name +
         ':  ' +
@@ -19,9 +13,6 @@ export default function returnNewCurrentTrip (item){
       atrip_Dates: dateStrShort(item.bstart_Date) +
         ' to ' +
         dateStrShort(item.cend_Date),
-      atrip_LongDates: dateStrLong(item.bstart_Date) +
-        ' to ' +
-        dateStrLong(item.cend_Date)
     }
     return newCurrentTrip;
 }
