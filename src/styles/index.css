@@ -1,7 +1,6 @@
 body {
-
-  --x:  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
-  --logo:  url('../assets/android-chrome-512x512.png');
+  --x: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
+  --logo: url("../assets/android-chrome-512x512.png");
   --background-blue: #00365f;
   --background-black: #5a5a5a;
   --background-button: #cccccc;
@@ -19,7 +18,7 @@ body {
   --color-modal-fader: #b3b3b3cc;
   --color-white: #ffffff;
   --color-table-stripe: rgb(222, 226, 230);
-  --font-serif: 'Times New Roman', Times, serif;
+  --font-serif: "Times New Roman", Times, serif;
   /* --font-sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
@@ -31,20 +30,20 @@ body {
   /* @link https://utopia.fyi/type/calculator?c=416,16,1.067,1920,24,1.067,6,10,900-1200-1800-600&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 
   --step--10: clamp(0.52rem, calc(0.45rem + 0.28vw), 0.78rem);
-  --step--9: clamp(0.56rem, calc(0.48rem + 0.30vw), 0.84rem);
-  --step--8: clamp(0.60rem, calc(0.51rem + 0.32vw), 0.89rem);
+  --step--9: clamp(0.56rem, calc(0.48rem + 0.3vw), 0.84rem);
+  --step--8: clamp(0.6rem, calc(0.51rem + 0.32vw), 0.89rem);
   --step--7: clamp(0.64rem, calc(0.55rem + 0.34vw), 0.95rem);
   --step--6: clamp(0.68rem, calc(0.58rem + 0.36vw), 1.02rem);
   --step--5: clamp(0.72rem, calc(0.62rem + 0.38vw), 1.08rem);
   --step--4: clamp(0.77rem, calc(0.66rem + 0.41vw), 1.16rem);
   --step--3: clamp(0.82rem, calc(0.71rem + 0.44vw), 1.24rem);
   --step--2: clamp(0.88rem, calc(0.76rem + 0.47vw), 1.32rem);
-  --step--1: clamp(0.94rem, calc(0.81rem + 0.50vw), 1.41rem);
-  --step-0: clamp(1.00rem, calc(0.86rem + 0.53vw), 1.50rem);
-  --step-1: clamp(1.07rem, calc(0.92rem + 0.57vw), 1.60rem);
+  --step--1: clamp(0.94rem, calc(0.81rem + 0.5vw), 1.41rem);
+  --step-0: clamp(1rem, calc(0.86rem + 0.53vw), 1.5rem);
+  --step-1: clamp(1.07rem, calc(0.92rem + 0.57vw), 1.6rem);
   --step-2: clamp(1.14rem, calc(0.98rem + 0.61vw), 1.71rem);
   --step-3: clamp(1.22rem, calc(1.05rem + 0.65vw), 1.82rem);
-  --step-4: clamp(1.30rem, calc(1.12rem + 0.69vw), 1.94rem);
+  --step-4: clamp(1.3rem, calc(1.12rem + 0.69vw), 1.94rem);
   --step-5: clamp(1.38rem, calc(1.19rem + 0.74vw), 2.07rem);
   --step-6: clamp(1.48rem, calc(1.27rem + 0.79vw), 2.21rem);
 }
@@ -122,15 +121,14 @@ h6 {
 
 /* print */
 @media print {
-
   #print {
     display: none;
   }
 
   .itinerary-date {
-    margin-left: -.5em;
+    margin-left: -0.5em;
   }
-  .itinerary-date  > summary {
+  .itinerary-date > summary {
     list-style: none;
   }
   .itinerary-date > summary::-webkit-details-marker {
@@ -145,29 +143,28 @@ h6 {
     width: 0;
   }
 
-  #itinerary-page{
+  #itinerary-page {
     display: block;
     margin-left: 1em;
     overflow-y: hidden;
   }
-    
+
   #itinerary-page > div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
     flex: 1 1 0%;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%;
   }
 }
 
 /* phone only 599px */
 @media screen and (max-width: 37.4375em) {
-  
-  #trip-page  ul > li {
+  #trip-page ul > li {
     font-size: var(--step--1);
-  } 
-  
+  }
+
   .titled-outer > h2,
   .titled-inner > h3 {
     font-size: var(--step--1);
@@ -182,57 +179,56 @@ h6 {
   }
 
   #itinerary-page > ul {
-      height: 0;
-      visibility: collapse;
-      width: 0;
-    }
+    height: 0;
+    visibility: collapse;
+    width: 0;
+  }
 
-  #itinerary-page{
+  #itinerary-page {
     display: block;
     margin-left: 1em;
     overflow-y: hidden;
   }
-    
+
   #itinerary-page > div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
     flex: 1 1 0%;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     width: 100%;
   }
 }
 /* tablet portrait up 600px */
 @media screen and (min-width: 37.5em) {
-  #trip-page  ul > li {
+  #trip-page ul > li {
     font-size: var(--step-0);
-  } 
-   
+  }
 
-.titled-outer > h2,
-.titled-inner > h3 {
-  font-size: var(--step-0);
-}
+  .titled-outer > h2,
+  .titled-inner > h3 {
+    font-size: var(--step-0);
+  }
 
-#trip-page h2 {
-  top: -1.6em;
-}
+  #trip-page h2 {
+    top: -1.6em;
+  }
 
   #detail-buttons > div > button.not-stacked {
     font-size: var(--step-0);
   }
-  #itinerary-page > ul {  
-      visibility: visible;
-    }  
+  #itinerary-page > ul {
+    visibility: visible;
+  }
 
-  #itinerary-page{
+  #itinerary-page {
     display: flex;
     flex-direction: row;
     margin-left: 1em;
     overflow-y: hidden;
   }
-  
-  #itinerary-page> div:first-of-type {
+
+  #itinerary-page > div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -300,7 +296,7 @@ body {
   width: 100%;
 }
 
-#sign-in label{
+#sign-in label {
   padding-right: 5em;
   width: fit-content;
 }
@@ -314,7 +310,7 @@ body {
 }
 
 button,
-a[type='button'] {
+a[type="button"] {
   appearance: none;
   background-color: var(--background-button);
   border: 0.05em solid var(--background-button);
@@ -332,9 +328,11 @@ a[type='button'] {
   -webkit-appearance: none;
 }
 
-button { width: fit-content;}
+button {
+  width: fit-content;
+}
 button:hover,
-a[type='button']:hover,
+a[type="button"]:hover,
 #modal > section > footer > button:last-child:hover {
   appearance: none;
   background-color: var(--background-white);
@@ -343,10 +341,10 @@ a[type='button']:hover,
   -webkit-appearance: none;
 }
 
-.buttons { 
+.buttons {
   display: flex;
   flex-direction: row;
-  gap: .5em;
+  gap: 0.5em;
   margin: 0 auto;
   width: fit-content;
 }
@@ -362,7 +360,6 @@ a[type='button']:hover,
 
 .stacked {
   margin: 0.25em auto 0.5em auto;
-
 }
 
 header {
@@ -370,7 +367,7 @@ header {
   display: flex;
   flex-direction: row;
   gap: 1em;
-  margin: .5em auto 1em auto;
+  margin: 0.5em auto 1em auto;
   width: fit-content;
 }
 
@@ -380,22 +377,21 @@ header > h1 {
   width: fit-content;
   background-color: var(--background-button);
   color: var(--background-blue);
-  box-shadow: 0em .875em 1.75em rgba(0, 0, 0, 0.25), 0 .625em .625em rgba(0, 0, 0, 0.28);
+  box-shadow: 0em 0.875em 1.75em rgba(0, 0, 0, 0.25),
+    0 0.625em 0.625em rgba(0, 0, 0, 0.28);
   font-size: var(--step-0);
-  margin-left: .25em;
-  padding-right: 0.5em;/* 0.5em .5em 0 .75em; */
+  margin-left: 0.25em;
+  padding-right: 0.5em; /* 0.5em .5em 0 .75em; */
   overflow: hidden;
 }
 
-header >  h1::before {
-  content: ''; 
+header > h1::before {
+  content: "";
   box-sizing: content-box;
   display: inline;
-  padding: 0 .75em;
+  padding: 0 0.75em;
   color: var(--color-black);
-  background: transparent
-    var(--logo)
-    left/1em auto no-repeat;
+  background: transparent var(--logo) left/1em auto no-repeat;
   opacity: 1;
   position: relative;
 }
@@ -412,7 +408,7 @@ header > nav ul {
 }
 nav li {
   display: inline-block;
-  margin: 0 .125em;
+  margin: 0 0.125em;
 }
 nav a,
 nav p {
@@ -489,8 +485,6 @@ nav a.inactive,
   /*One big thing to pay attention to is the  on the inner DIV. If you omit auto margin on the VERTICAL (a direction that normally ignores margin!) flex will chop off the top of your content and you won’t be able to scroll up to it. Grid often drops the ball on this worse which is why I favor flex here. If you’re going to use a container to center its children, I really suggest using flex with margin on an inner container. Failing to do so can really screw you over.*/
 }
 
-
-
 #add-edit > section {
   background: var(--background-white);
   display: flex;
@@ -511,12 +505,11 @@ nav a.inactive,
   width: 100%;
 }
 
-:is(#modal, #add-edit)  section > header > h2 {
+:is(#modal, #add-edit) section > header > h2 {
   font-size: var(--step-0);
   font-weight: 700;
   margin-left: 0.5em;
-
-}/* This link is the X to close the modal.*/
+} /* This link is the X to close the modal.*/
 
 #modal section > header > h2 + a.modalClose {
   box-sizing: content-box;
@@ -525,21 +518,19 @@ nav a.inactive,
   height: 1em;
   padding: 0.25em 1em;
   color: var(--color-black);
-  background: transparent
-    var(--x)
-    center/1em auto no-repeat;
+  background: transparent var(--x) center/1em auto no-repeat;
   border: 0;
   border-radius: 0.25rem;
   opacity: 0.5;
   position: relative;
 }
 
-#add-edit  section > form {
+#add-edit section > form {
   display: flex;
   flex-direction: column;
   max-width: 100%;
 }
-#add-edit  section > form > fieldset {
+#add-edit section > form > fieldset {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -547,27 +538,32 @@ nav a.inactive,
   max-width: 100%;
 }
 
- #add-edit  section > form > fieldset label {
+#add-edit section > form > fieldset label {
   font-size: var(--step-0);
 }
 
-#add-edit  section > form > fieldset > select {
+#add-edit section > form > fieldset > select {
   font-size: var(--step-0);
   margin: 0 auto;
   width: 100%;
 }
 
-label > input[type='text'],
-label > input[type='email'],
-label > input[type='password'] {
+label > input[type="text"],
+label > input[type="email"],
+label > input[type="password"] {
   margin-left: 0.5em;
 }
 
-:is( #modal, #add-edit )  section > form > fieldset > label > input[type='number'] {
+:is(#modal, #add-edit)
+  section
+  > form
+  > fieldset
+  > label
+  > input[type="number"] {
   margin-top: 0.5em;
 }
 
-#add-edit  section > form > fieldset > article {
+#add-edit section > form > fieldset > article {
   display: flex;
   flex-direction: row;
   gap: 0.5em;
@@ -578,7 +574,7 @@ label > input[type='password'] {
   width: fit-content;
 }
 
-:is( #modal, #add-edit ) footer{
+:is(#modal, #add-edit) footer {
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
@@ -591,28 +587,26 @@ label > input[type='password'] {
   border-top: 0.0625em solid rgb(222, 226, 230);
 }
 
-
 #add-edit section > form > fieldset > footer button,
-:is( #modal, #add-edit, #itinerary-details )  section > footer button {
+:is(#modal, #add-edit, #itinerary-details) section > footer button {
   align-items: flex-start;
   display: inline-block;
   margin: 0.25em;
   position: relative;
 }
 
-:is( #add-edit, #itinerary-details)  section > footer a,
-:is( #modal, #add-edit, #itinerary-details )  footer > button:first-child {
+:is(#add-edit, #itinerary-details) section > footer a,
+:is(#modal, #add-edit, #itinerary-details) footer > button:first-child {
   color: var(--color-white);
   background-color: var(--background-button-secondary);
   border-color: var(--background-button-secondary);
 }
 
-:is( #modal, #add-edit, #itinerary-details )  footer > button:last-child {
+:is(#modal, #add-edit, #itinerary-details) footer > button:last-child {
   color: var(--color-white);
   background-color: var(--background-button-primary);
   border-color: var(--background-button-primary);
 }
-
 
 #modal.open > section {
   left: 0;
@@ -634,23 +628,22 @@ label > input[type='password'] {
 
 #trip-page #detail-buttons {
   margin-top: -1.5em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 #trip-page > div {
   padding: 1em 1em;
   width: fit-content;
-
 }
 
-#trip-page  ul {
+#trip-page ul {
   margin: -1.5em auto 0 auto;
   text-align: left;
   width: fit-content;
 }
 
 #trip-page ul > li {
-  margin: .5em 0;
+  margin: 0.5em 0;
 }
 
 #trip-page ul > button {
@@ -659,11 +652,10 @@ label > input[type='password'] {
 }
 
 #trip-page > .titled-outer:nth-of-type(2) {
-  gap: .75em;
+  gap: 0.75em;
 }
 #trip-page > .titled-outer:nth-of-type(2) > button {
   margin-top: -1.5em;
-
 }
 
 .active-li {
@@ -673,7 +665,7 @@ label > input[type='password'] {
 #detail-buttons {
   display: flex;
   flex-direction: row;
-  gap: .5em;
+  gap: 0.5em;
   width: fit-content;
 }
 
@@ -681,7 +673,7 @@ label > input[type='password'] {
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: .5em;
+  gap: 0.5em;
 }
 
 a > svg {
@@ -689,7 +681,6 @@ a > svg {
   min-height: 1.5em;
   min-width: 1.5em;
 }
-
 
 select {
   color: var(--color-black);
@@ -708,7 +699,7 @@ select {
   width: fit-content;
 }
 
-.select-dropdown-container > label{
+.select-dropdown-container > label {
   font-size: var(--step-0);
 }
 .select-dropdown-container label > select {
@@ -734,8 +725,8 @@ select {
 
 .titled-inner {
   font-size: var(--step-0);
-  margin: 0 auto .5em auto;
-  padding: 0 .5em .5em .5em;
+  margin: 0 auto 0.5em auto;
+  padding: 0 0.5em 0.5em 0.5em;
   text-align: left;
   width: 95%;
 }
@@ -755,7 +746,7 @@ select {
 #itinerary-page {
   display: flex;
   flex-direction: row;
-  margin: 1em .5em 3em .5em;
+  margin: 1em 0.5em 3em 0.5em;
 }
 
 #itinerary-page h2 {
@@ -768,22 +759,22 @@ select {
   display: flex;
   flex-direction: column;
   height: fit-content;
-  justify-content: flex-start;  
+  justify-content: flex-start;
   text-align: left;
+  padding-right: 0.5em;
   position: fixed;
+  width: fit-content;
 }
 
 #itinerary-page > ul > li {
-  line-height: .9;
+  line-height: 0.75;
 }
-
-
 
 #itinerary-page > ul > li > button {
   background-color: var(--background-white);
   border: none;
   color: var(--color-black);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: var(--step--4);
   font-weight: 500;
   padding: 0;
@@ -793,14 +784,14 @@ select {
 #itinerary-page > div {
   display: flex;
   flex-direction: column;
-  margin-left: 7em;
+  margin-left: 8em;
 }
 
-.itinerary-date { 
+.itinerary-date {
   width: fit-content;
 }
 
-#itinerary-page> div  h3,
+#itinerary-page > div h3,
 .itinerary-date > summary {
   font-size: var(--step-0);
   font-weight: 700;
@@ -812,9 +803,7 @@ select {
   display: flex;
   flex-direction: column;
   width: fit-content;
-
 }
-
 
 .itinerary-date > ul > li > button {
   background-color: var(--background-white);
@@ -822,7 +811,7 @@ select {
   border: none;
   font-size: var(--step--1);
   font-weight: 500;
-  margin: 0 0 0 2em;;
+  margin: 0 0 0 2em;
   padding: 0;
   outline: none;
 }
@@ -833,13 +822,11 @@ select {
   gap: 1em;
 }
 
-:is(#itinerary-items > p, .activityItem)
- {
+:is(#itinerary-items > p, .activityItem) {
   text-align: left;
   padding-left: 2.8em;
   text-indent: -2.8em;
 }
-
 
 #add-edit {
   display: flex;
@@ -882,8 +869,8 @@ select {
   display: block;
 }
 #itinerary-details p {
-  border-radius: .2em;
-  margin: 0 .5em .5em .5em;
+  border-radius: 0.2em;
+  margin: 0 0.5em 0.5em 0.5em;
   text-align: left;
 }
 
@@ -891,7 +878,7 @@ summary {
   display: list-item;
   font-size: var(--step-0);
   font-weight: 700;
-  margin: 0 .5em;
+  margin: 0 0.5em;
   text-align: left;
   width: fit-content;
 }
@@ -899,10 +886,9 @@ summary {
 summary p {
   font-size: var(--step-0);
   font-weight: normal;
-  margin: 0 .5em;
+  margin: 0 0.5em;
   text-align: left;
   white-space: normal;
-
 }
 
 .item {
@@ -926,9 +912,9 @@ nav > ul > li:last-of-type {
 nav > ul > li:last-of-type > ul {
   display: none;
   position: absolute;
-  background-color: var(--background-button); 
+  background-color: var(--background-button);
   margin-left: -1.5em;
-  padding: .75em 1em;
+  padding: 0.75em 1em;
   width: 8em;
   z-index: 1;
 }
@@ -949,6 +935,3 @@ nav > ul > li:last-of-type ul > li > a {
 nav > ul > li:last-of-type ul div + li {
   font-weight: 700;
 }
-
-
-
