@@ -81,7 +81,7 @@ export default function AddEdit({
   }
 
   const inputs = Object.keys(data).map(keyItem => {
-    if (keyItem !== 'key' && keyItem !== 'details') {
+    if (keyItem !== 'key' && keyItem !== 'details' && keyItem !=='dprint_Date') {
       return formItem(keyItem);
     } else {
       return null;

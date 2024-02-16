@@ -1,4 +1,4 @@
-import React, { StrictMode, Suspense } from "react";
+import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { ErrorBoundary } from 'react-error-boundary';
 import {

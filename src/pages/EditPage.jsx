@@ -61,7 +61,7 @@ export default function EditPage({ page }) {
           refreshItineraryData();
           break;
         default:
-          const newData = _.cloneDeep(data);
+          let newData = _.cloneDeep(data);
           delete newData.key;
           updateDetail(userId, currentTripKey, newData, page, data.key);
           refreshTripData();
@@ -80,10 +80,8 @@ export default function EditPage({ page }) {
   const handleChange = e => {
     e.preventDefault();
     let name  = e.target.name;
-    console.log("😊😊 name", name)
     let value = e.target.value ? e.target.value : '';
-    if (page === 'trip' && name !=='atrip_Name') value = value + 'T00:00'; 
-    console.log("😊😊 value", value)
+    if (page === 'trip' && name !=='atrip_Name') value = value + 'T00:00';
     setData({ ...data, [name]: value });
   };
 

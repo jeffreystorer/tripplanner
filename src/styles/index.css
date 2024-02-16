@@ -754,6 +754,11 @@ select {
   margin: 0 auto;
   width: fit-content;
 }
+#itinerary-page h3{
+  font-size: var(--step--1);
+  margin: 0 auto;
+  width: fit-content;
+}
 
 #itinerary-page > ul {
   display: flex;

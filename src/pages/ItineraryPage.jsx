@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   useRecoilRefresher_UNSTABLE,
@@ -8,11 +8,19 @@ import {
 } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import * as state from '@/store';
-import { createItineraryItems, dateStrShort } from '@/utils';
+import { createItineraryItems, dateStrShort, returnNewCurrentTrip }  from '@/utils';
+import { updateTrip } from '@/services';
+import * as _ from 'lodash';
 
 export default function ItineraryPage() {
   const navigate = useNavigate();
+  const [lastPrinted, setLastPrinted] = useState('')
+  const userId = useRecoilValue(state.userId);
+  const currentTripKey = useRecoilValue(state.currentTripKey);
+  const setCurrentTrip = useSetRecoilState(state.currentTrip);
+  const refreshTripData = useRecoilRefresher_UNSTABLE(state.tripData);
   const currentTripIndex = useRecoilValue(state.currentTripIndex);
+  const tripData = useRecoilValue(state.tripData);
   const currentTrip = useRecoilValue(state.currentTrip);
   const data = useRecoilValue(state.itineraryData);
   const [itineraryDetail, setItineraryDetail] = useRecoilState(
@@ -41,6 +49,10 @@ export default function ItineraryPage() {
     } catch (error) {}
   });
 
+  useEffect(() => {
+    setLastPrinted(tripData[currentTripIndex].dprint_Date)
+  },[tripData, currentTripIndex])
+
   function onClick(item, e) {
     e.preventDefault();
     let detail = {
@@ -64,12 +76,19 @@ export default function ItineraryPage() {
   }
 
   function handleNoteClick(e) {
-    e.preventDefault();
     navigate('/pages/additinerarynote')
   }
 
   const items = createItineraryItems(data, onClick, handleDateClick, handleNoteClick);
   function handlePrint(){
+    const date = new Date();
+    const printDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    let data = JSON.parse(JSON.stringify(tripData[currentTripIndex]));
+    data.dprint_Date = printDate;    
+    updateTrip(userId, currentTripKey, data);
+    const newCurrentTrip = returnNewCurrentTrip(data);
+    setCurrentTrip((prev) => newCurrentTrip);
+    refreshTripData();
     print()
 };
 
@@ -101,6 +120,7 @@ export default function ItineraryPage() {
         <div>
           <h2 key={uuidv4()}>{currentTrip.atrip_Name}
           </h2>
+          <h3>(Printed: {lastPrinted})</h3>
           {items}
         </div>
       </div>
