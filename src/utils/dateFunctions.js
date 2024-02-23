@@ -119,7 +119,7 @@ export function tripDates(startStr, endStr) {
   const endTime = timestampFromDateTimeStr(endStr); 
 
   let dates = [];
-  for (let i = startTime; i < endTime - MILLISECONDS_IN_DAY; i = i + MILLISECONDS_IN_DAY) {
+  for (let i = startTime; i < endTime; i = i + MILLISECONDS_IN_DAY) {
     let newDate = new Date(i);
     let timestamp = newDate.getTime();
 /* 

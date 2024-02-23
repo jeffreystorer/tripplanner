@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilRefresher_UNSTABLE, useRecoilValue } from 'recoil';
-import * as _ from 'lodash';
+import { cloneDeep}from 'lodash';
 import { AddEdit } from '@/components/screens';
 import { updateDetail } from '@/services';
 import * as state from '@/store';
@@ -39,7 +39,7 @@ export default function EditDetailPage({type}) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const newData = _.cloneDeep(data);
+      const newData = cloneDeep(data);
       delete newData.key;
       updateDetail(userId, currentTripKey, newData, detail.page, detail.key);
       refreshItineraryData();
