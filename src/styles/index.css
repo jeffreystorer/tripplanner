@@ -800,7 +800,7 @@ select {
 .itinerary-date > summary {
   font-size: var(--step-0);
   font-weight: 700;
-  width: fit-content;
+  width: 100%;
 }
 
 .itinerary-date > ul {
