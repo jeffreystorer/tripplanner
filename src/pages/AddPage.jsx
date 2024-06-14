@@ -44,7 +44,7 @@ export default function AddPage({ page }) {
           setData({ ...data, astart_Date: itineraryDateTime });
           break;
         case 'transport':
-          setData({ ...data, astart: itineraryDateTime });
+          setData({ ...data, astart: itineraryDateTime, bend: itineraryDateTime });
           break;
         default:
           break;
