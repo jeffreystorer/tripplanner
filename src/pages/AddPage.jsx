@@ -41,7 +41,6 @@ export default function AddPage({ page }) {
           setData({ ...data, astart: itineraryDateTime, bend: itineraryDateTime });
           break;
         case 'room':
-          console.log(itineraryDateTime)
           setData({ ...data, astart_Date: itineraryDateTime, bend_Date: itineraryDateTime});
           break;
         case 'transport':
