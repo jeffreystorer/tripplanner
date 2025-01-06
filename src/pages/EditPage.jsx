@@ -1,21 +1,20 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useRecoilRefresher_UNSTABLE,
   useRecoilValue,
   useSetRecoilState,
-} from 'recoil';
-import * as _ from 'lodash';
-import { updateDetail, updateTrip } from '@/services';
-import { returnNewCurrentTrip } from '@/utils';
-import { AddEdit } from '@/components/screens';
-import * as state from '@/store';
-import '@/styles/index.css';
+} from "recoil";
+import { updateDetail, updateTrip } from "@/services";
+import { returnNewCurrentTrip } from "@/utils";
+import { AddEdit } from "@/components/screens";
+import * as state from "@/store";
+import "@/styles/index.css";
 
 export default function EditPage({ page }) {
   let isItinerary = false;
   let addedPage = page;
-  if (page.includes('itinerary')) {
+  if (page.includes("itinerary")) {
     isItinerary = true;
     addedPage = page.substring(9);
   }
@@ -34,7 +33,7 @@ export default function EditPage({ page }) {
 
   useEffect(() => {
     switch (page) {
-      case 'trip':
+      case "trip":
         setData(tripData[rowIndex]);
         break;
       default:
@@ -44,15 +43,13 @@ export default function EditPage({ page }) {
     setLoading(false);
   }, [detailData, page, rowIndex, tripData]);
 
-  
-
   if (loading) return <h2>Loading...</h2>;
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       switch (page) {
-        case 'trip':
+        case "trip":
           updateTrip(userId, currentTripKey, data);
           const newCurrentTrip = returnNewCurrentTrip(data);
           setCurrentTrip((prev) => newCurrentTrip);
@@ -61,7 +58,7 @@ export default function EditPage({ page }) {
           refreshItineraryData();
           break;
         default:
-          let newData = _.cloneDeep(data);
+          let newData = structuredClone(data);
           delete newData.key;
           updateDetail(userId, currentTripKey, newData, page, data.key);
           refreshTripData();
@@ -75,27 +72,25 @@ export default function EditPage({ page }) {
     }
   };
 
-
-
-  const handleChange = e => {
+  const handleChange = (e) => {
     e.preventDefault();
-    let name  = e.target.name;
-    let value = e.target.value ? e.target.value : '';
-    if (page === 'trip' && name !=='atrip_Name') value = value + 'T00:00';
+    let name = e.target.name;
+    let value = e.target.value ? e.target.value : "";
+    if (page === "trip" && name !== "atrip_Name") value = value + "T00:00";
     setData({ ...data, [name]: value });
   };
 
-  function handleCancel(){
+  function handleCancel() {
     if (isItinerary) {
-      navigate('/pages/itinerary');
+      navigate("/pages/itinerary");
     } else {
-      navigate('/pages/' + page);
+      navigate("/pages/" + page);
     }
-  };
+  }
 
   return (
     <AddEdit
-      mode={'Edit'}
+      mode={"Edit"}
       data={data}
       page={addedPage}
       handleSubmit={handleSubmit}

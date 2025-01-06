@@ -3,7 +3,6 @@ import {
   useSetRecoilState,
   useRecoilValue
 } from 'recoil';
-import * as _ from 'lodash';
 import * as state from '@/store';
 
 export default function NavBar(){
@@ -67,7 +66,7 @@ export default function NavBar(){
 
     function createObject(item) {
       let aKey = item.key;
-      let newItem = _.cloneDeep(item);
+      let newItem = structuredClone(item);
       delete newItem.key;
       backup[userId][aKey] = newItem;
     }

@@ -31,7 +31,7 @@ export const tripData = selector({
         atrip_Name: value.atrip_Name,
         bstart_Date: value.bstart_Date,
         cend_Date: value.cend_Date,
-        dprint_Date: value.dprint_Date,
+        dprint_Date: value?.dprint_Date,
         details: value.details,
       });
     }

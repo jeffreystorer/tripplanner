@@ -10,7 +10,6 @@ import { v4 as uuidv4 } from 'uuid';
 import * as state from '@/store';
 import { createItineraryItems, dateStrShort, returnNewCurrentTrip }  from '@/utils';
 import { updateTrip } from '@/services';
-import * as _ from 'lodash';
 
 export default function ItineraryPage() {
   const navigate = useNavigate();

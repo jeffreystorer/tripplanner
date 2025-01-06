@@ -39,6 +39,9 @@ export default function MovePage() {
     const formJson = Object.fromEntries(formData.entries());
     const newStartDate = formJson.startDate + 'T00:00';
     const movedData = moveTrip(newStartDate, data);
+    const date = new Date();
+    const printDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    if (!movedData.dprint_Date) movedData.dprint_Date = printDate;
     try {
           updateTrip(userId, currentTripKey, movedData);
           const newCurrentTrip = returnNewCurrentTrip(movedData);

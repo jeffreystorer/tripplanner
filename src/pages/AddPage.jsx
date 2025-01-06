@@ -38,10 +38,10 @@ export default function AddPage({ page }) {
           setData({ ...data, astart_Date: itineraryDateTime });
           break;
         case 'car':
-          setData({ ...data, astart: itineraryDateTime });
+          setData({ ...data, astart: itineraryDateTime, bend: itineraryDateTime });
           break;
         case 'room':
-          setData({ ...data, astart_Date: itineraryDateTime });
+          setData({ ...data, astart_Date: itineraryDateTime, bend_Date: itineraryDateTime});
           break;
         case 'transport':
           setData({ ...data, astart: itineraryDateTime, bend: itineraryDateTime });

@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilRefresher_UNSTABLE, useRecoilValue } from 'recoil';
-import { cloneDeep}from 'lodash';
-import { AddEdit } from '@/components/screens';
-import { updateDetail } from '@/services';
-import * as state from '@/store';
-import '@/styles/index.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilRefresher_UNSTABLE, useRecoilValue } from "recoil";
+import { AddEdit } from "@/components/screens";
+import { updateDetail } from "@/services";
+import * as state from "@/store";
+import "@/styles/index.css";
 
-export default function EditDetailPage({type}) {
+export default function EditDetailPage({ type }) {
   const navigate = useNavigate();
   const detail = useRecoilValue(state.itineraryDetail);
   const tripData = useRecoilValue(state.tripData);
@@ -18,7 +17,8 @@ export default function EditDetailPage({type}) {
   const currentTripIndex = useRecoilValue(state.currentTripIndex);
   const refreshItineraryData = useRecoilRefresher_UNSTABLE(state.itineraryData);
   const refreshTripData = useRecoilRefresher_UNSTABLE(state.tripData);
-  const path = (type === 'itinerary') ? '/pages/itinerary' : `/pages/${detail.page}`;
+  const path =
+    type === "itinerary" ? "/pages/itinerary" : `/pages/${detail.page}`;
 
   useEffect(() => {
     setData(tripData[currentTripIndex].details[detail.page][detail.key]);
@@ -30,16 +30,16 @@ export default function EditDetailPage({type}) {
     refreshItineraryData();
   }, [refreshItineraryData, refreshTripData]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     let newValue = e.target.value;
-    if (!newValue) newValue = '';
+    if (!newValue) newValue = "";
     setData({ ...data, [e.target.name]: newValue });
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newData = cloneDeep(data);
+      const newData = structuredClone(data);
       delete newData.key;
       updateDetail(userId, currentTripKey, newData, detail.page, detail.key);
       refreshItineraryData();
@@ -58,7 +58,7 @@ export default function EditDetailPage({type}) {
 
   return (
     <AddEdit
-      mode={'Edit'}
+      mode={"Edit"}
       page={detail.page}
       data={data}
       handleSubmit={handleSubmit}
