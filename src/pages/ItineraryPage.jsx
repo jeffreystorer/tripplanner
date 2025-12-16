@@ -37,16 +37,58 @@ export default function ItineraryPage() {
     refreshItineraryData();
   }, [refreshItineraryData]);
 
+  // Scroll to the selected itinerary detail when it changes
   useEffect(() => {
+    if (!itineraryDetail || !itineraryDetail.key) return;
     try {
       const node = document.getElementById(itineraryDetail.key);
-      node.scrollIntoView({
-        behavior: 'auto',
-        block: 'start',
-        inline: 'nearest',
-      });
+      if (node)
+        node.scrollIntoView({
+          behavior: 'auto',
+          block: 'start',
+          inline: 'nearest',
+        });
     } catch (error) {}
-  });
+  }, [itineraryDetail && itineraryDetail.key]);
+
+  // On initial load (or when itinerary data changes) auto-scroll to today's date
+  useEffect(() => {
+    if (!itineraryData || !Array.isArray(itineraryData.dates)) return;
+    try {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const todayStr = `${year}-${month}-${day}`; // local date YYYY-MM-DD
+
+      const dates = itineraryData.dates.filter(Boolean);
+      if (dates.length === 0) return;
+
+      // build date-only values and Date objects (local)
+      const dateOnly = dates.map(d => d.substring(0, 10));
+      const dateObjs = dateOnly.map(s => new Date(s + 'T00:00'));
+
+      const first = dateObjs[0];
+      const last = dateObjs[dateObjs.length - 1];
+      const todayDate = new Date(todayStr + 'T00:00');
+
+      // Only auto-scroll if today is within the itinerary date range
+      if (todayDate < first || todayDate > last) return;
+
+      // find exact match, otherwise find first date >= today
+      let idx = dateObjs.findIndex(d => d.getTime() === todayDate.getTime());
+      if (idx === -1) {
+        idx = dateObjs.findIndex(d => d.getTime() > todayDate.getTime());
+        if (idx === -1) idx = dateObjs.length - 1; // fallback to last
+      }
+
+      const match = dates[idx];
+      if (match) {
+        const node = document.getElementById(match);
+        if (node) node.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch (error) {}
+  }, [itineraryData]);
 
   useEffect(() => {
     setLastPrinted(tripData[currentTripIndex].dprint_Date)
