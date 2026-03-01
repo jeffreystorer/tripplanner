@@ -67,6 +67,7 @@ export default function AddPage({ page }) {
     try {
       switch (addedPage) {
         case 'trip':
+          data.dprint_Date = '';
           addTrip(userId, data);
           resetCurrentTripIndex();
           resetCurrentTripKey();
