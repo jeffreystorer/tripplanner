@@ -6,9 +6,12 @@ import { dateStrShort, timeStr } from '@/utils';
 export default function createItineraryItems(
   data,
   onClick,
+  handleInsertDateClick,  
+  handleDeleteDateClick,
   handleDateClick,
   handleNoteClick
 ) {
+  //dates are YYYY-MM-DDT00:00
   const dates = data.dates;
   const activities = data.activities;
   const cars = data.cars;
@@ -77,6 +80,16 @@ export default function createItineraryItems(
       <details key={uuidv4()} id={item} className='itinerary-date'>
         <summary>{dateStrShort(item)}</summary>
         <ul>
+          <li>
+            <button className='stacked'  onClick={e => handleInsertDateClick(item, e)}>
+              Insert Date After
+            </button>
+          </li>
+          <li>
+            <button className='stacked'  onClick={e => handleDeleteDateClick(item, e)}>
+              Delete Date
+            </button>
+          </li>
           <li>
             <button className='stacked'  onClick={e => handleDateClick(item, 'activity', e)}>
               Add Activity

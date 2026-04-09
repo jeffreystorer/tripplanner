@@ -1,6 +1,6 @@
 import { HashRouter } from "react-router-dom";
 
-const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
+export const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
 //get a timestamp from a string 2022-06-02
 
@@ -28,19 +28,8 @@ function dateFromDateStr(str) {
   const d = parseInt(dStr);
   let timestamp = Date.UTC(y, m, d, 0, 0, 0); // + MILLISECONDS_IN_DAY;
   const date = new Date(timestamp);
-
- /*  console.groupCollapsed('dateFromDateStr')
-  console.log("str:", str)
-  console.log("timestamp:", timestamp)
-  console.log("dateStrFromTimestamp(timestamp)", dateStrFromTimestamp(timestamp))
-  console.log("date:", date)
-  console.log("date.valueOf():", date.valueOf())
-  console.groupEnd() */
-
   return date;
 }
-//console.log("😊😊 dateFromDateStr('2022-06-02')",dateFromDateStr('2022-06-02') )
-
 
 //get a date from a string 2022-06-02T:00
 function dateFromDateTimeStr(str) {
@@ -57,20 +46,8 @@ function dateFromDateTimeStr(str) {
   let timestamp = Date.UTC(y, m, d, hr, mn, 0); // + MILLISECONDS_IN_DAY;
   const date = new Date(timestamp);
 
- /*  console.groupCollapsed('dateFromDateTimeStr')
-  console.log("str:", str)
-  console.log("tStr", tStr)
-  console.log("hrmn", hrmn)
-  console.log("timestamp:", timestamp)
-  console.log("dateStrFromTimestamp(timestamp)", dateStrFromTimestamp(timestamp))
-  console.log("date:", date)
-  console.log("date.valueOf():", date.valueOf())
-  console.log("date.toISOString()", date.toISOString())
-  console.groupEnd() */
-
   return date;
 }
-//console.log("😊😊 dateFromDateTimeStr('2022-06-02T23:59')", dateFromDateTimeStr('2022-06-02T23:59'))
 //convert a string '2022-06-11' or 2022-06-11THH:MM
 //to weekday, month day Thu, Jun 4
 export function dateStrShort(str) {
@@ -101,7 +78,6 @@ function dateStrFromTimestamp(timestamp) {
   if (day.length === 1) day = "0" + day;
   return year.toString() + "-" + month + "-" + day;
 }
-//console.log("😊😊 dateStrFromTimestamp(1693958400000)", dateStrFromTimestamp(1693958400000))
 
 //converts a timestamp into a datetime string
 function dateTimeStrFromTimestamp(timestamp){
@@ -110,7 +86,6 @@ function dateTimeStrFromTimestamp(timestamp){
   const dateTimeStr = str.substring(0,16)
   return dateTimeStr
 }
-//console.log("😊😊 dateStrFromTimestamp(1693958400000)", dateTimeStrFromTimestamp(1693958400000))
 
 //From two DateTime strings '2022-06-02T11:00'
 //get an array of date strings '2022-06-03' from a start date to an end date
@@ -122,36 +97,16 @@ export function tripDates(startStr, endStr) {
   for (let i = startTime; i < endTime; i = i + MILLISECONDS_IN_DAY) {
     let newDate = new Date(i);
     let timestamp = newDate.getTime();
-/* 
-    console.group(newDate);
-      console.log("i", i);
-      console.log("timestamp", timestamp);
-      console.log(dateTimeStrFromTimestamp(timestamp));
-    console.groupEnd(); */
-
     dates.push(dateTimeStrFromTimestamp(timestamp));
   } 
   dates.push(dateTimeStrFromTimestamp(endTime));
-  
-/*   console.group('tripDates')
-    console.group('Start')
-      console.log("startStr", startStr);
-      console.log("startTime", startTime);
-      console.log("dateTimeStrFromTimeStamp(startTime)", dateTimeStrFromTimestamp(startTime))
-    console.groupEnd()
-    console.group('End')
-      console.log("endStr", endStr);
-      console.log("endTime", endTime);
-      console.log("dateTimeStrFromTimeStamp(endTime)", dateTimeStrFromTimestamp(endTime))
-    console.groupEnd()
-  console.log("dates", dates)
-  console.groupEnd(); */
 
   return dates;
 }
 
 //From two DateTime strings '2022-06-02T11:00'
-//get an array of date strings '2022-06-03' between two dates
+//get an array of date strings '2022-06-03'
+//or datetime stringsbetween two dates
 //used by Room to make trip detail items for stayDates
 export function stayDates(startStr, endStr, withTime) {
   const startDate = dateFromDateTimeStr(startStr);
@@ -165,9 +120,11 @@ export function stayDates(startStr, endStr, withTime) {
     i = i + MILLISECONDS_IN_DAY
   ) {
     let newDate = new Date(i);
-    withTime
-      ? dates.push(dateStrFromTimestamp(newDate) + "T00:00")
-      : dates.push(dateStrFromTimestamp(newDate));
+    if (withTime) {
+      dates.push(dateStrFromTimestamp(newDate) + "T00:00")
+    } else {
+      dates.push(dateStrFromTimestamp(newDate));
+    }
   }
   return dates;
 }
@@ -190,9 +147,22 @@ export function newEndDate(oldStart, newStart, oldEnd) {
 }
 
 export function movedDate(oldDate, diffM){  
-  const dOld = timestampFromDateTimeStr(oldDate);
+  const dOld = timestampFromDateTimeStr(oldDate);   
   const dNew = dOld + diffM;
   const _movedDate = dateTimeStrFromTimestamp(dNew);
   return _movedDate;
 }
 
+export function incrementDate(oldDate){ 
+  const dOld = timestampFromDateTimeStr(oldDate);
+  const dNew = dOld + MILLISECONDS_IN_DAY;
+  const _movedDate = dateTimeStrFromTimestamp(dNew);
+  return _movedDate;
+}
+
+export function decrementDate(oldDate){  
+  const dOld = timestampFromDateTimeStr(oldDate);   
+  const dNew = dOld - MILLISECONDS_IN_DAY;
+  const _movedDate = dateTimeStrFromTimestamp(dNew);
+  return _movedDate;
+}

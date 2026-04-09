@@ -8,7 +8,7 @@ import {
 } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import * as state from '@/store';
-import { createItineraryItems, dateStrShort, returnNewCurrentTrip }  from '@/utils';
+import { createItineraryItems, dateStrShort, returnNewCurrentTrip, insertDate, deleteDate}  from '@/utils';
 import { updateTrip } from '@/services';
 
 export default function ItineraryPage() {
@@ -106,6 +106,46 @@ export default function ItineraryPage() {
     navigate('/pages/itinerarydetail');
   }
 
+  const handleInsertDateClick = async (date,e) => {
+      e.preventDefault();
+      const movedData = insertDate(date, tripData[currentTripIndex]);
+      const _date = new Date();
+      const printDate = _date.toLocaleDateString() + ' ' + _date.toLocaleTimeString();
+      if (!movedData.dprint_Date) movedData.dprint_Date = printDate;
+      try {
+            updateTrip(userId, currentTripKey, movedData);
+            const newCurrentTrip = returnNewCurrentTrip(movedData);
+            setCurrentTrip((prev) => newCurrentTrip);
+            refreshTripData();
+            refreshItineraryData();
+        } catch (error) {
+        console.log(error);
+      }
+      handleCancel();
+    };
+
+  const handleDeleteDateClick = async (date,e) => {
+      e.preventDefault();
+      const movedData = deleteDate(date, tripData[currentTripIndex]);
+      const _date = new Date();
+      const printDate = _date.toLocaleDateString() + ' ' + _date.toLocaleTimeString();
+      if (!movedData.dprint_Date) movedData.dprint_Date = printDate;
+      try {
+            updateTrip(userId, currentTripKey, movedData);
+            const newCurrentTrip = returnNewCurrentTrip(movedData);
+            setCurrentTrip((prev) => newCurrentTrip);
+            refreshTripData();
+            refreshItineraryData();
+        } catch (error) {
+        console.log(error);
+      }
+      handleCancel();
+    };
+
+    function handleCancel(){
+      navigate('/pages/itinerary');
+  };
+
   function handleDateClick(date, page, e) {
     e.preventDefault();
     let detail = {
@@ -120,7 +160,7 @@ export default function ItineraryPage() {
     navigate('/pages/additinerarynote')
   }
 
-  const items = createItineraryItems(data, onClick, handleDateClick, handleNoteClick);
+  const items = createItineraryItems(data, onClick, handleInsertDateClick, handleDeleteDateClick,handleDateClick, handleNoteClick);
   function handlePrint(){
     const date = new Date();
     const printDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();

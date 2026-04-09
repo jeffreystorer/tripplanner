@@ -58,6 +58,7 @@ export default function SignInPage() {
                 autoComplete='email'
                 type='email'
                 name='email'
+                defaultValue='tp@storer.net'
                 required
               />
             </label>
@@ -67,6 +68,7 @@ export default function SignInPage() {
                 autoComplete='current-password'
                 type='password'
                 name='password'
+                autoFocus
                 required
               />
             </label>
