@@ -41,7 +41,7 @@ export default function EditDetailPage({ type }) {
     try {
       const newData = structuredClone(data);
       delete newData.key;
-      updateDetail(userId, currentTripKey, newData, detail.page, detail.key);
+      await updateDetail(userId, currentTripKey, newData, detail.page, detail.key);
       refreshItineraryData();
       refreshTripData();
       navigate(path);

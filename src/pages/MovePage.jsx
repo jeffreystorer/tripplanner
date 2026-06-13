@@ -43,7 +43,7 @@ export default function MovePage() {
     const printDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
     if (!movedData.dprint_Date) movedData.dprint_Date = printDate;
     try {
-          updateTrip(userId, currentTripKey, movedData);
+          await updateTrip(userId, currentTripKey, movedData);
           const newCurrentTrip = returnNewCurrentTrip(movedData);
           setCurrentTrip((prev) => newCurrentTrip);
           refreshTripData();

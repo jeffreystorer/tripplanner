@@ -50,7 +50,7 @@ export default function EditPage({ page }) {
     try {
       switch (page) {
         case "trip":
-          updateTrip(userId, currentTripKey, data);
+          await updateTrip(userId, currentTripKey, data);
           const newCurrentTrip = returnNewCurrentTrip(data);
           setCurrentTrip((prev) => newCurrentTrip);
           refreshTripData();

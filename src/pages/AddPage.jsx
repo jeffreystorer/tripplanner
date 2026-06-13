@@ -68,7 +68,7 @@ export default function AddPage({ page }) {
       switch (addedPage) {
         case 'trip':
           data.dprint_Date = '';
-          addTrip(userId, data);
+          await addTrip(userId, data);
           resetCurrentTripIndex();
           resetCurrentTripKey();
           refreshTripData();
@@ -77,7 +77,7 @@ export default function AddPage({ page }) {
           navigate('/pages/trip');
           break;
         default:
-          addDetail(userId, currentTripKey, data, addedPage);
+          await addDetail(userId, currentTripKey, data, addedPage);
           refreshTripData();
           refreshDetailData();
           refreshItineraryData();
