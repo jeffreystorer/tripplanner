@@ -108,14 +108,6 @@ export default function NavBar(){
         <li>
             <p>More...</p>
               <ul>
-                <li>
-                    <NavLink
-                    to="/pages/log"
-                    className={({isActive}) => isActive ? "active" : "inactive"}
-                    >
-                    Log
-                    </NavLink>
-                </li>
                   <li>
                     <button onClick={handleAdd}>Add Trip</button>
                   </li>
@@ -149,6 +141,15 @@ export default function NavBar(){
                   </li>
                   </>
                   )}
+                  <li className='divider'></li>
+                  <li>
+                    <NavLink
+                    to="/pages/log"
+                    className={({isActive}) => isActive ? "active" : "inactive"}
+                    >
+                    Log
+                    </NavLink>
+                  </li>
                   <li className='divider'></li>
                   <li>                  
                     <NavLink
