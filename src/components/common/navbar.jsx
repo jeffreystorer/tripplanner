@@ -109,50 +109,58 @@ export default function NavBar(){
             <p>More...</p>
               <ul>
                 <li>
-                  <button onClick={handleAdd}>Add Trip</button>
+                    <NavLink
+                    to="/pages/log"
+                    className={({isActive}) => isActive ? "active" : "inactive"}
+                    >
+                    Log
+                    </NavLink>
                 </li>
-                {currentTripIndex > -1 && (
-                  <>
-                <li className='divider'></li>
-                <li>Current Trip</li>
-                <li>
-                  <button onClick={handleEdit}>Edit</button>
-                </li>
-                <li>
-                  <button onClick={handleMove}>Move</button>
-                </li>
-                <li>
-                  <button onClick={e => handleDelete(e, false)}>Delete</button>
-                </li>
-                <li>
-                  <button onClick={handleDownloadTrip}>Backup</button>
-                </li>
-                </>
-                )}
-                {tripData[0].length > 0 && (
-                  <>
-                <li className='divider'></li>
-                <li>All Trips</li>
-                <li>
-                  <button onClick={e => handleDelete(e, true)}>Delete</button>
-                </li>
-                <li>
-                  <button onClick={handleDownloadTrips}>Backup</button>
-                </li>
-                </>
-                )}
-                <li className='divider'></li>
-                <li>                  
-                  <NavLink
-                  to="/"
-                  className={({isActive}) => isActive ? "active" : "inactive"}
-                  >
-                    Sign Out
-                  </NavLink>
-                </li>
+                  <li>
+                    <button onClick={handleAdd}>Add Trip</button>
+                  </li>
+                  {currentTripIndex > -1 && (
+                    <>
+                  <li className='divider'></li>
+                  <li>Current Trip</li>
+                  <li>
+                    <button onClick={handleEdit}>Edit</button>
+                  </li>
+                  <li>
+                    <button onClick={handleMove}>Move</button>
+                  </li>
+                  <li>
+                    <button onClick={e => handleDelete(e, false)}>Delete</button>
+                  </li>
+                  <li>
+                    <button onClick={handleDownloadTrip}>Backup</button>
+                  </li>
+                  </>
+                  )}
+                  {tripData[0].length > 0 && (
+                    <>
+                  <li className='divider'></li>
+                  <li>All Trips</li>
+                  <li>
+                    <button onClick={e => handleDelete(e, true)}>Delete</button>
+                  </li>
+                  <li>
+                    <button onClick={handleDownloadTrips}>Backup</button>
+                  </li>
+                  </>
+                  )}
+                  <li className='divider'></li>
+                  <li>                  
+                    <NavLink
+                    to="/"
+                    className={({isActive}) => isActive ? "active" : "inactive"}
+                    >
+                      Sign Out
+                    </NavLink>
+                  </li>
 
-              </ul>
-        </li>
+                </ul>
+          </li>
       </ul>
     </nav>
   );

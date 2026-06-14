@@ -940,3 +940,26 @@ nav > ul > li:last-of-type ul > li > a {
 nav > ul > li:last-of-type ul div + li {
   font-weight: 700;
 }
+/* LOG VIEWER */
+
+#logs-page pre {
+  background-color: var(--background-secondary);
+  border: var(--border-hairline);
+  border-radius: 0.5em;
+  font-size: var(--step--1);
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0.5em;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#logs-page table {
+  max-width: 100%;
+  width: 100%;
+}
+
+#logs-page td {
+  vertical-align: top;
+}

@@ -14,6 +14,40 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const dbRef = ref(db);
 
+// --- Logging ---
+
+function logAction(userId, action, path, data) {
+  const logEntry = {
+    timestamp: new Date().toISOString(),
+    action, // 'create' | 'update' | 'delete'
+    path,
+    data: data ?? null,
+  };
+  push(child(dbRef, `/_logs/${userId}/`), logEntry);
+}
+
+export function getLogs(userId) {
+  return get(child(dbRef, `/_logs/${userId}/`))
+    .then(snapshot => {
+      if (!snapshot.exists()) return [];
+      const raw = snapshot.val();
+      const entries = Object.entries(raw).map(([key, value]) => ({ key, ...value }));
+      // Most recent first
+      entries.sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1));
+      return entries;
+    })
+    .catch(error => {
+      console.error(error);
+      return [];
+    });
+}
+
+export function clearLogs(userId) {
+  return remove(child(dbRef, `/_logs/${userId}/`));
+}
+
+// --- Reads (unchanged) ---
+
 export function getTrip(userId, key) {
   let trip = get(child(dbRef, `/${userId}/${key}/`))
     .then(snapshot => {
@@ -63,23 +97,39 @@ export function getDetails(userId, key, page) {
   return details;
 }
 
+// --- Writes & deletes (logged) ---
+
 export function addTrip(userId, data) {
   const newTripKey = push(child(ref(db), `/${userId}/`)).key;
   const updates = {};
   updates[`/${userId}/${newTripKey}`] = data;
-  return update(dbRef, updates);
+  const result = update(dbRef, updates);
+  logAction(userId, 'create', `/${userId}/${newTripKey}`, data);
+  return result;
+}export async function updateTrip(userId, key, data) {
+  const path = `/${userId}/${key}`;
+  const snapshot = await get(child(dbRef, path));
+  const oldData = snapshot.exists() ? snapshot.val() : null;
+
+  const updates = {};
+  updates[path] = data;
+  const result = await update(dbRef, updates);
+
+  logAction(userId, 'update', path, { old: oldData, new: data });
+  return result;
 }
 
-export function updateTrip(userId, key, data) {
-  const updates = {};
-  updates[`/${userId}/${key}`] = data;
-  return update(dbRef, updates);
-}
+export async function updateDetail(userId, tripKey, data, page, detailKey) {
+  const path = `/${userId}/${tripKey}/details/${page}/${detailKey}`;
+  const snapshot = await get(child(dbRef, path));
+  const oldData = snapshot.exists() ? snapshot.val() : null;
 
-export function updateDetail(userId, tripKey, data, page, detailKey) {
   const updates = {};
-  updates[`/${userId}/${tripKey}/details/${page}/${detailKey}`] = data;
-  return update(dbRef, updates);
+  updates[path] = data;
+  const result = await update(dbRef, updates);
+
+  logAction(userId, 'update', path, { old: oldData, new: data });
+  return result;
 }
 
 export function addDetail(userId, tripKey, data, page) {
@@ -88,17 +138,32 @@ export function addDetail(userId, tripKey, data, page) {
   ).key;
   const updates = {};
   updates[`/${userId}/${tripKey}/details/${page}/${newDetailKey}`] = data;
-  return update(dbRef, updates);
+  const result = update(dbRef, updates);
+  logAction(userId, 'create', `/${userId}/${tripKey}/details/${page}/${newDetailKey}`, data);
+  return result;
+}export async function removeDetail(userId, currentTripKey, page, key) {
+  const path = `/${userId}/${currentTripKey}/details/${page}/${key}`;
+  const snapshot = await get(child(dbRef, path));
+  const data = snapshot.exists() ? snapshot.val() : null;
+
+  await remove(child(dbRef, path));
+  logAction(userId, 'delete', path, data);
 }
 
-export function removeDetail(userId, currentTripKey, page, key) {
-  remove(child(dbRef, `/${userId}/${currentTripKey}/details/${page}/${key}`));
+export async function removeTrip(userId, key) {
+  const path = `/${userId}/${key}`;
+  const snapshot = await get(child(dbRef, path));
+  const data = snapshot.exists() ? snapshot.val() : null;
+
+  await remove(child(dbRef, path));
+  logAction(userId, 'delete', path, data);
 }
 
-export function removeTrip(userId, key) {
-  remove(child(dbRef, `/${userId}/` + key));
-}
+export const removeAll = async (userId) => {
+  const path = `/${userId}/`;
+  const snapshot = await get(child(dbRef, path));
+  const data = snapshot.exists() ? snapshot.val() : null;
 
-export const removeAll = userId => {
-  remove(ref(db, `/${userId}/`));
+  await remove(ref(db, path));
+  logAction(userId, 'delete', path, data);
 };

@@ -8,3 +8,4 @@ export { default as ItineraryPageErrorBoundary } from '@/pages/ItineraryPageErro
 export { default as SignInPage } from '@/pages/SignInPage';
 export { default as TripPage } from '@/pages/TripPage';
 export { default as MovePage } from '@/pages/MovePage';
+export {default as LogPage } from '@/pages/LogPage';
