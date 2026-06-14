@@ -4,6 +4,7 @@ import {
   useRecoilValue
 } from 'recoil';
 import * as state from '@/store';
+import {downloadBackup} from '@/services';
 
 export default function NavBar(){
   const navigate = useNavigate();
@@ -149,6 +150,10 @@ export default function NavBar(){
                     >
                     Log
                     </NavLink>
+                  </li>
+                  <li className='divider'></li>
+                  <li>
+                    <button onClick={downloadBackup}>Download Backup</button>
                   </li>
                   <li className='divider'></li>
                   <li>                  
