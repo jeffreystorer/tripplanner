@@ -18,7 +18,7 @@ export default function MapLink({ data, onClick }) {
         </p>
         <p className='map-item'>
           <a href={href} target='_blank' rel='noopener noreferrer'>
-            <MapPin size={16} />&nbsp;{Object.values(item)[1] || 'Google Maps'}
+            <MapPin size={16} />&nbsp;{Object.values(item)[1] || "Today's Route"}
           </a>
           <button
             type='button'

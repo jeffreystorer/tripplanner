@@ -15,7 +15,7 @@ export default function createItineraryItems(
   const dates = data.dates;
   const activities = data.activities;
   const cars = data.cars;
-  const maps = data.maps;
+  const maps = data.maps ?? [];
   const notes = data.notes;
   const rooms = data.rooms;
   const transports = data.transports;
@@ -71,8 +71,8 @@ export default function createItineraryItems(
   //item is YYYY-MM-DDT00:00
   function pushDateGroup(item) {
     pushDate(item);
-    pushDateItems(item);
     pushMaps(item);
+    pushDateItems(item);
     pushRoomsStay(item);
     dateItems = [];
   }
@@ -174,7 +174,7 @@ export default function createItineraryItems(
     items.push(
       <p key={uuidv4()} className='map-item'>
         <a href={href} target='_blank' rel='noopener noreferrer'>
-          <MapPin size={16} />&nbsp;{item.bdescription || 'Google Maps'}
+          <MapPin size={16} />&nbsp;{item.bdescription || "Today's Route"}
         </a>
         <button
           type='button'
