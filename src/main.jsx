@@ -65,6 +65,10 @@ const router = createBrowserRouter (
         element={<AddPage page={'itinerarycar'} />}
       />
       <Route
+        path="additinerarymap"
+        element={<AddPage page={'itinerarymap'} />}
+      />
+      <Route
         path="additineraryroom"
         element={<AddPage page={'itineraryroom'} />}
       />
@@ -73,6 +77,12 @@ const router = createBrowserRouter (
         element={<AddPage page={'itinerarytransport'} />}
       />
       <Route path="edititinerary" element={<EditDetailPage type={'itinerary'} />} />
+      <Route path="map" element={<DetailsPage page={'map'} />} />
+      <Route path="addmap" element={<AddPage page={'map'} />} />
+      <Route
+        path="/pages/editmap/:rowIndex"
+        element={<EditPage page={'map'} />}
+      />
       <Route path="note" element={<DetailsPage page={'note'} />} />
       <Route path="addnote" element={<AddPage page={'note'} />} />
       <Route

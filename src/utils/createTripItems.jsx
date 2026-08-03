@@ -1,4 +1,4 @@
-import { Activity, Car, Note, Room, Transport } from '@/components/tripitems';
+import { Activity, Car, MapLink, Note, Room, Transport } from '@/components/tripitems';
 
 export default function createTripItems(page, data, onClick) {
 
@@ -7,6 +7,8 @@ export default function createTripItems(page, data, onClick) {
       return <Activity data={data} onClick={onClick}/>;
     case 'car':
       return <Car data={data} onClick={onClick}/>;
+    case 'map':
+      return <MapLink data={data} onClick={onClick}/>;
     case 'note':
       return <Note data={data} onClick={onClick}/>;
     case 'room':

@@ -87,6 +87,11 @@ export const detailData = selectorFamily({
               return result !== 0 ? result : a.bend.localeCompare(b.bend);
             });
             break;
+          case "map":
+            detailArray.sort((a, b) =>
+              a.astart_Date.localeCompare(b.astart_Date)
+            );
+            break;
           case "note":
             break;
           case "room":
@@ -145,6 +150,16 @@ export const itineraryData = selector({
         carArray.push(detailObject);
       }
     }
+    //maps
+    let mapArray = [];
+    if (response.details.map) {
+      for (const [key, value] of Object.entries(response.details.map)) {
+        let detailObject = value;
+        detailObject.key = key;
+        detailObject.type = "map";
+        mapArray.push(detailObject);
+      }
+    }
     //notes
     let noteArray = [];
     if (response.details.note) {
@@ -194,6 +209,7 @@ export const itineraryData = selector({
       dates: dateArray,
       activities: activityArray,
       cars: carArray,
+      maps: mapArray,
       notes: noteArray,
       rooms: roomArray,
       transports: transportArray,
@@ -240,3 +256,24 @@ export const deleteTarget = atom({ key: "deleteTarget", default: "" });
 export const page = atom({ key: "page", default: "" });
 
 export const showModal = atom({ key: "showModal", default: false });
+ 
+//Recoil registers atoms and selectors by key at module scope. This module does
+//not self-accept, so Vite propagates edits to the page components that import
+//it - and those DO self-accept - which hot-swaps this module instead of doing a
+//full reload. Recoil then sees duplicate keys, keeps the ORIGINAL
+//registrations, and edits here silently have no effect.
+//
+//Reload on vite:beforeUpdate rather than via hot.accept, so the reload happens
+//BEFORE the module re-evaluates. Nothing re-registers, so there are no
+//duplicate-key warnings. Stripped from production builds (import.meta.hot is
+//undefined there).
+if (import.meta.hot) {
+  import.meta.hot.on("vite:beforeUpdate", payload => {
+    const touchesStore = (payload?.updates ?? []).some(update =>
+      (update.path ?? "").includes("/src/store/")
+    );
+    if (touchesStore) {
+      window.location.reload();
+    }
+  });
+}

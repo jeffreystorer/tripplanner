@@ -56,7 +56,17 @@ export default function DetailPage({type}) {
               </h3>
             )
             }
-            {itineraryDetail.value}
+            {itineraryDetail.page === 'map' && itineraryDetail.url ? (
+              <a
+                href={itineraryDetail.url}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {itineraryDetail.value || 'Open in Google Maps'}
+              </a>
+            ) : (
+              itineraryDetail.value
+            )}
           </div>
           <footer>
             <button className='not-stacked' onClick={handleCancel}>

@@ -35,6 +35,15 @@ export default function DetailButtons() {
         </button>
       </div>
       <div>
+        <button onClick={() => navigate('/pages/addmap')}
+          >
+            <Plus />
+        </button>
+        <button  onClick={() => navigate('/pages/map')}>
+            Map Links
+        </button>
+      </div>
+      <div>
         <button onClick={() => navigate('/pages/addroom')}
           >
             <Plus />

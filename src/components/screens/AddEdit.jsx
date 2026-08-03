@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { inputType, labels } from '@/fields';
 import * as state from '@/store';
 
+//handleDelete is optional - the Delete button only renders when a caller
+//passes one, so existing callers are unaffected
 export default function AddEdit({
   mode,
   data,
@@ -12,6 +14,7 @@ export default function AddEdit({
   handleSubmit,
   handleChange,
   handleCancel,
+  handleDelete,
 }) {
   const currentTrip = useRecoilValue(state.currentTrip);
   const width = window.innerWidth;
@@ -45,6 +48,14 @@ export default function AddEdit({
         labels[page][keyItem].slice(2).replaceAll('_', ' ');
     }
 
+    const resolvedType =
+      page === 'trip' && keyItem !== 'atrip_Name'
+        ? 'date'
+        : inputType[keyItem.slice(1)];
+    //links use a plain text input so an address or place name can be typed;
+    //type='url' would fail native validation on anything but a real URL
+    const isLink = resolvedType === 'url';
+
     if (inputType[keyItem.slice(1)] === 'textarea') {
       return (
         <Fragment key={uuidv4()}>
@@ -69,9 +80,15 @@ export default function AddEdit({
           </label>
           <input
             key={uuidv4()}
-            autoComplete={keyItem}
+            autoComplete={isLink ? 'off' : keyItem}
             name={keyItem}
-            type={page === 'trip' && keyItem !=='atrip_Name' ? 'date': inputType[keyItem.slice(1)]}
+            type={isLink ? 'text' : resolvedType}
+            autoCapitalize={isLink ? 'off' : undefined}
+            autoCorrect={isLink ? 'off' : undefined}
+            spellCheck={isLink ? false : undefined}
+            placeholder={
+              isLink ? 'Paste a Maps link, or type an address' : undefined
+            }
             defaultValue={page === 'trip' && keyItem !=='atrip_Name' ? data[keyItem].substring(0,10) : data[keyItem]}
             onBlur={handleChange}
           />
@@ -106,6 +123,11 @@ export default function AddEdit({
             <button className='not-stacked' onClick={handleSubmit}>
               Save
             </button>
+            {handleDelete && (
+              <button className='not-stacked' onClick={handleDelete}>
+                Delete
+              </button>
+            )}
         </footer>
       </section>
     </div>

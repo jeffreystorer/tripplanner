@@ -40,6 +40,9 @@ export default function AddPage({ page }) {
         case 'car':
           setData({ ...data, astart: itineraryDateTime, bend: itineraryDateTime });
           break;
+        case 'map':
+          setData({ ...data, astart_Date: itineraryDateTime });
+          break;
         case 'room':
           setData({ ...data, astart_Date: itineraryDateTime, bend_Date: itineraryDateTime});
           break;

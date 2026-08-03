@@ -9,7 +9,7 @@ import {
 import { Plus } from 'react-feather'; 
 import { DetailButtons } from '@/components/common';
 import * as state from '@/store';
-import { createTripItems } from '@/utils';
+import { createTripItems, toMapsHref } from '@/utils';
 
 //page is set by main.jsx as part of the route
 
@@ -23,6 +23,7 @@ export default function DetailsPage({ page }) {
   const labels = {
     activity: 'Activities',
     car: 'Cars',
+    map: 'Map Links',
     note: 'Trip Notes',
     room: 'Rooms',
     transport: 'Transports',
@@ -38,10 +39,18 @@ export default function DetailsPage({ page }) {
     let detail = {
       page: item.type,
       key: item.key,
-      value: e.target.innerText,
+      value: item.type === 'map' ? item.bdescription : e.target.innerText,
       date: Object.values(item)[0].substring(0, 10),
+      ...(item.type === 'map' && { url: toMapsHref(item.cmap_Link) }),
     };
     setItineraryDetail(detail);
+    //a map link row already has its own tappable link, so its Edit button
+    //skips the Cancel/Edit/Delete screen and opens the edit form directly
+    if (item.type === 'map') {
+      setPage(detail.page);
+      navigate('/pages/edittripdetail');
+      return;
+    }
     navigate('/pages/tripdetail');
   }
   const items = createTripItems(page, data[0], onClick);

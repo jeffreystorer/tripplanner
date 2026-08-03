@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilRefresher_UNSTABLE, useRecoilValue } from "recoil";
+import {
+  useRecoilRefresher_UNSTABLE,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import { AddEdit } from "@/components/screens";
 import { updateDetail } from "@/services";
 import * as state from "@/store";
@@ -17,6 +21,12 @@ export default function EditDetailPage({ type }) {
   const currentTripIndex = useRecoilValue(state.currentTripIndex);
   const refreshItineraryData = useRecoilRefresher_UNSTABLE(state.itineraryData);
   const refreshTripData = useRecoilRefresher_UNSTABLE(state.tripData);
+  const setCurrentKey = useSetRecoilState(state.currentKey);
+  const setDeleteAll = useSetRecoilState(state.deleteAll);
+  const setDeleteTarget = useSetRecoilState(state.deleteTarget);
+  const setShowModal = useSetRecoilState(state.showModal);
+  const setPage = useSetRecoilState(state.page);
+  const deleteTarget = type === "itinerary" ? "itinerarydetail" : "detail";
   const path =
     type === "itinerary" ? "/pages/itinerary" : `/pages/${detail.page}`;
 
@@ -50,6 +60,19 @@ export default function EditDetailPage({ type }) {
     }
   };
 
+  //mirrors DetailPage.handleDelete so both routes feed the same confirm modal.
+  //ConfirmDeleteModal reads the page atom for its detailData refresher and, on
+  //the 'detail' branch, for the record path - so set it here too.
+  const handleDelete = (e) => {
+    e.preventDefault();
+    setPage(detail.page);
+    setCurrentKey(detail.key);
+    setDeleteAll(false);
+    setDeleteTarget(deleteTarget);
+    setShowModal(true);
+    navigate("/pages/confirmdelete");
+  };
+
   const handleCancel = () => {
     navigate(path);
   };
@@ -64,6 +87,7 @@ export default function EditDetailPage({ type }) {
       handleSubmit={handleSubmit}
       handleChange={handleChange}
       handleCancel={handleCancel}
+      handleDelete={detail.page === "map" ? handleDelete : undefined}
     />
   );
 }

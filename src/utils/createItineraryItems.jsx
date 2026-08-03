@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
-import { Star } from 'react-feather';
+import { MapPin, Star } from 'react-feather';
 import { v4 as uuidv4 } from 'uuid';
-import { dateStrShort, timeStr } from '@/utils';
+import { dateStrShort, timeStr, toMapsHref } from '@/utils';
 
 export default function createItineraryItems(
   data,
@@ -15,6 +15,7 @@ export default function createItineraryItems(
   const dates = data.dates;
   const activities = data.activities;
   const cars = data.cars;
+  const maps = data.maps;
   const notes = data.notes;
   const rooms = data.rooms;
   const transports = data.transports;
@@ -71,6 +72,7 @@ export default function createItineraryItems(
   function pushDateGroup(item) {
     pushDate(item);
     pushDateItems(item);
+    pushMaps(item);
     pushRoomsStay(item);
     dateItems = [];
   }
@@ -98,6 +100,11 @@ export default function createItineraryItems(
           <li>
             <button className='stacked'  onClick={e => handleDateClick(item, 'car', e)}>
               Add Car
+            </button>
+          </li>
+          <li>
+            <button className='stacked'  onClick={e => handleDateClick(item, 'map', e)}>
+              Add Map Link
             </button>
           </li>
           <li>
@@ -150,6 +157,35 @@ export default function createItineraryItems(
   }
 
 
+
+  //map links are rendered outside dateItems because dateItems is sorted on
+  //its plain-string value, which JSX would break
+  function pushMaps(item) {
+    const todaysMaps = maps
+      .filter(obj => {
+        return dateStrShort(obj.astart_Date) === dateStrShort(item);
+      })
+      .sort((a, b) => a.astart_Date.localeCompare(b.astart_Date));
+    todaysMaps.forEach(pushMap);
+  }
+
+  function pushMap(item) {
+    const href = toMapsHref(item.cmap_Link);
+    items.push(
+      <p key={uuidv4()} className='map-item'>
+        <a href={href} target='_blank' rel='noopener noreferrer'>
+          <MapPin size={16} />&nbsp;{item.bdescription || 'Google Maps'}
+        </a>
+        <button
+          type='button'
+          className='map-edit'
+          onClick={e => onClick(item, e)}
+        >
+          Edit
+        </button>
+      </p>
+    );
+  }
 
   function pushCarsDropOff(item) {
     const todaysCars = cars.filter(obj => {

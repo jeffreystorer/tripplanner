@@ -963,3 +963,47 @@ nav > ul > li:last-of-type ul div + li {
 #logs-page td {
   vertical-align: top;
 }
+
+/* --- map links --- */
+
+.map-item {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+/* the :is(#itinerary-items > p, ...) rule above wins on specificity,
+   so re-state the box model for map rows with an id-level selector */
+#itinerary-items > p.map-item,
+.map-item {
+  padding-left: 2.8em;
+  text-indent: 0;
+}
+
+.map-item > a {
+  align-items: center;
+  display: inline-flex;
+  min-height: 44px;
+}
+
+.map-edit {
+  background: none;
+  border: none;
+  font-size: var(--step--1);
+  font-weight: 500;
+  margin: 0;
+  outline: none;
+  padding: 0.5em;
+  text-decoration: underline;
+}
+
+@media print {
+  .map-edit {
+    display: none;
+  }
+  .map-item > a::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+  }
+}

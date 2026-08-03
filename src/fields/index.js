@@ -1,3 +1,4 @@
+
 export const fields = {
   activity: {
     astart_Date: "",
@@ -10,6 +11,11 @@ export const fields = {
     dpick_Up_Location: "",
     edetails: "",
     fdrop_Off_Location: "",
+  },
+  map: {
+    astart_Date: "",
+    bdescription: "",
+    cmap_Link: "",
   },
   note: {
     anote: "",
@@ -36,10 +42,12 @@ export const fields = {
 export const inputType = {
   agency: "text",
   date: "date",
+  description: "text",
   details: "textarea",
   drop_Off_Location: "textarea",
   end: "datetime-local",
   end_Date: "datetime-local",
+  map_Link: "url",
   note: "textarea",
   pick_Up_Location: "textarea",
   room: "text",
@@ -55,6 +63,9 @@ export const labels = {
   car: {
     astart: "apick_Up_Date_and_Time",
     bend: "bdrop_Off_Date_and_Time",
+  },
+  map: {
+    astart_Date: "aDate_and_Time",
   },
   note: {
     anote: "aNote",
