@@ -40,7 +40,7 @@ export default function DetailButtons() {
             <Plus />
         </button>
         <button  onClick={() => navigate('/pages/map')}>
-            Map Links
+            Maps
         </button>
       </div>
       <div>
