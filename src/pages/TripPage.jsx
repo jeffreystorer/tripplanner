@@ -25,7 +25,7 @@ export default function TripPage() {
     setCurrentTripKey(item.key);
     setCurrentTripIndex(index);
     const newCurrentTrip = returnNewCurrentTrip(item);
-    setCurrentTrip((prev) => newCurrentTrip);
+    setCurrentTrip(newCurrentTrip);
     navigate('/pages/itinerary');
   }
 

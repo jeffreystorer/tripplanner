@@ -9,6 +9,7 @@ import {
 import { Plus } from 'react-feather'; 
 import { DetailButtons } from '@/components/common';
 import * as state from '@/store';
+import { startField } from '@/fields';
 import { createTripItems, toMapsHref } from '@/utils';
 
 //page is set by main.jsx as part of the route
@@ -23,7 +24,7 @@ export default function DetailsPage({ page }) {
   const labels = {
     activity: 'Activities',
     car: 'Cars',
-    map: 'Maps',
+    map: 'Map Links',
     note: 'Trip Notes',
     room: 'Rooms',
     transport: 'Transports',
@@ -40,7 +41,7 @@ export default function DetailsPage({ page }) {
       page: item.type,
       key: item.key,
       value: item.type === 'map' ? item.bdescription : e.target.innerText,
-      date: Object.values(item)[0].substring(0, 10),
+      date: item[startField[item.type]].substring(0, 10),
       ...(item.type === 'map' && { url: toMapsHref(item.cmap_Link) }),
     };
     setItineraryDetail(detail);

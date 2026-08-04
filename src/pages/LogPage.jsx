@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import * as state from '@/store';
 import { getLogs, clearLogs } from '@/services';
@@ -47,8 +47,10 @@ export default function LogsPage() {
           </thead>
           <tbody>
             {logs.map(entry => (
-              <>
-                <tr key={entry.key}>
+              //the key belongs on the outermost mapped element, so this has to
+              //be <Fragment key=...> - the <> shorthand cannot take props
+              <Fragment key={entry.key}>
+                <tr>
                   <td>{new Date(entry.timestamp).toLocaleString()}</td>
                   <td>{entry.action}</td>
                   <td>
@@ -58,8 +60,8 @@ export default function LogsPage() {
                   </td>
                 </tr>
                 {expanded === entry.key && (
-                  <tr key={entry.key + '-details'}>
-                    <td colSpan={4}>
+                  <tr>
+                    <td colSpan={3}>
                       {entry.action === 'update' ? (
                         <div>
                             <strong>New:</strong>
@@ -73,7 +75,7 @@ export default function LogsPage() {
                     </td>
                   </tr>
                 )}
-              </>
+              </Fragment>
             ))}
           </tbody>
         </table>

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilRefresher_UNSTABLE, useSetRecoilState, useRecoilValue } from 'recoil';
-import { dateStrShort } from '@/utils';
 import * as state from '@/store';
 
 export default function DetailPage({type}) {
@@ -27,10 +26,10 @@ export default function DetailPage({type}) {
     e.preventDefault();
     setCurrentKey(itineraryDetail.key);
     setDeleteAll(false);
-    setDeleteTarget(prev => deleteTarget);
+    setDeleteTarget(deleteTarget);
     setShowModal(true);
     navigate('/pages/confirmdelete');
-  };
+  }
 
   function handleCancel() {
     navigate(cancelPath);

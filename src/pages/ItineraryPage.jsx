@@ -7,6 +7,7 @@ import {
   useSetRecoilState,
 } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
+import { startField } from '@/fields';
 import * as state from '@/store';
 import { createItineraryItems, dateStrShort, returnNewCurrentTrip, insertDate, deleteDate, toMapsHref}  from '@/utils';
 import { updateTrip } from '@/services';
@@ -103,7 +104,7 @@ export default function ItineraryPage() {
       //for a map link the click target is the Edit button, so use the
       //stored description instead of the button's text
       value: item.type === 'map' ? item.bdescription : e.target.innerText,
-      date: dateStrShort(Object.values(item)[0]),
+      date: dateStrShort(item[startField[item.type]]),
       ...(item.type === 'map' && { url: toMapsHref(item.cmap_Link) }),
     };
     setItineraryDetail(detail);
@@ -126,7 +127,7 @@ export default function ItineraryPage() {
       try {
             await updateTrip(userId, currentTripKey, movedData);
             const newCurrentTrip = returnNewCurrentTrip(movedData);
-            setCurrentTrip((prev) => newCurrentTrip);
+            setCurrentTrip(newCurrentTrip);
             refreshTripData();
             refreshItineraryData();
         } catch (error) {
@@ -144,7 +145,7 @@ export default function ItineraryPage() {
       try {
             await updateTrip(userId, currentTripKey, movedData);
             const newCurrentTrip = returnNewCurrentTrip(movedData);
-            setCurrentTrip((prev) => newCurrentTrip);
+            setCurrentTrip(newCurrentTrip);
             refreshTripData();
             refreshItineraryData();
         } catch (error) {
@@ -179,7 +180,7 @@ export default function ItineraryPage() {
     data.dprint_Date = printDate;    
     updateTrip(userId, currentTripKey, data);
     const newCurrentTrip = returnNewCurrentTrip(data);
-    setCurrentTrip((prev) => newCurrentTrip);
+    setCurrentTrip(newCurrentTrip);
     refreshTripData();
     print()
 };

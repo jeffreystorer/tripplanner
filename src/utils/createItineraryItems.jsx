@@ -152,7 +152,7 @@ export default function createItineraryItems(
 
   function pushActivity(item) {
     dateItems.push(
-      {item: item, value: `${timeStr(Object.values(item)[0])} ${item.bdetails}`}
+      {item: item, value: `${timeStr(item.astart_Date)} ${item.bdetails}`}
     );
   }
 
@@ -174,7 +174,7 @@ export default function createItineraryItems(
     items.push(
       <p key={uuidv4()} className='map-item'>
         <a href={href} target='_blank' rel='noopener noreferrer'>
-          <MapPin size={16} />&nbsp;{item.bdescription || "Today's Route"}
+          <MapPin size={16} />&nbsp;{item.bdescription || 'Google Maps'}
         </a>
         <button
           type='button'
@@ -196,7 +196,7 @@ export default function createItineraryItems(
 
   function pushCarDropOff(item) {
     dateItems.push(
-      {item: item, value: `${timeStr(Object.values(item)[1])} Drop Off Car: ${item.cagency}, ${
+      {item: item, value: `${timeStr(item.bend)} Drop Off Car: ${item.cagency}, ${
           item.fdrop_Off_Location
         }`}
     );
@@ -211,7 +211,7 @@ export default function createItineraryItems(
 
   function pushCarPickUp(item) {
     dateItems.push(
-      {item: item, value: `${timeStr(Object.values(item)[0])} Pick Up Car: ${item.cagency}, ${
+      {item: item, value: `${timeStr(item.astart)} Pick Up Car: ${item.cagency}, ${
           item.dpick_Up_Location
         }, ${item.edetails}`}
     );
@@ -233,7 +233,7 @@ export default function createItineraryItems(
       arrDate = dateStrShort(item.bend) + ' ';
     }
     dateItems.push(
-      {item: item, value:`${timeStr(Object.values(item)[0])} - ${arrDate}${timeStr(Object.values(item)[1])}  ${item.cdetails}`}
+      {item: item, value:`${timeStr(item.astart)} - ${arrDate}${timeStr(item.bend)}  ${item.cdetails}`}
     );
   }
 
@@ -246,7 +246,7 @@ export default function createItineraryItems(
 
   function pushTransportOvernight(item) {
     dateItems.push(
-      {item: item, value: `${timeStr(Object.values(item)[1])} Arrival: ${
+      {item: item, value: `${timeStr(item.bend)} Arrival: ${
         item.cdetails
       }`}
     );
@@ -261,7 +261,7 @@ export default function createItineraryItems(
 
   function pushRoomCheckOut(item) {
     dateItems.push(
-      {item: item, value: `${timeStr(Object.values(item)[1])} Check Out: ${item.croom}`}
+      {item: item, value: `${timeStr(item.bend_Date)} Check Out: ${item.croom}`}
     );
   }
 
@@ -274,7 +274,7 @@ export default function createItineraryItems(
 
   function pushRoomCheckIn(item) {
     dateItems.push(
-      {item: item, value: `${timeStr(Object.values(item)[0])} Check In: ${item.croom}, ${item.ddetails}`}
+      {item: item, value: `${timeStr(item.astart_Date)} Check In: ${item.croom}, ${item.ddetails}`}
     );
   }
 

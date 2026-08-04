@@ -13,7 +13,6 @@ import '@/styles/index.css';
 export default function MovePage() {
   const navigate = useNavigate();
   const userId = useRecoilValue(state.userId);
-  const currentTrip = useRecoilValue(state.currentTrip);
   const currentTripKey = useRecoilValue(state.currentTripKey);
   const setCurrentTrip = useSetRecoilState(state.currentTrip);
   const refreshTripData = useRecoilRefresher_UNSTABLE(state.tripData);
@@ -24,7 +23,7 @@ export default function MovePage() {
   const tripData = useRecoilValue(state.tripData);
 
   useEffect(() => {
-    setData((prev) => tripData[rowIndex]);
+    setData(tripData[rowIndex]);
     setLoading(false);
   }, [tripData, rowIndex]);
 
@@ -45,10 +44,10 @@ export default function MovePage() {
     try {
           await updateTrip(userId, currentTripKey, movedData);
           const newCurrentTrip = returnNewCurrentTrip(movedData);
-          setCurrentTrip((prev) => newCurrentTrip);
+          setCurrentTrip(newCurrentTrip);
           refreshTripData();
           refreshItineraryData();
-          setData((prev) => tripData[rowIndex]);
+          setData(tripData[rowIndex]);
       } catch (error) {
       console.log(error);
     }
@@ -61,7 +60,7 @@ export default function MovePage() {
 
   function handleCancel(){
       navigate('/pages/trip');
-  };
+  }
 
   return (
     <div id='add-edit'>

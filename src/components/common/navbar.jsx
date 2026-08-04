@@ -85,7 +85,7 @@ export default function NavBar(){
     link.download = `${fileName} (${stamp}).json`;
 
     link.click();
-  };
+  }
 
   return (
     <nav>

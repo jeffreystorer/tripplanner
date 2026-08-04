@@ -11,7 +11,7 @@ export default function insertDate(insertAfterDate, tripData){
             for (const value of Object.entries(newTripData.details?.activity)){
                 if (datesToMove.includes(value[1].astart_Date.substring(0,10))){
                     value[1].astart_Date = incrementDate(value[1].astart_Date);
-                };
+                }
             }
         }
         if (newTripData.details?.car){
@@ -19,7 +19,7 @@ export default function insertDate(insertAfterDate, tripData){
                 if (datesToMove.includes(value[1].astart.substring(0,10))){
                     value[1].astart = incrementDate(value[1].astart);
                     value[1].bend = incrementDate(value[1].bend);
-                };
+                }
             }
         }
         if (newTripData.details?.room) {
@@ -27,7 +27,7 @@ export default function insertDate(insertAfterDate, tripData){
                 if (datesToMove.includes(value[1].astart_Date.substring(0,10))){
                     value[1].astart_Date = incrementDate(value[1].astart_Date);
                     value[1].bend_Date = incrementDate(value[1].bend_Date);
-                };
+                }
             }
         }
         if (newTripData.details?.transport) {
@@ -35,7 +35,7 @@ export default function insertDate(insertAfterDate, tripData){
                 if (datesToMove.includes(value[1].astart.substring(0,10))){
                     value[1].astart = incrementDate(value[1].astart);
                     value[1].bend = incrementDate(value[1].bend);
-                };
+                }
 
             }
         }

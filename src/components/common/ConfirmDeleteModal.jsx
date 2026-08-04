@@ -65,10 +65,6 @@ export default function ConfirmDeleteModal(){
       case 'detail':        
         try {
           removeDetail(userId, currentTripKey, page, currentKey);
-          console.log("😊😊 userId", userId)
-          console.log("😊😊 currentTripKey", currentTripKey)
-          console.log("😊😊 page", page)
-          console.log("😊😊 currentKey", currentKey)
           refreshDetailData();
           refreshItineraryData();
         } catch (error) {
@@ -81,7 +77,7 @@ export default function ConfirmDeleteModal(){
         break;
     }
     
-  };
+  }
   
   function handleClose(e){
     e.preventDefault();

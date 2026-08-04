@@ -1,24 +1,23 @@
 import { Fragment } from 'react';
 import { MapPin } from 'react-feather';
-import { v4 as uuidv4 } from 'uuid';
 import { dateStrShort, timeStr, toMapsHref } from '@/utils';
 
 export default function MapLink({ data, onClick }) {
 
   const items = data?.map((detail) => {
     const item = {...detail, type: 'map'};
-    const href = toMapsHref(Object.values(item)[2]);
+    const href = toMapsHref(item.cmap_Link);
   return (
-      <Fragment key={uuidv4()}>
+      <Fragment key={item.key}>
         <p className='item'>
           <strong>
-            {dateStrShort(Object.values(item)[0])}{' '}
-            {timeStr(Object.values(item)[0])}
+            {dateStrShort(item.astart_Date)}{' '}
+            {timeStr(item.astart_Date)}
           </strong>
         </p>
         <p className='map-item'>
           <a href={href} target='_blank' rel='noopener noreferrer'>
-            <MapPin size={16} />&nbsp;{Object.values(item)[1] || "Today's Route"}
+            <MapPin size={16} />&nbsp;{item.bdescription || 'Google Maps'}
           </a>
           <button
             type='button'

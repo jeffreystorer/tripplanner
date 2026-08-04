@@ -1,4 +1,4 @@
-import { StrictMode, Suspense } from "react";
+import { lazy, StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { ErrorBoundary } from 'react-error-boundary';
 import {
@@ -8,27 +8,47 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
-import { ConfirmDeleteModal, Layout, Loading } from '@/components/common';
-import {
-  SignInPage,
-  DetailsPage,
-  AddPage,
-  EditPage,
-  ItineraryPage,
-  ItineraryPageErrorBoundary,
-  DetailPage,
-  EditDetailPage,
-  TripPage,
-  MovePage,
-  LogPage
-} from '@/pages';
+// Imported from their files, not the '@/components/common' and '@/pages'
+// barrels: a barrel import pulls in every module it re-exports, which would
+// drag all the lazy pages straight back into the initial chunk.
+import ErrorFallback from '@/components/common/ErrorFallback';
+import RouteErrorFallback from '@/components/common/RouteErrorFallback';
+import Layout from '@/components/common/Layout';
+import Loading from '@/components/common/Loading';
+import SignInPage from '@/pages/SignInPage';
+
+const ConfirmDeleteModal = lazy(() =>
+  import('@/components/common/ConfirmDeleteModal')
+);
+
+// Everything else is split into its own chunk, fetched the first time its
+// route is visited. These import the page FILES directly rather than going
+// through '@/pages' - a barrel import pulls in every page it re-exports and
+// would undo the splitting entirely.
+const AddPage = lazy(() => import('@/pages/AddPage'));
+const DetailPage = lazy(() => import('@/pages/DetailPage'));
+const DetailsPage = lazy(() => import('@/pages/DetailsPage'));
+const EditDetailPage = lazy(() => import('@/pages/EditDetailPage'));
+const EditPage = lazy(() => import('@/pages/EditPage'));
+const ItineraryPage = lazy(() => import('@/pages/ItineraryPage'));
+const LogPage = lazy(() => import('@/pages/LogPage'));
+const MovePage = lazy(() => import('@/pages/MovePage'));
+const TripPage = lazy(() => import('@/pages/TripPage'));
 
 
 const router = createBrowserRouter (
   createRoutesFromElements(
     <>
-    <Route path="/" element={<SignInPage />} />
-    <Route path="/pages" element={<Layout />}>
+    <Route
+      path="/"
+      element={<SignInPage />}
+      errorElement={<RouteErrorFallback />}
+    />
+    <Route
+      path="/pages"
+      element={<Layout />}
+      errorElement={<RouteErrorFallback />}
+    >
       <Route path='confirmdelete' element={<ConfirmDeleteModal />} />
       <Route
         path="activity"
@@ -45,8 +65,10 @@ const router = createBrowserRouter (
         path="/pages/editcar/:rowIndex"
         element={<EditPage page={'car'} />}
       />
-      <Route path="itinerary" element={<ItineraryPage />} 
-        errorElement={<ItineraryPageErrorBoundary />}
+      <Route
+        path="itinerary"
+        element={<ItineraryPage />}
+        errorElement={<RouteErrorFallback />}
       />
       <Route
         path="itinerarydetail"
@@ -128,9 +150,9 @@ const router = createBrowserRouter (
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RecoilRoot>
-      <ErrorBoundary>
-        <Suspense FallbackComponent={<Loading />}>
-      <RouterProvider router={router} />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<Loading />}>
+          <RouterProvider router={router} />
         </Suspense>
       </ErrorBoundary>
     </RecoilRoot>

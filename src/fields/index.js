@@ -1,4 +1,3 @@
-
 export const fields = {
   activity: {
     astart_Date: "",
@@ -82,4 +81,17 @@ export const labels = {
     bstart_Date: "bstart_Date",
     cend_Date: "cend_Date",
   },
+};
+
+//The field each detail type sorts and groups by. Used where code handles an
+//item of unknown type and previously reached for Object.values(item)[0].
+//note has no date of its own; it keeps its single field to preserve the
+//existing behaviour.
+export const startField = {
+  activity: "astart_Date",
+  car: "astart",
+  map: "astart_Date",
+  note: "anote",
+  room: "astart_Date",
+  transport: "astart",
 };

@@ -8,6 +8,7 @@ import {
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from '@/firebaseConfig';
+import { setBackupUser } from '@/services';
 import * as state from '@/store';
 import '@/styles/index.css';
 
@@ -31,6 +32,7 @@ export default function SignInPage() {
       .then(userCredential => {
         const user = userCredential.user;
         setUserId(user.uid);
+        setBackupUser(user.uid);
         setLoading(false);
         resetCurrentTripIndex();
         refreshTripData();

@@ -93,6 +93,7 @@ button,
 label {
   cursor: pointer;
 }
+
 html,
 body {
   font-family: sans-serif;
@@ -115,6 +116,7 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
 /*---------------------
       AT RULES
 ---------------------*/
@@ -128,15 +130,17 @@ h6 {
   .itinerary-date {
     margin-left: -0.5em;
   }
-  .itinerary-date > summary {
+
+  .itinerary-date>summary {
     list-style: none;
   }
-  .itinerary-date > summary::-webkit-details-marker {
+
+  .itinerary-date>summary::-webkit-details-marker {
     display: none;
   }
 
   header,
-  #itinerary-page > ul {
+  #itinerary-page>ul {
     display: none;
     height: 0;
     visibility: collapse;
@@ -149,7 +153,7 @@ h6 {
     overflow-y: hidden;
   }
 
-  #itinerary-page > div:first-of-type {
+  #itinerary-page>div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -161,12 +165,12 @@ h6 {
 
 /* phone only 599px */
 @media screen and (max-width: 37.4375em) {
-  #trip-page ul > li {
+  #trip-page ul>li {
     font-size: var(--step--1);
   }
 
-  .titled-outer > h2,
-  .titled-inner > h3 {
+  .titled-outer>h2,
+  .titled-inner>h3 {
     font-size: var(--step--1);
   }
 
@@ -174,11 +178,11 @@ h6 {
     top: -1.9em;
   }
 
-  #detail-buttons > div > button {
+  #detail-buttons>div>button {
     font-size: var(--step--2);
   }
 
-  #itinerary-page > ul {
+  #itinerary-page>ul {
     height: 0;
     visibility: collapse;
     width: 0;
@@ -190,7 +194,7 @@ h6 {
     overflow-y: hidden;
   }
 
-  #itinerary-page > div:first-of-type {
+  #itinerary-page>div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -199,14 +203,15 @@ h6 {
     width: 100%;
   }
 }
+
 /* tablet portrait up 600px */
 @media screen and (min-width: 37.5em) {
-  #trip-page ul > li {
+  #trip-page ul>li {
     font-size: var(--step-0);
   }
 
-  .titled-outer > h2,
-  .titled-inner > h3 {
+  .titled-outer>h2,
+  .titled-inner>h3 {
     font-size: var(--step-0);
   }
 
@@ -214,10 +219,11 @@ h6 {
     top: -1.6em;
   }
 
-  #detail-buttons > div > button {
+  #detail-buttons>div>button {
     font-size: var(--step-0);
   }
-  #itinerary-page > ul {
+
+  #itinerary-page>ul {
     visibility: visible;
   }
 
@@ -228,7 +234,7 @@ h6 {
     overflow-y: hidden;
   }
 
-  #itinerary-page > div:first-of-type {
+  #itinerary-page>div:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -236,15 +242,16 @@ h6 {
     width: 100%;
   }
 }
+
 /* table landscape up 900px */
-@media screen and (min-width: 56.25em) {
-}
+@media screen and (min-width: 56.25em) {}
+
 /* desktop up 1200px */
-@media screen and (min-width: 75em) {
-}
+@media screen and (min-width: 75em) {}
+
 /* big desktop up 1800px */
-@media screen and (min-with: 112.5em) {
-}
+@media screen and (min-with: 112.5em) {}
+
 /*--------------------------------------
         SELECTORS
 ---------------------------------------*/
@@ -331,9 +338,10 @@ a[type="button"] {
 button {
   width: fit-content;
 }
+
 button:hover,
 a[type="button"]:hover,
-#modal > section > footer > button:last-child:hover {
+#modal>section>footer>button:last-child:hover {
   appearance: none;
   background-color: var(--background-white);
   border-radius: 0.5em;
@@ -371,7 +379,7 @@ header {
   width: fit-content;
 }
 
-header > h1 {
+header>h1 {
   display: inline-flex;
   height: fit-content;
   width: fit-content;
@@ -381,11 +389,12 @@ header > h1 {
     0 0.625em 0.625em rgba(0, 0, 0, 0.28);
   font-size: var(--step-0);
   margin-left: 0.25em;
-  padding-right: 0.5em; /* 0.5em .5em 0 .75em; */
+  padding-right: 0.5em;
+  /* 0.5em .5em 0 .75em; */
   overflow: hidden;
 }
 
-header > h1::before {
+header>h1::before {
   content: "";
   box-sizing: content-box;
   display: inline;
@@ -399,17 +408,20 @@ header > h1::before {
 nav {
   height: fit-content;
 }
-header > nav ul {
+
+header>nav ul {
   display: block;
   background: var(--background-white);
   height: fit-content;
   list-style-type: none;
   width: fit-content;
 }
+
 nav li {
   display: inline-block;
   margin: 0 0.125em;
 }
+
 nav a,
 nav p {
   background-color: var(--color-white);
@@ -426,20 +438,24 @@ nav p {
   text-decoration: none;
   text-size-adjust: 100%;
 }
+
 nav a:link,
 nav a:visited {
   color: var(--color-black);
 }
+
 nav a:hover,
 nav a.inactive:hover {
   background-color: var(--color-link-hover);
   color: var(--color-white);
 }
+
 nav a.active,
 .active {
   background: var(--color-link-active);
   color: var(--color-white);
 }
+
 nav a.inactive,
 .inactive {
   background: var(--color-white);
@@ -465,7 +481,7 @@ nav a.inactive,
   z-index: 1;
 }
 
-#modal > section {
+#modal>section {
   background: var(--background-white);
   border: var(--border-hairline);
   border-radius: var(--borderRadius-outer);
@@ -485,7 +501,7 @@ nav a.inactive,
   /*One big thing to pay attention to is the  on the inner DIV. If you omit auto margin on the VERTICAL (a direction that normally ignores margin!) flex will chop off the top of your content and you won’t be able to scroll up to it. Grid often drops the ball on this worse which is why I favor flex here. If you’re going to use a container to center its children, I really suggest using flex with margin on an inner container. Failing to do so can really screw you over.*/
 }
 
-#add-edit > section {
+#add-edit>section {
   background: var(--background-white);
   display: flex;
   flex-direction: column;
@@ -494,7 +510,7 @@ nav a.inactive,
   width: fit-content;
 }
 
-#modal > section > header {
+#modal>section>header {
   border-bottom: 0.0625em solid rgb(222, 226, 230);
   display: flex;
   flex-direction: row;
@@ -505,13 +521,15 @@ nav a.inactive,
   width: 100%;
 }
 
-:is(#modal, #add-edit) section > header > h2 {
+:is(#modal, #add-edit) section>header>h2 {
   font-size: var(--step-0);
   font-weight: 700;
   margin-left: 0.5em;
-} /* This link is the X to close the modal.*/
+}
 
-#modal section > header > h2 + a.modalClose {
+/* This link is the X to close the modal.*/
+
+#modal section>header>h2+a.modalClose {
   box-sizing: content-box;
   display: inline;
   width: 1em;
@@ -525,12 +543,13 @@ nav a.inactive,
   position: relative;
 }
 
-#add-edit section > form {
+#add-edit section>form {
   display: flex;
   flex-direction: column;
   max-width: 100%;
 }
-#add-edit section > form > fieldset {
+
+#add-edit section>form>fieldset {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -538,38 +557,33 @@ nav a.inactive,
   max-width: 100%;
 }
 
-#add-edit section > form > fieldset label {
+#add-edit section>form>fieldset label {
   font-size: var(--step-0);
 }
 
-#add-edit section > form > fieldset > select {
+#add-edit section>form>fieldset>select {
   font-size: var(--step-0);
   margin: 0 auto;
   width: 100%;
 }
 
-label > input[type="text"],
-label > input[type="email"],
-label > input[type="password"] {
+label>input[type="text"],
+label>input[type="email"],
+label>input[type="password"] {
   margin-left: 0.5em;
 }
 
-:is(#modal, #add-edit)
-  section
-  > form
-  > fieldset
-  > label
-  > input[type="number"] {
+:is(#modal, #add-edit) section>form>fieldset>label>input[type="number"] {
   margin-top: 0.5em;
 }
 
-#add-edit section > form > fieldset > article {
+#add-edit section>form>fieldset>article {
   display: flex;
   flex-direction: row;
   gap: 0.5em;
 }
 
-#add-edit > section > form {
+#add-edit>section>form {
   margin: 0 auto;
   width: fit-content;
 }
@@ -587,30 +601,31 @@ label > input[type="password"] {
   border-top: 0.0625em solid rgb(222, 226, 230);
 }
 
-#add-edit section > form > fieldset > footer button,
-:is(#modal, #add-edit, #itinerary-details) section > footer button {
+#add-edit section>form>fieldset>footer button,
+:is(#modal, #add-edit, #itinerary-details) section>footer button {
   align-items: flex-start;
   display: inline-block;
   margin: 0.25em;
   position: relative;
 }
 
-:is(#add-edit, #itinerary-details) section > footer a,
-:is(#modal, #add-edit, #itinerary-details) footer > button:first-child {
+:is(#add-edit, #itinerary-details) section>footer a,
+:is(#modal, #add-edit, #itinerary-details) footer>button:first-child {
   color: var(--color-white);
   background-color: var(--background-button-secondary);
   border-color: var(--background-button-secondary);
 }
 
-:is(#modal, #add-edit, #itinerary-details) footer > button:last-child {
+:is(#modal, #add-edit, #itinerary-details) footer>button:last-child {
   color: var(--color-white);
   background-color: var(--background-button-primary);
   border-color: var(--background-button-primary);
 }
 
-#modal.open > section {
+#modal.open>section {
   left: 0;
 }
+
 #modal.open {
   left: 0;
   opacity: 1;
@@ -631,7 +646,7 @@ label > input[type="password"] {
   margin-bottom: 0.5em;
 }
 
-#trip-page > div {
+#trip-page>div {
   padding: 1em 1em;
   width: fit-content;
 }
@@ -642,19 +657,20 @@ label > input[type="password"] {
   width: fit-content;
 }
 
-#trip-page ul > li {
+#trip-page ul>li {
   margin: 0.5em 0;
 }
 
-#trip-page ul > button {
+#trip-page ul>button {
   margin-left: auto;
   margin-right: auto;
 }
 
-#trip-page > .titled-outer:nth-of-type(2) {
+#trip-page>.titled-outer:nth-of-type(2) {
   gap: 0.75em;
 }
-#trip-page > .titled-outer:nth-of-type(2) > button {
+
+#trip-page>.titled-outer:nth-of-type(2)>button {
   margin-top: -1.5em;
 }
 
@@ -674,7 +690,7 @@ label > input[type="password"] {
   width: fit-content;
 }
 
-#detail-buttons > div {
+#detail-buttons>div {
   align-items: center;
   display: flex;
   /* allow a column to shrink below its content width so long labels
@@ -685,7 +701,7 @@ label > input[type="password"] {
   min-width: 0;
 }
 
-a > svg {
+a>svg {
   background-color: var(--background-button);
   min-height: 1.5em;
   min-width: 1.5em;
@@ -697,6 +713,7 @@ select {
   font-weight: normal;
   margin: 0;
 }
+
 .select-dropdown-container {
   display: flex;
   flex-direction: row;
@@ -708,10 +725,11 @@ select {
   width: fit-content;
 }
 
-.select-dropdown-container > label {
+.select-dropdown-container>label {
   font-size: var(--step-0);
 }
-.select-dropdown-container label > select {
+
+.select-dropdown-container label>select {
   margin-left: 0.5em;
 }
 
@@ -740,8 +758,8 @@ select {
   width: 95%;
 }
 
-.titled-outer > h2,
-.titled-inner > h3 {
+.titled-outer>h2,
+.titled-inner>h3 {
   background-color: var(--color-white);
   border-radius: 0.5em;
   font-weight: 700;
@@ -763,13 +781,14 @@ select {
   margin: 0 auto;
   width: fit-content;
 }
-#itinerary-page h3{
+
+#itinerary-page h3 {
   font-size: var(--step--1);
   margin: 0 auto;
   width: fit-content;
 }
 
-#itinerary-page > ul {
+#itinerary-page>ul {
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -780,11 +799,11 @@ select {
   width: fit-content;
 }
 
-#itinerary-page > ul > li {
+#itinerary-page>ul>li {
   line-height: 0.75;
 }
 
-#itinerary-page > ul > li > button {
+#itinerary-page>ul>li>button {
   background-color: var(--background-white);
   border: none;
   color: var(--color-black);
@@ -795,7 +814,7 @@ select {
   outline: none;
 }
 
-#itinerary-page > div {
+#itinerary-page>div {
   display: flex;
   flex-direction: column;
   margin-left: 8em;
@@ -805,21 +824,21 @@ select {
   width: fit-content;
 }
 
-#itinerary-page > div h3,
-.itinerary-date > summary {
+#itinerary-page>div h3,
+.itinerary-date>summary {
   font-size: var(--step-0);
   font-weight: 700;
   width: 100%;
 }
 
-.itinerary-date > ul {
+.itinerary-date>ul {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   width: fit-content;
 }
 
-.itinerary-date > ul > li > button {
+.itinerary-date>ul>li>button {
   background-color: var(--background-white);
   color: var(--color-black);
   border: none;
@@ -850,25 +869,25 @@ select {
   width: fit-content;
 }
 
-#add-edit > section > div {
+#add-edit>section>div {
   display: flex;
   flex-direction: column;
 }
 
-#add-edit > section > footer > button:first-child {
+#add-edit>section>footer>button:first-child {
   color: var(--color-white);
   background-color: var(--background-button-secondary);
   border-color: var(--background-button-secondary);
 }
 
-#add-edit > section > footer > button:last-child {
+#add-edit>section>footer>button:last-child {
   color: var(--color-white);
   background-color: var(--background-button-primary);
   border-color: var(--background-button-primary);
 }
 
 .details,
-.details > div {
+.details>div {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -879,9 +898,11 @@ select {
   flex-direction: column;
   gap: 1em;
 }
+
 #itinerary-details header {
   display: block;
 }
+
 #itinerary-details p {
   border-radius: 0.2em;
   margin: 0 0.5em 0.5em 0.5em;
@@ -916,14 +937,14 @@ summary p {
 
 /*. dropdown = nav > ul > li:last-of-type*/
 
-nav > ul > li:last-of-type {
+nav>ul>li:last-of-type {
   position: relative;
   display: inline-block;
 }
 
 /*.content = nav > ul > li:last-of-type > ul*/
 
-nav > ul > li:last-of-type > ul {
+nav>ul>li:last-of-type>ul {
   display: none;
   position: absolute;
   background-color: var(--background-button);
@@ -932,23 +953,26 @@ nav > ul > li:last-of-type > ul {
   width: 8em;
   z-index: 1;
 }
-nav > ul > li:last-of-type:hover ul {
+
+nav>ul>li:last-of-type:hover ul {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
-nav > ul > li:last-of-type ul > li > button,
-nav > ul > li:last-of-type ul > li > a {
+nav>ul>li:last-of-type ul>li>button,
+nav>ul>li:last-of-type ul>li>a {
   background-color: var(--background-button);
   border: none;
   font-size: inherit;
   font-weight: normal;
   text-align: left;
 }
-nav > ul > li:last-of-type ul div + li {
+
+nav>ul>li:last-of-type ul div+li {
   font-weight: 700;
 }
+
 /* LOG VIEWER */
 
 #logs-page pre {
@@ -984,13 +1008,13 @@ nav > ul > li:last-of-type ul div + li {
 
 /* the :is(#itinerary-items > p, ...) rule above wins on specificity,
    so re-state the box model for map rows with an id-level selector */
-#itinerary-items > p.map-item,
+#itinerary-items>p.map-item,
 .map-item {
   padding-left: 2.8em;
   text-indent: 0;
 }
 
-.map-item > a {
+.map-item>a {
   align-items: center;
   display: inline-flex;
   min-height: 44px;
@@ -1011,7 +1035,8 @@ nav > ul > li:last-of-type ul div + li {
   .map-edit {
     display: none;
   }
-  .map-item > a::after {
+
+  .map-item>a::after {
     content: ' (' attr(href) ')';
     font-size: 0.8em;
   }
@@ -1025,7 +1050,7 @@ nav > ul > li:last-of-type ul div + li {
    flex-wrap stays on as a safety net - a future label wraps rather than
    bleeding outside the box. */
 @media screen and (max-width: 37.4375em) {
-  #trip-page > div {
+  #trip-page>div {
     padding: 1em 0.5em;
   }
 
@@ -1033,18 +1058,52 @@ nav > ul > li:last-of-type ul div + li {
     gap: 0.2em;
   }
 
-  #detail-buttons > div {
+  #detail-buttons>div {
     gap: 0.25em;
   }
 
-  #detail-buttons > div > button {
+  #detail-buttons>div>button {
     font-size: clamp(0.58rem, 2.7vw, 0.88rem);
     padding: 0 0.25em;
     white-space: nowrap;
   }
 
-  #detail-buttons > div > button > svg {
+  #detail-buttons>div>button>svg {
     height: 1.25em;
     width: 1.25em;
   }
+}
+
+/* --- error fallback --- */
+
+#error-fallback {
+  margin: 2em auto;
+  max-width: 32em;
+  padding: 1em;
+  text-align: center;
+}
+
+#error-fallback small {
+  color: var(--color-gray, #666);
+  word-break: break-word;
+}
+
+#error-fallback>div {
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+}
+
+/* --- offline banner --- */
+
+#offline-banner {
+  background-color: #fff4ce;
+  border: 1px solid #e8c86a;
+  border-radius: 0.25em;
+  color: #5c4400;
+  font-size: var(--step--1);
+  margin: 0.5em auto;
+  max-width: 98%;
+  padding: 0.5em 0.75em;
+  text-align: center;
 }

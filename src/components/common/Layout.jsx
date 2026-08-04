@@ -5,6 +5,7 @@ import * as state from '@/store';
 import { returnNewCurrentTrip } from '@/utils';
 import ScrollToTop from 'react-scroll-to-top';
 import { NavBar } from '@/components/common';
+import OfflineBanner from '@/components/common/OfflineBanner';
 import '@/styles/index.css';
 
 export default function LayoutPage() {
@@ -51,6 +52,7 @@ export default function LayoutPage() {
           <h1>Storer TP</h1>
         <NavBar />
       </header>
+      <OfflineBanner />
       <main>
         <Outlet />
       </main>

@@ -49,22 +49,30 @@ export default function EditPage({ page }) {
     e.preventDefault();
     try {
       switch (page) {
-        case "trip":
-          await updateTrip(userId, currentTripKey, data);
+        case "trip": {
+          //tripData carries key and details for rendering; neither belongs in
+          //the write. updateTrip only touches the editable fields, so details
+          //is left untouched on the server either way
+          const newTripData = structuredClone(data);
+          delete newTripData.key;
+          delete newTripData.details;
+          await updateTrip(userId, currentTripKey, newTripData);
           const newCurrentTrip = returnNewCurrentTrip(data);
-          setCurrentTrip((prev) => newCurrentTrip);
+          setCurrentTrip(newCurrentTrip);
           refreshTripData();
           refreshDetailData();
           refreshItineraryData();
           break;
-        default:
+        }
+        default: {
           let newData = structuredClone(data);
           delete newData.key;
-          updateDetail(userId, currentTripKey, newData, page, data.key);
+          await updateDetail(userId, currentTripKey, newData, page, data.key);
           refreshTripData();
           refreshItineraryData();
           refreshDetailData();
           break;
+        }
       }
       handleCancel();
     } catch (error) {

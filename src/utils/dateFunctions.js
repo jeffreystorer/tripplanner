@@ -1,5 +1,3 @@
-import { HashRouter } from "react-router-dom";
-
 export const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
 //get a timestamp from a string 2022-06-02

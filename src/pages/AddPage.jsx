@@ -99,7 +99,7 @@ export default function AddPage({ page }) {
     } else {
       navigate('/pages/' + page);
     }
-  };
+  }
 
   return (
     <AddEdit

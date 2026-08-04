@@ -11,4 +11,19 @@ export default defineConfig({
     jsconfigPaths(),
   ],
   assetsInclude: ["**/*.JPG", "**/*.svg", "**/*.ico", "**/*.png"],
+  build: {
+    rollupOptions: {
+      output: {
+        // Split the big, rarely-changing dependencies into their own chunks.
+        // This does not shrink a first-ever visit, but on every deploy after
+        // that the browser reuses these from cache and only re-downloads the
+        // app code that actually changed.
+        manualChunks: {
+          firebase: ["firebase/app", "firebase/auth", "firebase/database"],
+          react: ["react", "react-dom", "react-router-dom"],
+          recoil: ["recoil"],
+        },
+      },
+    },
+  },
 });

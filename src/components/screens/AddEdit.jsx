@@ -1,7 +1,6 @@
 import { Fragment}  from 'react';
 import { useRecoilValue } from 'recoil';
 import Textarea from 'react-expanding-textarea';
-import { v4 as uuidv4 } from 'uuid';
 import { inputType, labels } from '@/fields';
 import * as state from '@/store';
 
@@ -24,13 +23,13 @@ export default function AddEdit({
   let header;
   if (page === 'trip') {
     header = (
-      <h2 key={uuidv4()}>
+      <h2>
         {mode} Trip
       </h2>
     );
   } else {
     header = (
-      <h2 key={uuidv4()}>
+      <h2>
         {mode} {page.charAt(0).toUpperCase() + page.slice(1)}<br />
         {currentTrip.atrip_Name}
       </h2>
@@ -38,15 +37,13 @@ export default function AddEdit({
   }
 
   function formItem(keyItem) {
-    let inputLabel = '';
-    if (!labels[page].hasOwnProperty(keyItem)) {
-      inputLabel =
-        keyItem.charAt(1).toUpperCase() + keyItem.slice(2).replaceAll('_', ' ');
-    } else {
-      inputLabel =
-        labels[page][keyItem].charAt(1).toUpperCase() +
-        labels[page][keyItem].slice(2).replaceAll('_', ' ');
-    }
+    //fall back to the field name when this page has no label override - or no
+    //labels entry at all, which is what used to throw for a new detail type.
+    //both sources get the same transform: drop the sort-order prefix letter,
+    //capitalise, and turn underscores into spaces
+    const rawLabel = labels[page]?.[keyItem] ?? keyItem;
+    const inputLabel =
+      rawLabel.charAt(1).toUpperCase() + rawLabel.slice(2).replaceAll('_', ' ');
 
     const resolvedType =
       page === 'trip' && keyItem !== 'atrip_Name'
@@ -58,14 +55,15 @@ export default function AddEdit({
 
     if (inputType[keyItem.slice(1)] === 'textarea') {
       return (
-        <Fragment key={uuidv4()}>
-          <label key={uuidv4()} htmlFor={keyItem}>
+        <Fragment key={keyItem}>
+          <label htmlFor={keyItem}>
             {inputLabel}
           </label>
           <Textarea
-            key={uuidv4()}
             cols={cols}
             rows="4"
+            //htmlFor on the label pairs with id, not name
+            id={keyItem}
             name={keyItem}
             defaultValue={data[keyItem]}
             onBlur={handleChange}
@@ -74,13 +72,18 @@ export default function AddEdit({
       );
     } else {
       return (
-        <Fragment key={uuidv4()}>
-          <label key={uuidv4()} htmlFor={keyItem}>
+        <Fragment key={keyItem}>
+          <label htmlFor={keyItem}>
             {inputLabel}
           </label>
           <input
-            key={uuidv4()}
-            autoComplete={isLink ? 'off' : keyItem}
+            //autocomplete only accepts values from a fixed HTML list, and none
+            //of these fields (trip names, dates, agencies, links) maps onto
+            //one. Field names like 'atrip_Name' are non-standard and browsers
+            //ignore them anyway, so ask for no autofill at all.
+            autoComplete='off'
+            //htmlFor on the label pairs with id, not name
+            id={keyItem}
             name={keyItem}
             type={isLink ? 'text' : resolvedType}
             autoCapitalize={isLink ? 'off' : undefined}

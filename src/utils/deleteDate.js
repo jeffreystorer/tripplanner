@@ -27,7 +27,7 @@ export default function deleteDate(deleteDate, tripData){
             for (const value of Object.entries(newTripData.details?.activity)){
                 if (datesToMove.includes(value[1].astart_Date.substring(0,10))){
                     value[1].astart_Date = decrementDate(value[1].astart_Date);
-                };
+                }
             }
         }
         if (newTripData.details?.car){
@@ -36,7 +36,7 @@ export default function deleteDate(deleteDate, tripData){
                 if (datesToMove.includes(value[1].astart.substring(0,10))){
                     value[1].astart = decrementDate(value[1].astart);
                     value[1].bend = decrementDate(value[1].bend);
-                };
+                }
             }
         }
         if (newTripData.details?.room) {
@@ -45,7 +45,7 @@ export default function deleteDate(deleteDate, tripData){
                 if (datesToMove.includes(value[1].astart_Date.substring(0,10))){
                     value[1].astart_Date = decrementDate(value[1].astart_Date);
                     value[1].bend_Date = decrementDate(value[1].bend_Date);
-                };
+                }
             }
         }
         if (newTripData.details?.transport) {
@@ -54,7 +54,7 @@ export default function deleteDate(deleteDate, tripData){
                 if (datesToMove.includes(value[1].astart.substring(0,10))){
                     value[1].astart = decrementDate(value[1].astart);
                     value[1].bend = decrementDate(value[1].bend);
-                };
+                }
 
             }
         }
