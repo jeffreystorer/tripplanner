@@ -5,4 +5,4 @@ export { default as DetailButtons } from "@/components/common/DetailButtons";
 export { default as Loading } from "@/components/common/Loading.jsx";
 export { default as Layout } from "@/components/common/Layout.jsx";
 export { default as NavBar } from "@/components/common/navbar.jsx";
-export { default as OffLineBanner } from "@/components/common/OffLineBanner.jsx";
+export { default as OfflineBanner } from "@/components/common/OfflineBanner.jsx";
