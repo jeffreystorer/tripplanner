@@ -39,19 +39,24 @@ export default function ItineraryPage() {
     refreshItineraryData();
   }, [refreshItineraryData]);
 
+  //extracted so the dependency array holds a plain value the linter can check
+  const itineraryDetailKey = itineraryDetail?.key;
+
   // Scroll to the selected itinerary detail when it changes
   useEffect(() => {
-    if (!itineraryDetail || !itineraryDetail.key) return;
+    if (!itineraryDetailKey) return;
     try {
-      const node = document.getElementById(itineraryDetail.key);
+      const node = document.getElementById(itineraryDetailKey);
       if (node)
         node.scrollIntoView({
           behavior: 'auto',
           block: 'start',
           inline: 'nearest',
         });
-    } catch (error) {}
-  }, [itineraryDetail && itineraryDetail.key]);
+    } catch (error) {
+      console.error('Could not scroll to the selected detail:', error);
+    }
+  }, [itineraryDetailKey]);
 
   // On initial load (or when itinerary data changes) auto-scroll to today's date
   useEffect(() => {
@@ -89,7 +94,9 @@ export default function ItineraryPage() {
         const node = document.getElementById(match);
         if (node) node.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error('Could not scroll to today:', error);
+    }
   }, [itineraryData]);
 
   useEffect(() => {
@@ -154,9 +161,9 @@ export default function ItineraryPage() {
       handleCancel();
     };
 
-    function handleCancel(){
-      navigate('/pages/itinerary');
-  };
+  function handleCancel() {
+    navigate('/pages/itinerary');
+  }
 
   function handleDateClick(date, page, e) {
     e.preventDefault();
@@ -168,7 +175,7 @@ export default function ItineraryPage() {
     navigate('/pages/additinerary' + page);
   }
 
-  function handleNoteClick(e) {
+  function handleNoteClick() {
     navigate('/pages/additinerarynote')
   }
 
@@ -183,7 +190,7 @@ export default function ItineraryPage() {
     setCurrentTrip(newCurrentTrip);
     refreshTripData();
     print()
-};
+  }
 
   return ( 
     <>

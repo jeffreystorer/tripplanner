@@ -42,7 +42,10 @@ export default function LayoutPage() {
         setCurrentTrip(returnNewCurrentTrip(item));
         navigate('/pages/itinerary');
       }
-    } catch (error) {}
+    } catch (error) {
+      //a bad date on a trip record should not stop the layout rendering
+      console.error('Could not select today\'s trip:', error);
+    }
   }, [tripData, currentTripIndex, setCurrentTripIndex, setCurrentTripKey, setCurrentTrip, navigate]);
 
   return (

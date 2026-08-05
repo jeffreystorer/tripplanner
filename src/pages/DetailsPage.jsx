@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   useRecoilRefresher_UNSTABLE,
@@ -6,7 +6,6 @@ import {
   useSetRecoilState,
   useRecoilValue,
 } from 'recoil';
-import { Plus } from 'react-feather'; 
 import { DetailButtons } from '@/components/common';
 import * as state from '@/store';
 import { startField } from '@/fields';
@@ -33,7 +32,7 @@ export default function DetailsPage({ page }) {
   useEffect(() => {
     setPage(page);
     refreshDetailData();
-  }, [refreshDetailData]);
+  }, [page, refreshDetailData, setPage]);
 
   function onClick(item, e) {
     e.preventDefault();
