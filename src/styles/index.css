@@ -1107,3 +1107,10 @@ nav>ul>li:last-of-type ul div+li {
   padding: 0.5em 0.75em;
   text-align: center;
 }
+/* --- sign-in error --- */
+
+#sign-in-error {
+  color: #8a1c1c;
+  margin: 0.5em 0 0;
+  text-align: center;
+}

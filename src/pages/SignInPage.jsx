@@ -8,7 +8,7 @@ import {
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from '@/firebaseConfig';
-import { setBackupUser } from '@/services';
+import { hasLocalBackup, openLocalBackup, setBackupUser } from '@/services';
 import * as state from '@/store';
 import '@/styles/index.css';
 
@@ -19,6 +19,8 @@ export default function SignInPage() {
   const auth = getAuth(app);
   const resetCurrentTripIndex = useResetRecoilState(state.currentTripIndex);
   const refreshTripData = useRecoilRefresher_UNSTABLE(state.tripData);
+  const [error, setError] = useState('');
+  const offlineAvailable = hasLocalBackup();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -38,10 +40,29 @@ export default function SignInPage() {
         refreshTripData();
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        console.error(error.code, error.message);
+        setError(
+          offlineAvailable
+            ? 'Could not sign in. If you are offline you can still open the ' +
+                'saved copy of your trips on this device.'
+            : 'Could not sign in. Check your email and password.'
+        );
       });
+  };
+
+  //No network and no sign-in: read the snapshot already on this device. Read
+  //only - every write is refused while this is active.
+  const handleOpenOffline = () => {
+    setError('');
+    try {
+      const userId = openLocalBackup();
+      setUserId(userId);
+      setLoading(false);
+      resetCurrentTripIndex();
+      refreshTripData();
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   return (
@@ -77,6 +98,16 @@ export default function SignInPage() {
             <button className={'not-stacked'} type='submit'>
               Sign In
             </button>
+            {offlineAvailable && (
+              <button
+                className={'not-stacked'}
+                type='button'
+                onClick={handleOpenOffline}
+              >
+                View Saved Itinerary
+              </button>
+            )}
+            {error && <p id='sign-in-error'>{error}</p>}
           </fieldset>
         </form>
       </main>

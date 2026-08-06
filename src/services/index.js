@@ -288,6 +288,41 @@ function fallbackToLocal(userId, resolve, error) {
   return value;
 }
 
+//True when this device holds a saved copy that could be opened without signing
+//in. The snapshot is shaped { [userId]: trips }, so the userId comes out of the
+//snapshot itself and nothing extra needs storing.
+export function hasLocalBackup() {
+  try {
+    const raw = localStorage.getItem('tripBackup');
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    const userId = Object.keys(parsed ?? {})[0];
+    return Boolean(userId && Object.keys(parsed[userId] ?? {}).length > 0);
+  } catch {
+    return false;
+  }
+}
+
+//Open the saved copy with no network and no sign-in. READ ONLY - assertWritable
+//below refuses every write while this is active, since there is no
+//authenticated session and the copy may be older than the database.
+export function openLocalBackup() {
+  const raw = localStorage.getItem('tripBackup');
+  if (!raw) {
+    throw new Error(
+      'No saved copy on this device. Sign in while online at least once.'
+    );
+  }
+  const parsed = JSON.parse(raw);
+  const userId = Object.keys(parsed ?? {})[0];
+  if (!userId || Object.keys(parsed[userId] ?? {}).length === 0) {
+    throw new Error('The saved copy on this device is empty.');
+  }
+  currentUserId = userId;
+  setServingLocalData(true);
+  return userId;
+}
+
 //Guard for every write path.
 function assertWritable() {
   if (servingLocalData) {
