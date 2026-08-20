@@ -1,4 +1,4 @@
-import { dateStrShort, timeStr } from '@/utils';
+import { dateStrShort, linkify, timeStr } from '@/utils';
 
 export default function Car({ data, onClick }) {
 
@@ -23,6 +23,12 @@ export default function Car({ data, onClick }) {
               Drop off: {timeStr(item.bend)}
               {'  '}
               {dropOffLocation}
+              {item.edetails && (
+                <>
+                  <br />
+                  {linkify(item.edetails)}
+                </>
+              )}
       </p>
   )});
 

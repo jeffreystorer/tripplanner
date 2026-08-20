@@ -1,4 +1,4 @@
-import { dateStrShort, timeStr } from '@/utils';
+import { dateStrShort, linkify, timeStr } from '@/utils';
 
 export default function Transport({ data, onClick}) {
 
@@ -12,7 +12,7 @@ export default function Transport({ data, onClick}) {
             dateStrShort(item.bend) &&
             dateStrShort(item.bend) + '  '}
       {timeStr(item.bend)}{' '}
-      {item.cdetails}
+      {linkify(item.cdetails)}
     </p>
   )});
 

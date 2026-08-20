@@ -1,4 +1,4 @@
-import { dateStrShort} from '@/utils';
+import { dateStrShort, linkify } from '@/utils';
 
 export default function Room({ data, onClick }) {
 
@@ -11,6 +11,12 @@ export default function Room({ data, onClick }) {
             &nbsp;
             </strong>
                 {item.croom}
+                {item.ddetails && (
+                  <>
+                    <br />
+                    {linkify(item.ddetails)}
+                  </>
+                )}
       </p>
   )});
 

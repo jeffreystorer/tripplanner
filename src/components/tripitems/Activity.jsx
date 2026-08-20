@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { dateStrShort, timeStr } from '@/utils';
+import { dateStrShort, linkify, timeStr } from '@/utils';
 
 export default function Activity({ data, onClick }) {
 
@@ -12,7 +12,7 @@ export default function Activity({ data, onClick }) {
           {dateStrShort(item.astart_Date)}{' '}
         </strong><br />
         </p>
-        <p className='activityItem'>{timeStr(item.astart_Date)}{' '}{item.bdetails}
+        <p className='activityItem'>{timeStr(item.astart_Date)}{' '}{linkify(item.bdetails)}
         </p>
       </Fragment>
   )});

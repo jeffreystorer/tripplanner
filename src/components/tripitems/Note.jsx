@@ -1,4 +1,5 @@
 import { Star } from 'react-feather';
+import { linkify } from '@/utils';
 
 export default function Note({ data, onClick }) {
 
@@ -8,7 +9,7 @@ export default function Note({ data, onClick }) {
     <div key={item.key} className='note-item' onClick={e => onClick(item, e)}>
       <Star />&nbsp;&nbsp;
       <p className='item'>
-        {item.anote}
+        {linkify(item.anote)}
       </p>
     </div>
   )});

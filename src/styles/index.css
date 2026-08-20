@@ -1131,3 +1131,11 @@ nav>ul>li:last-of-type ul div+li {
   margin: 0.5em 0 0;
   text-align: center;
 }
+
+/* --- inline links in notes and details --- */
+
+.item a,
+.activityItem a {
+  text-decoration: underline;
+  word-break: break-word;
+}

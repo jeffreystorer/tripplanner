@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { FileText, Globe, Mail, MapPin, Star } from 'react-feather';
 import { v4 as uuidv4 } from 'uuid';
-import { dateStrShort, linkKind, timeStr, toMapsHref } from '@/utils';
+import { dateStrShort, linkify, linkKind, timeStr, toMapsHref } from '@/utils';
 
 const LINK_ICONS = { map: MapPin, mail: Mail, doc: FileText, web: Globe };
 const LINK_FALLBACK_LABEL = { map: 'Google Maps', mail: 'Email', doc: 'Document', web: 'Link' };
@@ -29,7 +29,7 @@ export default function createItineraryItems(
       <div key={uuidv4()} className='note-item' onClick={e => onClick(item, e)}>
         <Star />&nbsp;&nbsp;
         <p className='item'>
-          {value}
+          {linkify(value)}
         </p>
       </div>
       
@@ -39,7 +39,9 @@ export default function createItineraryItems(
   function itineraryItem(item, value) {
     
     return (
-      <Fragment key={uuidv4()}><p onClick={e => onClick(item, e)}>{value}</p></Fragment>
+      <Fragment key={uuidv4()}>
+        <p onClick={e => onClick(item, e)}>{linkify(value)}</p>
+      </Fragment>
       
     );
   }
