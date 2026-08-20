@@ -23,7 +23,7 @@ export default function DetailsPage({ page }) {
   const labels = {
     activity: 'Activities',
     car: 'Cars',
-    map: 'Map Links',
+    map: 'Links',
     note: 'Trip Notes',
     room: 'Rooms',
     transport: 'Transports',

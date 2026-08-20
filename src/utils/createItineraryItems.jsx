@@ -1,7 +1,10 @@
 import { Fragment } from 'react';
-import { MapPin, Star } from 'react-feather';
+import { FileText, Globe, Mail, MapPin, Star } from 'react-feather';
 import { v4 as uuidv4 } from 'uuid';
-import { dateStrShort, timeStr, toMapsHref } from '@/utils';
+import { dateStrShort, linkKind, timeStr, toMapsHref } from '@/utils';
+
+const LINK_ICONS = { map: MapPin, mail: Mail, doc: FileText, web: Globe };
+const LINK_FALLBACK_LABEL = { map: 'Google Maps', mail: 'Email', doc: 'Document', web: 'Link' };
 
 export default function createItineraryItems(
   data,
@@ -104,7 +107,7 @@ export default function createItineraryItems(
           </li>
           <li>
             <button className='stacked'  onClick={e => handleDateClick(item, 'map', e)}>
-              Add Map Link
+              Add Link
             </button>
           </li>
           <li>
@@ -171,10 +174,13 @@ export default function createItineraryItems(
 
   function pushMap(item) {
     const href = toMapsHref(item.cmap_Link);
+    const kind = linkKind(href);
+    const Icon = LINK_ICONS[kind];
     items.push(
       <p key={uuidv4()} className='map-item'>
         <a href={href} target='_blank' rel='noopener noreferrer'>
-          <MapPin size={16} />&nbsp;{item.bdescription || 'Google Maps'}
+          <Icon size={16} />&nbsp;
+          {item.bdescription || LINK_FALLBACK_LABEL[kind]}
         </a>
         <button
           type='button'

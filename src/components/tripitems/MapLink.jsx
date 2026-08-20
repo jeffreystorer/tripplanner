@@ -1,12 +1,17 @@
 import { Fragment } from 'react';
-import { MapPin } from 'react-feather';
-import { dateStrShort, timeStr, toMapsHref } from '@/utils';
+import { FileText, Globe, Mail, MapPin } from 'react-feather';
+import { dateStrShort, linkKind, timeStr, toMapsHref } from '@/utils';
+
+const ICONS = { map: MapPin, mail: Mail, doc: FileText, web: Globe };
+const FALLBACK_LABEL = { map: 'Google Maps', mail: 'Email', doc: 'Document', web: 'Link' };
 
 export default function MapLink({ data, onClick }) {
 
   const items = data?.map((detail) => {
     const item = {...detail, type: 'map'};
     const href = toMapsHref(item.cmap_Link);
+    const kind = linkKind(href);
+    const Icon = ICONS[kind];
   return (
       <Fragment key={item.key}>
         <p className='item'>
@@ -17,7 +22,7 @@ export default function MapLink({ data, onClick }) {
         </p>
         <p className='map-item'>
           <a href={href} target='_blank' rel='noopener noreferrer'>
-            <MapPin size={16} />&nbsp;{item.bdescription || 'Google Maps'}
+            <Icon size={16} />&nbsp;{item.bdescription || FALLBACK_LABEL[kind]}
           </a>
           <button
             type='button'

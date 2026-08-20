@@ -65,6 +65,10 @@ export const labels = {
   },
   map: {
     astart_Date: "aDate_and_Time",
+    //the stored key stays cmap_Link (renaming it would need a data migration);
+    //this only changes what the form shows, since a link may be a map, an
+    //email, or any web page
+    cmap_Link: "cLink",
   },
   note: {
     anote: "aNote",
