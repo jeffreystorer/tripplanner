@@ -231,7 +231,10 @@ h6 {
     display: flex;
     flex-direction: row;
     margin-left: 1em;
-    overflow-y: hidden;
+    /* overflow-y: hidden here would clip the sticky date list and stop it
+       pinning - an overflow value other than visible on an ancestor disables
+       sticky positioning inside it */
+    align-items: flex-start;
   }
 
   #itinerary-page>div:first-of-type {
@@ -239,6 +242,7 @@ h6 {
     flex-direction: column;
     gap: 1em;
     flex: 1 1 0%;
+    min-width: 0;
     width: 100%;
   }
 }
@@ -791,12 +795,22 @@ select {
 #itinerary-page>ul {
   display: flex;
   flex-direction: column;
-  height: fit-content;
   justify-content: flex-start;
   text-align: left;
   padding-right: 0.5em;
-  position: fixed;
   width: fit-content;
+  /* Was position: fixed with height: fit-content, so a long trip grew taller
+     than the viewport and the overflow was simply unreachable.
+     sticky keeps it in the document flow - it scrolls with the page until it
+     reaches the top, then pins - and max-height plus overflow-y lets a long
+     date list scroll within itself. */
+  position: sticky;
+  top: 0.5em;
+  align-self: flex-start;
+  max-height: calc(100vh - 1em);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
 }
 
 #itinerary-page>ul>li {
@@ -817,7 +831,11 @@ select {
 #itinerary-page>div {
   display: flex;
   flex-direction: column;
-  margin-left: 8em;
+  /* the date list is in the flow now, so it no longer needs clearing with a
+     hard-coded margin */
+  flex: 1 1 0%;
+  margin-left: 1em;
+  min-width: 0;
 }
 
 .itinerary-date {
