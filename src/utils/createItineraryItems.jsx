@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { dateStrShort, linkify, linkKind, timeStr, toMapsHref } from '@/utils';
 
 const LINK_ICONS = { map: MapPin, mail: Mail, doc: FileText, web: Globe };
-const LINK_FALLBACK_LABEL = { map: 'Google Maps', mail: 'Email', doc: 'Document', web: 'Link' };
+const LINK_FALLBACK_LABEL = { map: "Today's Route", mail: 'Email', doc: 'Document', web: 'Link' };
 
 export default function createItineraryItems(
   data,

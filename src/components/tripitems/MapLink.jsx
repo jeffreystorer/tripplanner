@@ -3,7 +3,7 @@ import { FileText, Globe, Mail, MapPin } from 'react-feather';
 import { dateStrShort, linkKind, timeStr, toMapsHref } from '@/utils';
 
 const ICONS = { map: MapPin, mail: Mail, doc: FileText, web: Globe };
-const FALLBACK_LABEL = { map: 'Google Maps', mail: 'Email', doc: 'Document', web: 'Link' };
+const FALLBACK_LABEL = { map: "Today's Route", mail: 'Email', doc: 'Document', web: 'Link' };
 
 export default function MapLink({ data, onClick }) {
 
