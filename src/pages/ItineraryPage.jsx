@@ -100,8 +100,11 @@ export default function ItineraryPage() {
   }, [itineraryData]);
 
   useEffect(() => {
-    setLastPrinted(tripData[currentTripIndex].dprint_Date)
-  },[tripData, currentTripIndex])
+    const trip = tripData[currentTripIndex];
+    if (!trip) return;
+    //don't clear a just-set value if the record has no date yet
+    if (trip.dprint_Date) setLastPrinted(trip.dprint_Date);
+  }, [tripData, currentTripIndex]);
 
   function onClick(item, e) {
     e.preventDefault();
@@ -180,16 +183,29 @@ export default function ItineraryPage() {
   }
 
   const items = createItineraryItems(data, onClick, handleInsertDateClick, handleDeleteDateClick,handleDateClick, handleNoteClick);
-  function handlePrint(){
+  async function handlePrint() {
     const date = new Date();
-    const printDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+    const printDate =
+      date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
     let data = JSON.parse(JSON.stringify(tripData[currentTripIndex]));
-    data.dprint_Date = printDate;    
-    updateTrip(userId, currentTripKey, data);
-    const newCurrentTrip = returnNewCurrentTrip(data);
-    setCurrentTrip(newCurrentTrip);
-    refreshTripData();
-    print()
+    data.dprint_Date = printDate;
+
+    //show the new date straight away rather than waiting for the round trip -
+    //the effect below would otherwise not run until tripData refreshes
+    setLastPrinted(printDate);
+
+    try {
+      //await the write before refreshing, or the refresh can read the old value
+      await updateTrip(userId, currentTripKey, data);
+      setCurrentTrip(returnNewCurrentTrip(data));
+      refreshTripData();
+    } catch (error) {
+      console.error('Could not save the print date:', error);
+    }
+
+    //print() blocks the main thread until the dialog closes, so let React
+    //paint the updated date first
+    setTimeout(() => window.print(), 0);
   }
 
   return ( 
