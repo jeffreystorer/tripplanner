@@ -8,6 +8,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
+//registers the generated service worker, which precaches the app shell so the
+//app can start with no connection. autoUpdate means a new deploy replaces the
+//cached version on the next visit.
+import { registerSW } from 'virtual:pwa-register';
 // Imported from their files, not the '@/components/common' and '@/pages'
 // barrels: a barrel import pulls in every module it re-exports, which would
 // drag all the lazy pages straight back into the initial chunk.
@@ -146,6 +150,8 @@ const router = createBrowserRouter (
     </>   
   )
 );
+
+registerSW({ immediate: true });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
