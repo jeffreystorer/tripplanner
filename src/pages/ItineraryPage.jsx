@@ -195,17 +195,20 @@ export default function ItineraryPage() {
     setLastPrinted(printDate);
 
     try {
-      //await the write before refreshing, or the refresh can read the old value
       await updateTrip(userId, currentTripKey, data);
+      //currentTrip is an atom, so this re-renders without suspending
       setCurrentTrip(returnNewCurrentTrip(data));
-      refreshTripData();
     } catch (error) {
       console.error('Could not save the print date:', error);
     }
 
-    //print() blocks the main thread until the dialog closes, so let React
-    //paint the updated date first
-    setTimeout(() => window.print(), 0);
+    //Print on the next frame so React paints the new date first, then refresh
+    //AFTER printing. tripData is an async selector: refreshing it suspends the
+    //tree, and printing mid-suspension puts the Loading fallback on the page.
+    setTimeout(() => {
+      window.print();
+      refreshTripData();
+    }, 0);
   }
 
   return ( 
