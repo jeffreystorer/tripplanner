@@ -1157,3 +1157,28 @@ nav>ul>li:last-of-type ul div+li {
   text-decoration: underline;
   word-break: break-word;
 }
+
+/* --- phone: remove the date list from the layout ---
+   The breakpoint above sets height/visibility/width on #itinerary-page > ul,
+   but the base rule (further down the file) sets width: fit-content. Media
+   queries add no specificity, so with identical selectors the LATER rule wins
+   and that width override was being discarded - leaving an invisible element
+   that still occupied its column.
+   display: none removes it from the layout outright, and placing the override
+   at the end of the file guarantees it wins on source order. */
+@media screen and (max-width: 37.4375em) {
+  #itinerary-page > ul {
+    display: none;
+  }
+
+  #itinerary-page {
+    display: block;
+  }
+
+  /* the base rule indents the content column to clear the date list */
+  #itinerary-page > div,
+  #itinerary-page > div:first-of-type {
+    margin-left: 0;
+    width: auto;
+  }
+}
